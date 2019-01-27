@@ -16,6 +16,10 @@ export function foldConcat(curr: Array<any>, next: Array<any>): Array<any> {
   return curr.concat(next);
 }
 
+export function foldFirst(curr: any): any {
+  return curr;
+}
+
 export function foldLast(curr: any, next: any): any {
   return next;
 }

@@ -25,16 +25,23 @@ export function createFolder<I, O>(
 ): TFolder<I, O> {
   const o = createOutPorts(["b_d_val", "d_fold", "ev_err"]);
   const outputs = createOutputs(o);
-
-  let folded = copy(initial);
+  const initialized = arguments.length === 2;
+  let folded: O;
+  let first: boolean = true;
 
   const i: TInPorts<IInputs<I> & { all: IInputs<I> }> = {
     all: ({d_val, ev_res}, tag) => {
       try {
-        folded = cb(folded, d_val, tag);
+        if (first) {
+          folded = initialized ?
+            cb(copy(initial), d_val, tag) :
+            <any>d_val;
+          first = ev_res;
+        } else {
+          folded = cb(folded, d_val, tag);
+        }
         if (ev_res) {
           outputs.d_fold(folded, tag);
-          folded = copy(initial);
         }
       } catch (err) {
         outputs.b_d_val(d_val, tag);
@@ -44,7 +51,14 @@ export function createFolder<I, O>(
 
     d_val: (value, tag) => {
       try {
-        folded = cb(folded, value, tag);
+        if (first) {
+          folded = initialized ?
+            cb(copy(initial), value, tag) :
+            <any>value;
+          first = false;
+        } else {
+          folded = cb(folded, value, tag);
+        }
       } catch (err) {
         outputs.b_d_val(value, tag);
         outputs.ev_err(String(err), tag);
@@ -54,7 +68,7 @@ export function createFolder<I, O>(
     ev_res: (value, tag) => {
       if (value) {
         outputs.d_fold(folded, tag);
-        folded = copy(initial);
+        first = true;
       }
     }
   };

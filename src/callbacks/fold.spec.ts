@@ -1,6 +1,6 @@
 import {
   foldConcat,
-  foldCount,
+  foldCount, foldFirst,
   foldJoin,
   foldLast,
   foldMax,
@@ -43,6 +43,13 @@ describe("fold", () => {
     it("should return foldLast item", () => {
       const input = [1, 2, 3, 4, 5];
       expect(input.reduce(foldLast)).toEqual(5);
+    });
+  });
+
+  describe("foldFirst()", () => {
+    it("should return foldLast item", () => {
+      const input = [1, 2, 3, 4, 5];
+      expect(input.reduce(foldFirst)).toEqual(1);
     });
   });
 
