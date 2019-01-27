@@ -11,14 +11,12 @@
     "README.md"
   ],
   "keywords": [
-    "graph",
-    "stream",
-    "reactive",
-    "push",
-    "observable",
-    "observer",
-    "iterable",
-    "iterator"
+    "computational-graphs",
+    "reactive-programming",
+    "reactive-streams",
+    "stream-processing",
+    "distributed-computing",
+    "fault-tolerance"
   ],
   "author": "Dan Stocker <dan@kwaia.com>",
   "license": "MIT",
