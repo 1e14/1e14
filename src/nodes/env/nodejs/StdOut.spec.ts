@@ -1,4 +1,4 @@
-import {createStdOut, TStdOut} from "./TStdOut";
+import {createStdOut, TStdOut} from "./StdOut";
 
 describe("createStdOut", () => {
   it("should be singleton", () => {

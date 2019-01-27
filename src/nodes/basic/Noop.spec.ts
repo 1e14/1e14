@@ -1,5 +1,5 @@
 import {connect} from "../../node";
-import {createNoop, TNoop} from "./TNoop";
+import {createNoop, TNoop} from "./Noop";
 
 describe("createNoop()", () => {
   describe("on input (d_val)", () => {

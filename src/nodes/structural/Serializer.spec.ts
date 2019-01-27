@@ -1,5 +1,5 @@
 import {connect} from "../../node";
-import {createSerializer, TSerializer} from "./TSerializer";
+import {createSerializer, TSerializer} from "./Serializer";
 
 describe("createSerializer()", () => {
   describe("on input (d_val)", () => {

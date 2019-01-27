@@ -1,3 +1,3 @@
-export {TJoiner, createJoiner} from "./TJoiner";
-export {TMerger, createMerger} from "./TMerger";
-export {TSerializer, createSerializer} from "./TSerializer";
+export {TJoiner, createJoiner} from "./Joiner";
+export {TMerger, createMerger} from "./Merger";
+export {TSerializer, createSerializer} from "./Serializer";

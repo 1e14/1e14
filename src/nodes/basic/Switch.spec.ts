@@ -1,5 +1,5 @@
 import {connect} from "../../node";
-import {createSwitch, TSwitch} from "./TSwitch";
+import {createSwitch, TSwitch} from "./Switch";
 
 describe("createSwitch()", () => {
   describe("on input (all)", () => {

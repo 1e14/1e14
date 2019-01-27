@@ -1,5 +1,5 @@
 import {connect} from "../../node";
-import {createDelayer, TDelayer} from "./TDelayer";
+import {createDelayer, TDelayer} from "./Delayer";
 
 describe("createDelayer()", () => {
   describe("on input (d_val)", () => {

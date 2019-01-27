@@ -1,5 +1,5 @@
 import {connect} from "../../../node";
-import {createStdIn, TStdIn} from "./TStdIn";
+import {createStdIn, TStdIn} from "./StdIn";
 
 describe("createStdIn", () => {
   it("should be singleton", () => {

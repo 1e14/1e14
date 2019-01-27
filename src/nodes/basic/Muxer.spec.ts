@@ -1,5 +1,5 @@
 import {connect} from "../../node";
-import {createMuxer, TMuxer} from "./TMuxer";
+import {createMuxer, TMuxer} from "./Muxer";
 
 describe("createMuxer()", () => {
   describe("on input", () => {

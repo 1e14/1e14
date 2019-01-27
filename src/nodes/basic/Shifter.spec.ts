@@ -1,5 +1,5 @@
 import {connect} from "../../node";
-import {createShifter, TShifter} from "./TShifter";
+import {createShifter, TShifter} from "./Shifter";
 
 describe("createShifter()", () => {
   describe("on input (d_val)", () => {

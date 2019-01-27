@@ -1,6 +1,6 @@
 import {INode, TInPorts} from "../../node";
 import {copy, createOutPorts, createOutputs} from "../../utils";
-import {TOutputs} from "../basic/TDemuxer";
+import {TOutputs} from "../basic/Demuxer";
 
 export type TInputs<T> = T;
 

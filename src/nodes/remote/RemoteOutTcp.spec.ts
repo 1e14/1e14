@@ -1,6 +1,6 @@
 import * as net from "net";
 import {connect} from "../../node";
-import {createRemoteOutTcp, TRemoteOutTcp} from "./TRemoteOutTcp";
+import {createRemoteOutTcp, TRemoteOutTcp} from "./RemoteOutTcp";
 
 describe("createRemoteOutTcp()", () => {
   describe("on input (d_val)", () => {

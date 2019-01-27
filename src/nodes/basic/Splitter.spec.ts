@@ -1,5 +1,5 @@
 import {connect} from "../../node";
-import {createSplitter, TSplitter} from "./TSplitter";
+import {createSplitter, TSplitter} from "./Splitter";
 
 describe("createSplitter()", () => {
   describe("on input (d_val)", () => {

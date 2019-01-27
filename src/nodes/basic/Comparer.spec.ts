@@ -1,5 +1,5 @@
 import {connect} from "../../node";
-import {createComparer, TComparer} from "./TComparer";
+import {createComparer, TComparer} from "./Comparer";
 
 describe("createComparer()", () => {
   describe("with callback", () => {

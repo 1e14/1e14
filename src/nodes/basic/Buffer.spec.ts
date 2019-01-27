@@ -1,5 +1,5 @@
 import {connect} from "../../node";
-import {createBuffer, TBuffer} from "./TBuffer";
+import {createBuffer, TBuffer} from "./Buffer";
 
 describe("createBuffer()", () => {
   describe("on input (all)", () => {

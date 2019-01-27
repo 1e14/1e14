@@ -1,5 +1,5 @@
 import {connect} from "../../node";
-import {createFolder, TFolder} from "./TFolder";
+import {createFolder, TFolder} from "./Folder";
 
 describe("createFolder()", () => {
   describe("when initialized", () => {

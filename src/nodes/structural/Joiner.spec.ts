@@ -1,5 +1,5 @@
 import {connect} from "../../node";
-import {createJoiner, TJoiner} from "./TJoiner";
+import {createJoiner, TJoiner} from "./Joiner";
 
 describe("createJoiner()", () => {
   describe("on input", () => {

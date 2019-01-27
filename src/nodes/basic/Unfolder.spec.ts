@@ -1,5 +1,5 @@
 import {connect} from "../../node";
-import {createUnfolder, TUnfolder} from "./TUnfolder";
+import {createUnfolder, TUnfolder} from "./Unfolder";
 
 describe("createUnfolder()", () => {
   describe("on input (d_fold)", () => {

@@ -1,4 +1,4 @@
-import {createStdErr, TStdErr} from "./TStdErr";
+import {createStdErr, TStdErr} from "./StdErr";
 
 describe("createStdErr", () => {
   it("should be singleton", () => {

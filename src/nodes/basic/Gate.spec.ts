@@ -1,5 +1,5 @@
 import {connect} from "../../node";
-import {createGate, TGate} from "./TGate";
+import {createGate, TGate} from "./Gate";
 
 describe("createGate()", () => {
   describe("on input (all)", () => {

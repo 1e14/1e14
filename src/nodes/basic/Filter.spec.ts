@@ -1,5 +1,5 @@
 import {connect} from "../../node";
-import {createFilter, TFilter} from "./TFilter";
+import {createFilter, TFilter} from "./Filter";
 
 describe("createFilter()", () => {
   describe("on input (d_val)", () => {

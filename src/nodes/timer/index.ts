@@ -1,1 +1,1 @@
-export {TDelayer, createDelayer} from "./TDelayer";
+export {TDelayer, createDelayer} from "./Delayer";

@@ -1,5 +1,5 @@
 import {connect} from "../../node";
-import {createMapper, TMapper} from "./TMapper";
+import {createMapper, TMapper} from "./Mapper";
 
 describe("createMapper()", () => {
   describe("on input (d_val)", () => {

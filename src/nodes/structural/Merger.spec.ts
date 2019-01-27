@@ -1,5 +1,5 @@
 import {connect} from "../../node";
-import {createMerger, TMerger} from "./TMerger";
+import {createMerger, TMerger} from "./Merger";
 
 describe("createMerger()", () => {
   describe("on input", () => {

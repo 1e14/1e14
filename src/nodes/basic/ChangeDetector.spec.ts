@@ -1,5 +1,5 @@
 import {connect} from "../../node";
-import {createChangeDetector, TChangeDetector} from "./TChangeDetector";
+import {createChangeDetector, TChangeDetector} from "./ChangeDetector";
 
 describe("createChangeDetector()", () => {
   describe("when callback is specified", () => {

@@ -1,5 +1,5 @@
 import {connect} from "../../node";
-import {createDemuxer, TDemuxer} from "./TDemuxer";
+import {createDemuxer, TDemuxer} from "./Demuxer";
 
 describe("createDemuxer()", () => {
   describe("on input (d_mux)", () => {

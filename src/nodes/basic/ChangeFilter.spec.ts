@@ -1,5 +1,5 @@
 import {connect} from "../../node";
-import {createChangeFilter, TChangeFilter} from "./TChangeFilter";
+import {createChangeFilter, TChangeFilter} from "./ChangeFilter";
 
 describe("createChangeFilter", () => {
   describe("when callback is specified", () => {

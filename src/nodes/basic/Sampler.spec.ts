@@ -1,5 +1,5 @@
 import {connect} from "../../node";
-import {createSampler, TSampler} from "./TSampler";
+import {createSampler, TSampler} from "./Sampler";
 
 describe("createSampler()", () => {
   describe("on input (ev_smp)", () => {

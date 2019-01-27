@@ -1,6 +1,6 @@
 import * as net from "net";
 import {connect} from "../../node";
-import {createRemoteInTcp, TRemoteInTcp} from "./TRemoteInTcp";
+import {createRemoteInTcp, TRemoteInTcp} from "./RemoteInTcp";
 
 describe("createRemoteInTcp()", () => {
   describe("on data", () => {
