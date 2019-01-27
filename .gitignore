@@ -1,0 +1,7 @@
+/.idea
+/.tscache
+/dist
+/node_modules
+/*.tgz
+/src/**/*.js
+/src/**/*.map

@@ -1,0 +1,46 @@
+{
+  "name": "@kwaia/mote",
+  "version": "0.1.0",
+  "description": "Low-level, distributed computational graph library",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "!dist/**/*.spec.*",
+    "package.json",
+    "README.md"
+  ],
+  "keywords": [
+    "graph",
+    "stream",
+    "reactive",
+    "push",
+    "observable",
+    "observer",
+    "iterable",
+    "iterator"
+  ],
+  "author": "Dan Stocker <dan@kwaia.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:kwaia/mote.git"
+  },
+  "devDependencies": {
+    "@types/jasmine": "^2.8.16",
+    "grunt": "^1.0.3",
+    "grunt-contrib-clean": "^1.1.0",
+    "grunt-contrib-watch": "^1.1.0",
+    "grunt-exec": "^3.0.0",
+    "grunt-notify": "^0.4.5",
+    "grunt-ts": "^6.0.0-beta.22",
+    "grunt-tslint": "^5.0.2",
+    "jasmine": "^3.3.1",
+    "jasmine-spec-reporter": "^4.2.1",
+    "tslint": "^5.12.1",
+    "typescript": "^3.2.4"
+  },
+  "dependencies": {
+    "@types/node": "^10.12.18"
+  }
+}

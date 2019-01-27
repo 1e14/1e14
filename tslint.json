@@ -1,0 +1,27 @@
+{
+  "defaultSeverity": "error",
+  "extends": [
+    "tslint:recommended"
+  ],
+  "jsRules": {},
+  "rules": {
+    "array-type": [
+      true,
+      "generic"
+    ],
+    "forin": false,
+    "no-angle-bracket-type-assertion": false,
+    "only-arrow-functions": false,
+    "space-before-function-paren": false,
+    "trailing-comma": false,
+    "whitespace": [
+      true,
+      "check-branch",
+      "check-decl",
+      "check-operator",
+      "check-separator",
+      "check-type"
+    ]
+  },
+  "rulesDirectory": []
+}
