@@ -1,16 +1,16 @@
 import {TUnfolderCallback} from "../nodes/basic";
-import * as unfold from "./unfold";
+import {unfoldPop, unfoldShift, unfoldSplit} from "./unfold";
 
 describe("unfold", () => {
-  describe("pop()", () => {
+  describe("unfoldPop()", () => {
     it("should unfold array", () => {
-      const iterator = unfold.pop([1, 2, 3]);
+      const iterator = unfoldPop([1, 2, 3]);
       expect([...iterator]).toEqual([3, 2, 1]);
     });
 
     it("should leave original input intact", () => {
       const array = [1, 2, 3];
-      const iterator = unfold.pop(array);
+      const iterator = unfoldPop(array);
       for (const item of iterator) {
         //
       }
@@ -18,15 +18,15 @@ describe("unfold", () => {
     });
   });
 
-  describe("shift()", () => {
+  describe("unfoldShift()", () => {
     it("should unfold array", () => {
-      const iterator = unfold.shift([1, 2, 3]);
+      const iterator = unfoldShift([1, 2, 3]);
       expect([...iterator]).toEqual([1, 2, 3]);
     });
 
     it("should leave original input intact", () => {
       const array = [1, 2, 3];
-      const iterator = unfold.shift(array);
+      const iterator = unfoldShift(array);
       for (const item of iterator) {
         //
       }
@@ -34,9 +34,9 @@ describe("unfold", () => {
     });
   });
 
-  describe("split()", () => {
+  describe("mapSplit()", () => {
     it("should return string fragments", () => {
-      const split = unfold.split("\n");
+      const split = unfoldSplit("\n");
       const iterable = split("foo\nbar\nbaz");
       expect([...iterable]).toEqual(["foo", "bar"]);
     });
@@ -46,7 +46,7 @@ describe("unfold", () => {
       let iterable: IterableIterator<string>;
 
       beforeEach(() => {
-        split = unfold.split("\n");
+        split = unfoldSplit("\n");
         iterable = split("foo\nba");
         for (const item of iterable) {
           //

@@ -10,7 +10,7 @@ describe("createChangeDetector()", () => {
     });
 
     describe("on input (d_val)", () => {
-      describe("when not equal to last value", () => {
+      describe("when not equal to foldLast value", () => {
         beforeEach(() => {
           node.i.d_val(5, "1");
         });
@@ -23,7 +23,7 @@ describe("createChangeDetector()", () => {
         });
       });
 
-      describe("when equal to last value", () => {
+      describe("when equal to foldLast value", () => {
         beforeEach(() => {
           node.i.d_val(5, "1");
         });
@@ -68,7 +68,7 @@ describe("createChangeDetector()", () => {
     });
 
     describe("on input (d_val)", () => {
-      describe("when different than last value", () => {
+      describe("when different than foldLast value", () => {
         beforeEach(() => {
           node.i.d_val(5, "1");
         });
@@ -81,7 +81,7 @@ describe("createChangeDetector()", () => {
         });
       });
 
-      describe("when same as last value", () => {
+      describe("when same as foldLast value", () => {
         beforeEach(() => {
           node.i.d_val(5, "1");
         });

@@ -14,7 +14,7 @@ describe("createChangeFilter", () => {
         node.i.d_val(3, "1");
       });
 
-      describe("when not equal to last value", () => {
+      describe("when not equal to foldLast value", () => {
         it("should forward d_val", () => {
           const spy = jasmine.createSpy();
           connect(node.o.d_val, spy);
@@ -23,7 +23,7 @@ describe("createChangeFilter", () => {
         });
       });
 
-      describe("when equal to last value", () => {
+      describe("when equal to foldLast value", () => {
         it("should not forward d_val", () => {
           const spy = jasmine.createSpy();
           connect(node.o.d_val, spy);
@@ -64,7 +64,7 @@ describe("createChangeFilter", () => {
       node.i.d_val(3, "1");
     });
 
-    describe("when different than last value", () => {
+    describe("when different than foldLast value", () => {
       it("should forward d_val", () => {
         const spy = jasmine.createSpy();
         connect(node.o.d_val, spy);
@@ -73,7 +73,7 @@ describe("createChangeFilter", () => {
       });
     });
 
-    describe("when same as last value", () => {
+    describe("when same as foldLast value", () => {
       it("should not forward d_val", () => {
         const spy = jasmine.createSpy();
         connect(node.o.d_val, spy);

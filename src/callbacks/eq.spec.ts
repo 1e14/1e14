@@ -1,8 +1,8 @@
 import {TEqualityCallback} from "../nodes/basic";
-import * as equal from "./equal";
+import {eqProperty} from "./eq";
 
 describe("equal", () => {
-  describe("property", () => {
+  describe("eqProperty", () => {
     describe("when callback is specified", () => {
       let cb: TEqualityCallback<number>;
 
@@ -12,21 +12,21 @@ describe("equal", () => {
 
       describe("when properties match", () => {
         it("should return true", () => {
-          expect(equal.property("foo", cb)({foo: 3}, {foo: 1})).toBe(true);
+          expect(eqProperty("foo", cb)({foo: 3}, {foo: 1})).toBe(true);
         });
       });
 
       describe("when properties don't match", () => {
         it("should return false", () => {
-          expect(equal.property("foo", cb)({foo: 2}, {foo: 1})).toBe(false);
-          expect(equal.property("foo", cb)({}, {foo: 1})).toBe(false);
+          expect(eqProperty("foo", cb)({foo: 2}, {foo: 1})).toBe(false);
+          expect(eqProperty("foo", cb)({}, {foo: 1})).toBe(false);
         });
       });
 
       describe("when either argument is undefined", () => {
         it("should return undefined", () => {
-          expect(equal.property("foo", cb)(undefined, {foo: 1})).toBeUndefined();
-          expect(equal.property("foo", cb)({foo: 1}, undefined)).toBeUndefined();
+          expect(eqProperty("foo", cb)(undefined, {foo: 1})).toBeUndefined();
+          expect(eqProperty("foo", cb)({foo: 1}, undefined)).toBeUndefined();
         });
       });
     });
@@ -34,21 +34,21 @@ describe("equal", () => {
     describe("when callback is not specified", () => {
       describe("when properties match", () => {
         it("should return true", () => {
-          expect(equal.property("foo")({foo: 1}, {foo: 1})).toBe(true);
+          expect(eqProperty("foo")({foo: 1}, {foo: 1})).toBe(true);
         });
       });
 
       describe("when properties don't match", () => {
         it("should return false", () => {
-          expect(equal.property("foo")({foo: 2}, {foo: 1})).toBe(false);
-          expect(equal.property("foo")({}, {foo: 1})).toBe(false);
+          expect(eqProperty("foo")({foo: 2}, {foo: 1})).toBe(false);
+          expect(eqProperty("foo")({}, {foo: 1})).toBe(false);
         });
       });
 
       describe("when either argument is undefined", () => {
         it("should return undefined", () => {
-          expect(equal.property("foo")(undefined, {foo: 1})).toBeUndefined();
-          expect(equal.property("foo")({foo: 1}, undefined)).toBeUndefined();
+          expect(eqProperty("foo")(undefined, {foo: 1})).toBeUndefined();
+          expect(eqProperty("foo")({foo: 1}, undefined)).toBeUndefined();
         });
       });
     });

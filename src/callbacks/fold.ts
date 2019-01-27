@@ -1,37 +1,37 @@
-export function count(curr: number) {
+export function foldCount(curr: number) {
   return ++curr;
 }
 
-export function push(curr: Array<any>, next: any): Array<any> {
+export function foldPush(curr: Array<any>, next: any): Array<any> {
   curr.push(next);
   return curr;
 }
 
-export function unshift(curr: Array<any>, next: any): Array<any> {
+export function foldUnshift(curr: Array<any>, next: any): Array<any> {
   curr.unshift(next);
   return curr;
 }
 
-export function concat(curr: Array<any>, next: Array<any>): Array<any> {
+export function foldConcat(curr: Array<any>, next: Array<any>): Array<any> {
   return curr.concat(next);
 }
 
-export function last(curr: any, next: any): any {
+export function foldLast(curr: any, next: any): any {
   return next;
 }
 
-export function join(curr: string, next: string): string {
+export function foldJoin(curr: string, next: string): string {
   return curr + next;
 }
 
-export function sum(curr: number, next: number): number {
+export function foldSum(curr: number, next: number): number {
   return curr + next;
 }
 
-export function min(curr: number, next: number): number {
+export function foldMin(curr: number, next: number): number {
   return next < curr ? next : curr;
 }
 
-export function max(curr: number, next: number): number {
+export function foldMax(curr: number, next: number): number {
   return next > curr ? next : curr;
 }
