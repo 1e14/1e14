@@ -42,6 +42,7 @@ export function createFolder<I, O>(
         }
         if (ev_res) {
           outputs.d_fold(folded, tag);
+          first = true;
         }
       } catch (err) {
         outputs.b_d_val(d_val, tag);
