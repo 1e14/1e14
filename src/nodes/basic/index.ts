@@ -11,5 +11,4 @@ export {TMapper, TMapperCallback, createMapper} from "./Mapper";
 export {TMuxer, createMuxer} from "./Muxer";
 export {TNoop, createNoop} from "./Noop";
 export {TSampler, createSampler} from "./Sampler";
-export {TSplitter, createSplitter} from "./Splitter";
 export {TUnfolder, TUnfolderCallback, createUnfolder} from "./Unfolder";
