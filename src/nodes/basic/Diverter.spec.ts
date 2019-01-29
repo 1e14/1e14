@@ -1,12 +1,12 @@
 import {connect} from "../../node";
-import {createSwitch, TSwitch} from "./Switch";
+import {createDiverter, TDiverter} from "./Diverter";
 
-describe("createSwitch()", () => {
+describe("createDiverter()", () => {
   describe("on input (all)", () => {
-    let node: TSwitch<"foo" | "bar" | "baz", number>;
+    let node: TDiverter<"foo" | "bar" | "baz", number>;
 
     beforeEach(() => {
-      node = createSwitch(["foo", "bar", "baz"]);
+      node = createDiverter(["foo", "bar", "baz"]);
     });
 
     it("should forward to specified output", () => {
@@ -33,10 +33,10 @@ describe("createSwitch()", () => {
   });
 
   describe("on input (d_val)", () => {
-    let node: TSwitch<"foo" | "bar" | "baz", number>;
+    let node: TDiverter<"foo" | "bar" | "baz", number>;
 
     beforeEach(() => {
-      node = createSwitch(["foo", "bar", "baz"], "foo");
+      node = createDiverter(["foo", "bar", "baz"], "foo");
     });
 
     it("should forward to current position", () => {
@@ -48,10 +48,10 @@ describe("createSwitch()", () => {
   });
 
   describe("on input (st_pos)", () => {
-    let node: TSwitch<"foo" | "bar" | "baz", number>;
+    let node: TDiverter<"foo" | "bar" | "baz", number>;
 
     beforeEach(() => {
-      node = createSwitch(["foo", "bar", "baz"], "foo");
+      node = createDiverter(["foo", "bar", "baz"], "foo");
     });
 
     describe("on invalid st_pos", () => {

@@ -13,17 +13,17 @@ export type TSwitchPositions<P extends string | number, V> = {
 export type TOutputs<P extends string | number, V> =
   TSwitchPositions<P, V> & { b_st_pos: P; };
 
-export type TSwitch<P extends string | number, V> =
+export type TDiverter<P extends string | number, V> =
   INode<IInputs<P, V> & { all: IInputs<P, V> }, TOutputs<P, V>>;
 
 /**
  * TODO: Remove <any> typecasts once TS supports string patterns in types
  * @link https://github.com/Microsoft/TypeScript/issues/12754
  */
-export function createSwitch<P extends string | number, V>(
+export function createDiverter<P extends string | number, V>(
   positions: Array<P>,
   position?: P
-): TSwitch<P, V> {
+): TDiverter<P, V> {
   const o = createOutPorts((<Array<keyof TOutputs<P, V>>>positions).concat("b_st_pos"));
   const outputs = createOutputs<TOutputs<P, V>>(o);
 
