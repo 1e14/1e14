@@ -4,17 +4,41 @@ import {createOutPorts, createOutputs} from "../../utils";
 export type TUnfolderCallback<I, O> = (value: I, tag?: TTag) => IterableIterator<O>;
 
 export interface IInputs<I> {
+  /**
+   * Value to unfold.
+   */
   d_fold: I;
 }
 
 export interface IOutputs<I, O> {
+  /**
+   * Bounced input value.
+   */
   b_d_fold: I;
+
+  /**
+   * Unfolded value.
+   */
   d_val: O;
+
+  /**
+   * Error message.
+   */
   ev_err: string;
 }
 
+/**
+ * Opposite of Folder.
+ * Emits multiple outputs for a single input, according to an unfolder
+ * (generator) callback.
+ * Bounces input, and emits error on callback exception.
+ */
 export type TUnfolder<I, O> = INode<IInputs<I>, IOutputs<I, O>>;
 
+/**
+ * Creates an Unfolder node.
+ * @param cb Unfolder callback (generator).
+ */
 export function createUnfolder<I, O>(cb: TUnfolderCallback<I, O>): TUnfolder<I, O> {
   const o = createOutPorts(["b_d_fold", "d_val", "ev_err"]);
   const outputs = createOutputs(o);

@@ -48,7 +48,7 @@ describe("map", () => {
       join = mapJoin(";");
     });
 
-    it("should foldJoin input array", () => {
+    it("should join input array", () => {
       expect(join(["foo", 5, true])).toBe("foo;5;true");
     });
   });
@@ -60,7 +60,7 @@ describe("map", () => {
       append = mapAppend("_");
     });
 
-    it("should mapAppend to input string", () => {
+    it("should append to input string", () => {
       expect(append("foo")).toBe("foo_");
     });
   });
@@ -72,7 +72,7 @@ describe("map", () => {
       prepend = mapPrepend("_");
     });
 
-    it("should mapPrepend to input string", () => {
+    it("should prepend to input string", () => {
       expect(prepend("foo")).toBe("_foo");
     });
   });

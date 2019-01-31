@@ -2,13 +2,24 @@ import {INode, TInPorts} from "../../node";
 import {createOutPorts, createOutputs, IMuxed} from "../../utils";
 
 export interface IInputs<T> {
+  /**
+   * Multiplexed input value.
+   */
   d_mux: IMuxed<T>;
 }
 
 export type TOutputs<T> = T;
 
+/**
+ * De-multiplexes input value.
+ * Forwards de-multiplexed input values to corresponding output ports.
+ */
 export type TDemuxer<T> = INode<IInputs<T>, TOutputs<T>>;
 
+/**
+ * Creates a Demuxer node.
+ * @param fields List of output fields.
+ */
 export function createDemuxer<T>(fields: Array<keyof T>): TDemuxer<T> {
   const o = createOutPorts(fields);
   const outputs = createOutputs(o);

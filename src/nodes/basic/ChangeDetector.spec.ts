@@ -10,27 +10,27 @@ describe("createChangeDetector()", () => {
     });
 
     describe("on input (d_val)", () => {
-      describe("when not equal to foldLast value", () => {
+      describe("when not equal to last value", () => {
         beforeEach(() => {
           node.i.d_val(5, "1");
         });
 
-        it("should emit true", () => {
+        it("should emit true on d_chg", () => {
           const spy = jasmine.createSpy();
-          connect(node.o.d_eq, spy);
+          connect(node.o.d_chg, spy);
           node.i.d_val(4, "2");
           expect(spy).toHaveBeenCalledWith(true, "2");
         });
       });
 
-      describe("when equal to foldLast value", () => {
+      describe("when equal to last value", () => {
         beforeEach(() => {
           node.i.d_val(5, "1");
         });
 
-        it("should emit false", () => {
+        it("should emit false on d_chg", () => {
           const spy = jasmine.createSpy();
-          connect(node.o.d_eq, spy);
+          connect(node.o.d_chg, spy);
           node.i.d_val(7, "2");
           expect(spy).toHaveBeenCalledWith(false, "2");
         });
@@ -68,27 +68,27 @@ describe("createChangeDetector()", () => {
     });
 
     describe("on input (d_val)", () => {
-      describe("when different than foldLast value", () => {
+      describe("when different than last value", () => {
         beforeEach(() => {
           node.i.d_val(5, "1");
         });
 
         it("should emit true", () => {
           const spy = jasmine.createSpy();
-          connect(node.o.d_eq, spy);
+          connect(node.o.d_chg, spy);
           node.i.d_val(4, "2");
           expect(spy).toHaveBeenCalledWith(true, "2");
         });
       });
 
-      describe("when same as foldLast value", () => {
+      describe("when same as last value", () => {
         beforeEach(() => {
           node.i.d_val(5, "1");
         });
 
         it("should emit false", () => {
           const spy = jasmine.createSpy();
-          connect(node.o.d_eq, spy);
+          connect(node.o.d_chg, spy);
           node.i.d_val(5, "2");
           expect(spy).toHaveBeenCalledWith(false, "2");
         });

@@ -2,7 +2,14 @@ import {INode, TInPorts} from "../../node";
 import {createOutPorts, createOutputs} from "../../utils";
 
 export interface IInputs<P extends string | number, V> {
+  /**
+   * Value to be diverted.
+   */
   d_val: V;
+
+  /**
+   * Current position of the diverter.
+   */
   st_pos: P;
 }
 
@@ -13,12 +20,20 @@ export type TSwitchPositions<P extends string | number, V> = {
 export type TOutputs<P extends string | number, V> =
   TSwitchPositions<P, V> & { b_st_pos: P; };
 
+/**
+ * Forwards input value to one of the output ports, depending on the
+ * node's current 'position' state.
+ * Operates with either independent or joined inputs.
+ */
 export type TDiverter<P extends string | number, V> =
   INode<IInputs<P, V> & { all: IInputs<P, V> }, TOutputs<P, V>>;
 
 /**
+ * Creates a Diverter node.
  * TODO: Remove <any> typecasts once TS supports string patterns in types
  * @link https://github.com/Microsoft/TypeScript/issues/12754
+ * @param positions List of all possible positions.
+ * @param position Initial position.
  */
 export function createDiverter<P extends string | number, V>(
   positions: Array<P>,

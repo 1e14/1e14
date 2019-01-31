@@ -2,16 +2,34 @@ import {INode, TInPorts} from "../../node";
 import {createOutPorts, createOutputs} from "../../utils";
 
 export interface IInputs<V> {
+  /**
+   * Value to be forwarded.
+   */
   d_val: V;
+
+  /**
+   * Whether gate is open.
+   */
   st_open: boolean;
 }
 
 export interface IOutputs<V> {
+  /**
+   * Forwarded value.
+   */
   d_val: V;
 }
 
+/**
+ * Forwards input value when gate is open.
+ * Operates with either independent or joined inputs.
+ */
 export type TGate<V> = INode<IInputs<V> & { all: IInputs<V> }, IOutputs<V>>;
 
+/**
+ * Creates a Gate node.
+ * @param open Initial 'open' state.
+ */
 export function createGate<V>(open?: boolean): TGate<V> {
   const o = createOutPorts(["d_val"]);
   const outputs = createOutputs(o);

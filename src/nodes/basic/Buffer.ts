@@ -2,17 +2,41 @@ import {INode, TInPorts, TTag} from "../../node";
 import {createOutPorts, createOutputs} from "../../utils";
 
 export interface IInputs<V> {
+  /**
+   * Value to be buffered.
+   */
   d_val: V;
+
+  /**
+   * Whether the buffer is open.
+   */
   st_open: boolean;
 }
 
 export interface IOutputs<V> {
+  /**
+   * Forwarded value.
+   */
   d_val: V;
+
+  /**
+   * Current buffer size. Non-zero when only when buffer is closed.
+   */
   st_size: number;
 }
 
+/**
+ * Buffers values.
+ * When the buffer is closed, it stores input values. When the buffer is
+ * open it releases stored values and forwards input value.
+ * Operates with either independent or joined inputs.
+ */
 export type TBuffer<V> = INode<IInputs<V> & { all: IInputs<V> }, IOutputs<V>>;
 
+/**
+ * Creates a Buffer node.
+ * @param open Whether buffer is open initially.
+ */
 export function createBuffer<V>(open?: boolean): TBuffer<V> {
   const o = createOutPorts(["d_val", "st_size"]);
   const outputs = createOutputs(o);

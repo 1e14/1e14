@@ -7,18 +7,47 @@ export type TFolderCallback<I, O> = (
   tag?: TTag) => O;
 
 export interface IInputs<I> {
+  /**
+   * Value to be folded (aggregated).
+   */
   d_val: I;
+
+  /**
+   * Reset signal.
+   */
   ev_res: boolean;
 }
 
 export interface IOutputs<I, O> {
+  /**
+   * Bounced input value.
+   */
   b_d_val: I;
+
+  /**
+   * Folded (aggregated) value.
+   */
   d_fold: O;
+
+  /**
+   * Error message.
+   */
   ev_err: string;
 }
 
+/**
+ * Aggregates input values between reset signals, according to an aggregator
+ * (reduce) callback.
+ * Bounces input, and emits error on callback exception.
+ * Operates with either independent or joined inputs.
+ */
 export type TFolder<I, O> = INode<IInputs<I> & { all: IInputs<I> }, IOutputs<I, O>>;
 
+/**
+ * Creates a Folder node.
+ * @param cb Aggregator (reduce) function.
+ * @param initial Initial value for aggregation.
+ */
 export function createFolder<I, O>(
   cb: TFolderCallback<I, O>,
   initial?: O
