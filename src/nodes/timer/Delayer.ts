@@ -2,15 +2,32 @@ import {INode, TInPorts} from "../../node";
 import {createOutPorts, createOutputs} from "../../utils";
 
 export interface IInputs<V> {
+  /**
+   * Value to be delayed.
+   */
   d_val: V;
 }
 
 export interface IOutputs<V> {
+  /**
+   * Delayed value.
+   */
   d_val: V;
 }
 
+/**
+ * Forwards input value with the specified delay.
+ * @example
+ * delayer = createDelayer(1000);
+ * mote.connect(delayer.o.d_val, console.log);
+ * delayer.i.d_val("a"); // logs after 1 second: "a"
+ */
 export type TDelayer<V> = INode<IInputs<V>, IOutputs<V>>;
 
+/**
+ * Creates a Delayer node.
+ * @param ms Number of milliseconds between receiving and forwarding input.
+ */
 export function createDelayer<V>(ms: number): TDelayer<V> {
   const o = createOutPorts(["d_val"]);
   const outputs = createOutputs(o);

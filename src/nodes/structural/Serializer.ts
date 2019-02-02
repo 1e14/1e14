@@ -2,16 +2,39 @@ import {INode, TInPorts, TTag} from "../../node";
 import {createOutPorts, createOutputs} from "../../utils";
 
 export interface IInputs<V> {
+  /**
+   * Values to serialize.
+   */
   d_val: V;
+
+  /**
+   * Reference input.
+   */
   r_tag: any;
 }
 
 export interface IOutputs<V> {
+  /**
+   * Forwarded value.
+   */
   d_val: V;
 }
 
+/**
+ * Forwards input values in an order matching the reference input.
+ * @example
+ * serializer = createSerializer();
+ * mote.connect(serializer.o.d_val, console.log);
+ * serializer.i.d_val("a", 2);
+ * serializer.i.r_tag(null, 1);
+ * serializer.i.r_tag(null, 2);
+ * serializer.i.d_val("b", 1); // logs: "b" 1, "a" 2
+ */
 export type TSerializer<V> = INode<IInputs<V>, IOutputs<V>>;
 
+/**
+ * Creates a Serializer node.
+ */
 export function createSerializer<V>(): TSerializer<V> {
   const o = createOutPorts(["d_val"]);
   const outputs = createOutputs(o);

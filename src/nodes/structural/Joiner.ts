@@ -4,11 +4,27 @@ import {createOutPorts, createOutputs} from "../../utils";
 export type TInputs<T> = T;
 
 export interface IOutputs<T> {
+  /**
+   * Joined inputs.
+   */
   all: T;
 }
 
+/**
+ * Joins input values from all ports having the same tag.
+ * @example
+ * joiner = createJoiner(["foo", "bar"]);
+ * mote.connect(joiner.o.all, console.log);
+ * joiner.i.foo("a", 2);
+ * joiner.i.foo("b", 1);
+ * joiner.i.bar("c", 2); // logs: {foo: "a", bar: "c"} 2
+ */
 export type TJoiner<T> = INode<TInputs<T>, IOutputs<T>>;
 
+/**
+ * Creates a Joiner node.
+ * @param fields List of input fields.
+ */
 export function createJoiner<T>(fields: Array<keyof T>): TJoiner<T> {
   const o = createOutPorts(["all"]);
   const outputs = createOutputs(o);

@@ -3,18 +3,38 @@ import {INode, TInPorts, TTag} from "../../node";
 import {createOutPorts, createOutputs} from "../../utils";
 
 export interface IInputs<V> {
+  /**
+   * Value to be sent to remote node.
+   */
   d_val: V;
 }
 
 export interface IOutputs<V> {
+  /**
+   * Bounced input value.
+   */
   b_d_val: V;
+
+  /**
+   * Error message.
+   */
   ev_err: string;
 }
 
+/**
+ * Sends data to a RemoteInTcp node on a remote server through TCP connection.
+ * Bounces input, and emits error on socket error.
+ */
 export type TRemoteOutTcp<V> = INode<IInputs<V>, IOutputs<V>>;
 
 const socketCache: Map<string, Socket> = new Map();
 
+/**
+ * Creates a RemoteOutTcp node.
+ * @param host Address of remote server.
+ * @param port Port of the remote server.
+ * @param id Identifies RemoteInTcp node on remote server.
+ */
 export function createRemoteOutTcp<V>(host: string, port: number, id: string): TRemoteOutTcp<V> {
   const o = createOutPorts(["b_d_val", "ev_err"]);
   const outputs = createOutputs(o);
