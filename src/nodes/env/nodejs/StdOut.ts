@@ -10,6 +10,10 @@ interface IInputs {
 /**
  * Forwards input to standard output (stdout).
  * Environments: Node.js.
+ * @example
+ * mote = require("@kwaia/mote");
+ * stdOut = mote.createStdOut();
+ * stdOut.i.d_val("foo"); // writes to stdout: "foo"
  */
 export type TStdOut = INode<IInputs, {}>;
 

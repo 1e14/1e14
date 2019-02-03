@@ -19,6 +19,10 @@ let instance: TStdErr;
  * Creates a StdErr node.
  * Returns a singleton, ie. subsequent calls to `createStdErr` will return the
  * same object.
+ * @example
+ * mote = require("@kwaia/mote");
+ * stdErr = mote.createStdErr();
+ * stdErr.i.d_val("foo"); // writes to stderr: "foo"
  */
 export function createStdErr(): TStdErr {
   if (instance) {
