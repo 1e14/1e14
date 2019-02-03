@@ -1,5 +1,9 @@
 import {TUnfolderCallback} from "../nodes/basic";
 
+/**
+ * Unfolds array by popping values out of it.
+ * @param value
+ */
 export function* unfoldPop(value: Array<any>): any {
   value = value.slice();
   while (value.length > 0) {
@@ -7,6 +11,10 @@ export function* unfoldPop(value: Array<any>): any {
   }
 }
 
+/**
+ * Unfolds array by unshifting values out of it.
+ * @param value
+ */
 export function* unfoldShift(value: Array<any>): any {
   value = value.concat();
   while (value.length > 0) {
@@ -14,6 +22,11 @@ export function* unfoldShift(value: Array<any>): any {
   }
 }
 
+/**
+ * Creates a generator function that unfolds a string by splitting it along
+ * the specified delimiter.
+ * @param delimiter
+ */
 export function unfoldSplit(delimiter: string): TUnfolderCallback<string, string> {
   let fragment = "";
   return function* (value: string) {

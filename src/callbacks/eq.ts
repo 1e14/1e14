@@ -1,5 +1,11 @@
 import {TEqualityCallback} from "../nodes/basic";
 
+/**
+ * Creates an equality callback that checks whether the specified property
+ * of the arguments are equal, according to an optional equality callback.
+ * @param name Property name.
+ * @param cb Optional equality callback.
+ */
 export function eqProperty<I>(
   name: string,
   cb?: TEqualityCallback<I[keyof I]>

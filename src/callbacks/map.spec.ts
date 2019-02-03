@@ -41,7 +41,7 @@ describe("map", () => {
     });
   });
 
-  describe("foldJoin()", () => {
+  describe("foldAdd()", () => {
     let join: (value: Array<any>) => string;
 
     beforeEach(() => {

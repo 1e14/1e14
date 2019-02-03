@@ -1,12 +1,12 @@
 import {
+  foldAdd,
   foldConcat,
-  foldCount, foldFirst,
-  foldJoin,
+  foldCount,
+  foldFirst,
   foldLast,
   foldMax,
   foldMin,
   foldPush,
-  foldSum,
   foldUnshift
 } from "./fold";
 
@@ -53,17 +53,10 @@ describe("fold", () => {
     });
   });
 
-  describe("foldJoin()", () => {
+  describe("foldAdd()", () => {
     it("should return joined string", () => {
       const input = ["1", "2", "3", "4", "5"];
-      expect(input.reduce(foldJoin, "")).toEqual("12345");
-    });
-  });
-
-  describe("foldSum()", () => {
-    it("should return sum", () => {
-      const input = [1, 2, 3, 4, 5];
-      expect(input.reduce(foldSum, 0)).toEqual(15);
+      expect(input.reduce(foldAdd, "")).toEqual("12345");
     });
   });
 
