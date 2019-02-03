@@ -30,6 +30,11 @@ export interface IOutputs<I, O> {
 /**
  * Maps input value according to mapper callback.
  * Bounces input, and emits error on callback exception.
+ * @example
+ * mote = require("@kwaia/mote");
+ * mapper = mote.createMapper(next => 2 * next);
+ * mote.connect(mapper.o.d_val, console.log);
+ * mapper.i.d_val(5); // logs: 10
  */
 export type TMapper<I, O> = INode<IInputs<I>, IOutputs<I, O>>;
 

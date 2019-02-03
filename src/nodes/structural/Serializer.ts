@@ -23,7 +23,8 @@ export interface IOutputs<V> {
 /**
  * Forwards input values in an order matching the reference input.
  * @example
- * serializer = createSerializer();
+ * mote = require("@kwaia/mote");
+ * serializer = mote.createSerializer();
  * mote.connect(serializer.o.d_val, console.log);
  * serializer.i.d_val("a", 2);
  * serializer.i.r_tag(null, 1);

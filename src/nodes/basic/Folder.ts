@@ -40,6 +40,14 @@ export interface IOutputs<I, O> {
  * (reduce) callback.
  * Bounces input, and emits error on callback exception.
  * Operates with either independent or joined inputs.
+ * @example
+ * mote = require("@kwaia/mote");
+ * folder = mote.createFolder((curr, next) => curr + next);
+ * mote.connect(folder.o.d_fold, console.log);
+ * folder.i.d_val(2);
+ * folder.i.d_val(3);
+ * folder.i.d_val(4);
+ * folder.i.ev_res(true); // logs: 9
  */
 export type TFolder<I, O> = INode<IInputs<I> & { all: IInputs<I> }, IOutputs<I, O>>;
 

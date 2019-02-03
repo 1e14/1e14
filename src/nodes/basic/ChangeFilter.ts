@@ -31,6 +31,13 @@ export interface IOutputs<V> {
  * Forwards input value when different than the last one, according to
  * optional equality callback.
  * Bounces input, and emits error on callback exception.
+ * @example
+ * mote = require("@kwaia/mote");
+ * changeFilter = mote.createChangeFilter();
+ * mote.connect(changeFilter.o.d_val, console.log);
+ * changeFilter.i.d_val("a"); // logs: "a"
+ * changeFilter.i.d_val("a");
+ * changeFilter.i.d_val("b"); // logs: "b"
  */
 export type TChangeFilter<V> = INode<IInputs<V>, IOutputs<V>>;
 

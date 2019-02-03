@@ -24,6 +24,12 @@ export type TOutputs<P extends string | number, V> =
  * Forwards input value to one of the output ports, depending on the
  * node's current 'position' state.
  * Operates with either independent or joined inputs.
+ * @example
+ * mote = require("@kwaia/mote");
+ * diverter = mote.createDiverter(["foo", "bar"]);
+ * mote.connect(diverter.o.foo, console.log);
+ * diverter.i.st_pos("foo");
+ * diverter.i.d_val("a"); // logs: "a"
  */
 export type TDiverter<P extends string | number, V> =
   INode<IInputs<P, V> & { all: IInputs<P, V> }, TOutputs<P, V>>;

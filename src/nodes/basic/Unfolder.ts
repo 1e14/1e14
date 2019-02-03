@@ -32,6 +32,11 @@ export interface IOutputs<I, O> {
  * Emits multiple outputs for a single input, according to an unfolder
  * (generator) callback.
  * Bounces input, and emits error on callback exception.
+ * @example
+ * mote = require("@kwaia/mote");
+ * unfolder = mote.createUnfolder(function *(value) {while (value > 0) yield value--});
+ * mote.connect(unfolder.o.d_val, console.log);
+ * unfolder.i.d_fold(5); // logs: 5, 4, 3, 2, 1
  */
 export type TUnfolder<I, O> = INode<IInputs<I>, IOutputs<I, O>>;
 

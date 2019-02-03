@@ -18,7 +18,8 @@ export interface IOutputs<V> {
 /**
  * Forwards input value with the specified delay.
  * @example
- * delayer = createDelayer(1000);
+ * mote = require("@kwaia/mote");
+ * delayer = mote.createDelayer(1000);
  * mote.connect(delayer.o.d_val, console.log);
  * delayer.i.d_val("a"); // logs after 1 second: "a"
  */

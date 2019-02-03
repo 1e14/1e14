@@ -13,6 +13,11 @@ export interface IOutputs<T> {
 /**
  * Multiplexes input value.
  * Forwards multiplexed input value to a single output port.
+ * @example
+ * mote = require("@kwaia/mote");
+ * muxer = mote.createMuxer(["foo", "bar"]);
+ * mote.connect(muxer.o.d_mux, console.log);
+ * muxer.i.foo("a"); // logs: {field: "foo", value: "a"}
  */
 export type TMuxer<T> = INode<TInputs<T>, IOutputs<T>>;
 

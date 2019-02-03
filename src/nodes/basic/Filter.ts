@@ -30,6 +30,13 @@ export interface IOutputs<V> {
 /**
  * Filters input values according to a filter callback.
  * Bounces input, and emits error on callback exception.
+ * @example
+ * mote = require("@kwaia/mote");
+ * filter = mote.createFilter(next => next > 5);
+ * mote.connect(filter.o.d_val, console.log);
+ * filter.i.d_val(3);
+ * filter.i.d_val(5);
+ * filter.i.d_val(8); // logs: 8
  */
 export type TFilter<V> = INode<IInputs<V>, IOutputs<V>>;
 

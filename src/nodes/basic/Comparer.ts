@@ -33,6 +33,12 @@ export interface IOutputs<V> {
 /**
  * Compares a pair of input values according to an optional equality callback.
  * Bounces input, and emits error on callback exception.
+ * @example
+ * mote = require("@kwaia/mote");
+ * comparer = mote.createComparer();
+ * mote.connect(comparer.o.d_eq, console.log);
+ * comparer.i.d_vals({a: "foo", b: "foo"}); // logs: true
+ * comparer.i.d_vals({a: "foo", b: "bar"}); // logs: false
  */
 export type TComparer<V> = INode<IInputs<V>, IOutputs<V>>;
 

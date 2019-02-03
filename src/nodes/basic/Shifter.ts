@@ -17,6 +17,13 @@ export interface IOutputs<V> {
 
 /**
  * Shifts input back by one in impulse domain.
+ * @example
+ * mote = require("@kwaia/mote");
+ * shifter = mote.createShifter();
+ * mote.connect(shifter.o.d_val, console.log);
+ * shifter.i.d_val(5); // logs: undefined
+ * shifter.i.d_val(3); // logs: 5
+ * shifter.i.d_val(4); // logs: 3
  */
 export type TShifter<V> = INode<IInputs<V>, IOutputs<V>>;
 

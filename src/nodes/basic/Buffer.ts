@@ -30,6 +30,14 @@ export interface IOutputs<V> {
  * When the buffer is closed, it stores input values. When the buffer is
  * open it releases stored values and forwards input value.
  * Operates with either independent or joined inputs.
+ * @example
+ * mote = require("@kwaia/mote");
+ * buffer = mote.createBuffer(false);
+ * mote.connect(buffer.o.d_val, console.log);
+ * buffer.i.d_val("a");
+ * buffer.i.d_val("b");
+ * buffer.i.st_open(true); // logs: "a", "b"
+ * buffer.i.d_val("c"); // logs: "c"
  */
 export type TBuffer<V> = INode<IInputs<V> & { all: IInputs<V> }, IOutputs<V>>;
 

@@ -23,6 +23,13 @@ export interface IOutputs<V> {
 /**
  * Forwards input value when gate is open.
  * Operates with either independent or joined inputs.
+ * @example
+ * mote = require("@kwaia/mote");
+ * gate = mote.createGate(false);
+ * mote.connect(gate.o.d_val, console.log);
+ * gate.i.d_val("a");
+ * gate.i.st_open(true);
+ * gate.i.d_val("b"); // logs: "b"
  */
 export type TGate<V> = INode<IInputs<V> & { all: IInputs<V> }, IOutputs<V>>;
 

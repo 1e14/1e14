@@ -31,6 +31,13 @@ export interface IOutputs<V> {
  * Emits `true` or `false` depending on whether input value is different than
  * last one, according to optional equality callback.
  * Bounces input, and emits error on callback exception.
+ * @example
+ * mote = require("@kwaia/mote");
+ * changeDetector = mote.createChangeDetector();
+ * mote.connect(changeDetector.o.d_chg, console.log);
+ * changeDetector.i.d_val("a"); // logs: true
+ * changeDetector.i.d_val("b"); // logs: true
+ * changeDetector.i.d_val("b"); // logs: false
  */
 export type TChangeDetector<V> = INode<IInputs<V>, IOutputs<V>>;
 

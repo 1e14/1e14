@@ -13,6 +13,11 @@ export type TOutputs<T> = T;
 /**
  * De-multiplexes input value.
  * Forwards de-multiplexed input values to corresponding output ports.
+ * @example
+ * mote = require("@kwaia/mote");
+ * demuxer = mote.createDemuxer(["foo", "bar"]);
+ * mote.connect(demuxer.o.foo, console.log);
+ * demuxer.i.d_mux({field: "foo", value: "a"}); // logs: "a"
  */
 export type TDemuxer<T> = INode<IInputs<T>, TOutputs<T>>;
 

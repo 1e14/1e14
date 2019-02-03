@@ -13,7 +13,8 @@ export interface IOutputs<T> {
 /**
  * Joins input values from all ports having the same tag.
  * @example
- * joiner = createJoiner(["foo", "bar"]);
+ * mote = require("@kwaia/mote");
+ * joiner = mote.createJoiner(["foo", "bar"]);
  * mote.connect(joiner.o.all, console.log);
  * joiner.i.foo("a", 2);
  * joiner.i.foo("b", 1);

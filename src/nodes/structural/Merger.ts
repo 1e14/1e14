@@ -14,7 +14,8 @@ export interface IOutputs<T> {
 /**
  * Merges last input values from all ports.
  * @example
- * merger = createMerger(["foo", "bar"]);
+ * mote = require("@kwaia/mote");
+ * merger = mote.createMerger(["foo", "bar"]);
  * mote.connect(merger.o.all, console.log);
  * merger.i.foo("a"); // logs: {foo: "a"}
  * merger.i.foo("b"); // logs: {foo: "b"}
