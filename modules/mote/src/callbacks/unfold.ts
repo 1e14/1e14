@@ -1,4 +1,4 @@
-import {TUnfolderCallback} from "../nodes/basic";
+import {TUnfolderCallback} from "../nodes";
 
 /**
  * Unfolds array by popping values out of it.

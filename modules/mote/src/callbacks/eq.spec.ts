@@ -1,4 +1,4 @@
-import {TEqualityCallback} from "../nodes/basic";
+import {TEqualityCallback} from "../nodes";
 import {eqProperty} from "./eq";
 
 describe("equal", () => {

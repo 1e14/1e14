@@ -1,4 +1,4 @@
-import {TUnfolderCallback} from "../nodes/basic";
+import {TUnfolderCallback} from "../nodes";
 import {unfoldPop, unfoldShift, unfoldSplit} from "./unfold";
 
 describe("unfold", () => {

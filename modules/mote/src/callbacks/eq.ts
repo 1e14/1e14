@@ -1,4 +1,4 @@
-import {TEqualityCallback} from "../nodes/basic";
+import {TEqualityCallback} from "../nodes";
 
 /**
  * Creates an equality callback that checks whether the specified property

@@ -1,4 +1,4 @@
-import {TMapperCallback} from "../nodes/basic";
+import {TMapperCallback} from "../nodes";
 
 /**
  * Creates a function that maps any value to the specified constant.
