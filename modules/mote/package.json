@@ -23,5 +23,15 @@
   "repository": {
     "type": "git",
     "url": "git@github.com:kwaia/mote.git"
+  },
+  "devDependencies": {
+    "typescript": "^3.3.3"
+  },
+  "scripts": {
+    "build": "npm run clean && tsc",
+    "clean": "rm -rf dist",
+    "jasmine": "jasmine dist/**/*.spec.js",
+    "test": "npm run tslint && npm run jasmine",
+    "tslint": "tslint -c ../../tslint.json src/**/*.ts"
   }
 }
