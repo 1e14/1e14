@@ -1,6 +1,5 @@
+import {createOutPorts, createOutputs, INode, TInPorts, TTag} from "@kwaia/mote";
 import {Socket} from "net";
-import {INode, TInPorts, TTag} from "../../node";
-import {createOutPorts, createOutputs} from "../../utils";
 
 export interface IInputs<V> {
   /**

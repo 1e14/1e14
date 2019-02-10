@@ -1,5 +1,5 @@
+import {connect, disconnect, TInPort, TOutPort} from ".";
 import {noop} from "../utils";
-import {connect, disconnect, TInPort, TOutPort} from "./index";
 
 describe("connect", () => {
   let outPort: TOutPort<number>;

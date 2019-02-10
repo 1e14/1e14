@@ -1,0 +1,31 @@
+{
+  "name": "@kwaia/mote-nodejs",
+  "version": "0.1.0",
+  "description": "NodeJS-specific nodes",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "!dist/**/*.spec.*",
+    "package.json",
+    "README.md"
+  ],
+  "keywords": [
+    "computational-graphs",
+    "reactive-programming",
+    "reactive-streams",
+    "stream-processing",
+    "distributed-computing",
+    "fault-tolerance"
+  ],
+  "author": "Dan Stocker <dan@kwaia.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:kwaia/mote.git"
+  },
+  "dependencies": {
+    "@kwaia/mote": "^0.1.0",
+    "@types/node": "^10.12.18"
+  }
+}

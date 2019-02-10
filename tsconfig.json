@@ -3,11 +3,6 @@
     "module": "commonjs",
     "target": "es2017",
     "declaration": true,
-    "rootDir": "./src",
-    "outDir": "./dist",
     "sourceMap": true
-  },
-  "include": [
-    "src/**/*.ts"
-  ]
+  }
 }

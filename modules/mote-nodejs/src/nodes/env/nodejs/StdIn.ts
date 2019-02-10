@@ -1,5 +1,4 @@
-import {INode} from "../../../node";
-import {createOutPorts, createOutputs} from "../../../utils";
+import {createOutPorts, createOutputs, INode} from "@kwaia/mote";
 
 interface IOutputs {
   /**

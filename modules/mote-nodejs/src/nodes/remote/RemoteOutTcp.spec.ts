@@ -1,5 +1,5 @@
+import {connect} from "@kwaia/mote";
 import * as net from "net";
-import {connect} from "../../node";
 import {createRemoteOutTcp, TRemoteOutTcp} from "./RemoteOutTcp";
 
 describe("createRemoteOutTcp()", () => {

@@ -1,4 +1,4 @@
-import {connect} from "../../../node";
+import {connect} from "@kwaia/mote";
 import {createStdIn, TStdIn} from "./StdIn";
 
 describe("createStdIn", () => {

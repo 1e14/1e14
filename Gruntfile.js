@@ -6,15 +6,18 @@ module.exports = function (grunt) {
     clean: {
       // compilation outputs
       tsc: [
-        "dist/**/*.js",
-        "dist/**/*.js.map",
-        "dist/**/*.d.ts"
+        "modules/*/dist/**/*.js",
+        "modules/*/dist/**/*.js.map",
+        "modules/*/dist/**/*.d.ts"
       ]
     },
 
     ts: {
-      default: {
-        tsconfig: "./tsconfig.json"
+      "mote": {
+        tsconfig: "modules/mote/tsconfig.json"
+      },
+      "mote-nodejs": {
+        tsconfig: "modules/mote-nodejs/tsconfig.json"
       }
     },
 
@@ -22,7 +25,7 @@ module.exports = function (grunt) {
       options: {
         configuration: "./tslint.json"
       },
-      files: "src/**/*.ts"
+      files: "modules/*/src/**/*.ts"
     },
 
     exec: {

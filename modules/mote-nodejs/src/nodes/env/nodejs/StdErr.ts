@@ -1,4 +1,4 @@
-import {INode, TInPorts} from "../../../node";
+import {INode, TInPorts} from "@kwaia/mote";
 
 interface IInputs {
   /**

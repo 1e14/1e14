@@ -1,7 +1,5 @@
+/*.tgz
 /.idea
 /.tscache
-/dist
-/node_modules
-/*.tgz
-/src/**/*.js
-/src/**/*.map
+/modules/*/dist
+node_modules
