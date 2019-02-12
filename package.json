@@ -1,12 +1,12 @@
 {
-  "name": "@kwaia/mote-development",
+  "name": "@protoboard/river-development",
   "version": "0.1.0",
   "description": "",
   "author": "Dan Stocker <dan@kwaia.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git@github.com:kwaia/mote.git"
+    "url": "git@github.com:kwaia/river.git"
   },
   "devDependencies": {
     "@types/jasmine": "^2.8.16",
@@ -15,18 +15,18 @@
     "typescript": "^3.3.3"
   },
   "scripts": {
-    "b-mote": "cd modules/mote && npm run build",
-    "b-mote-nodejs": "cd modules/mote-nodejs && npm run build",
-    "build": "npm run b-mote && npm run b-mote-nodejs",
-    "i-mote": "cd modules/mote && npm i",
-    "i-mote-nodejs": "cd modules/mote-nodejs && npm i",
-    "ln-mote": "cd modules/mote && npm ln",
-    "ln-mote-nodejs": "cd modules/mote-nodejs && npm ln @kwaia/mote && npm ln",
-    "pi-mote": "npm run ln-mote && npm run i-mote",
-    "pi-mote-nodejs": "npm run ln-mote-nodejs && npm run i-mote-nodejs",
-    "postinstall": "npm run pi-mote && npm run pi-mote-nodejs",
-    "t-mote": "cd modules/mote && npm run test",
-    "t-mote-nodejs": "cd modules/mote-nodejs && npm run test",
-    "test": "npm run t-mote && npm run t-mote-nodejs"
+    "b-river": "cd modules/river && npm run build",
+    "b-river-nodejs": "cd modules/river-nodejs && npm run build",
+    "build": "npm run b-river && npm run b-river-nodejs",
+    "i-river": "cd modules/river && npm i",
+    "i-river-nodejs": "cd modules/river-nodejs && npm i",
+    "ln-river": "cd modules/river && npm ln",
+    "ln-river-nodejs": "cd modules/river-nodejs && npm ln @protoboard/river && npm ln",
+    "pi-river": "npm run ln-river && npm run i-river",
+    "pi-river-nodejs": "npm run ln-river-nodejs && npm run i-river-nodejs",
+    "postinstall": "npm run pi-river && npm run pi-river-nodejs",
+    "t-river": "cd modules/river && npm run test",
+    "t-river-nodejs": "cd modules/river-nodejs && npm run test",
+    "test": "npm run t-river && npm run t-river-nodejs"
   }
 }
