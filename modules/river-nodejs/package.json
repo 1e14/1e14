@@ -24,18 +24,16 @@
     "type": "git",
     "url": "git@github.com:protoboard/river.git"
   },
-  "devDependencies": {
-    "typescript": "^3.3.3"
-  },
   "dependencies": {
     "@protoboard/river": "^0.1.0",
     "@types/node": "^10.12.18"
   },
   "scripts": {
-    "build": "npm run clean && tsc",
-    "clean": "rm -rf dist",
-    "jasmine": "jasmine dist/**/*.spec.js",
+    "build": "npm run clean && tsc && echo river-nodejs built",
+    "clean": "rm -rf dist && echo river-nodejs cleaned",
+    "jasmine": "jasmine dist/**/*.spec.js && echo river-nodejs tests passed",
+    "ln": "npm ln @protoboard/river && npm ln && echo river-nodejs linked",
     "test": "npm run tslint && npm run jasmine",
-    "tslint": "tslint -c ../../tslint.json src/**/*.ts"
+    "tslint": "tslint -c ../../tslint.json src/**/*.ts && echo river-nodejs tslint passed"
   }
 }
