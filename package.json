@@ -6,7 +6,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git@github.com:kwaia/river.git"
+    "url": "git@github.com:protoboard/river.git"
   },
   "devDependencies": {
     "@types/jasmine": "^2.8.16",
