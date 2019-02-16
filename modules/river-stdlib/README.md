@@ -1,7 +1,4 @@
-River
-=====
+River-Stdlib
+============
 
-River is a low-level *computational graph* library for NodeJS.
-
-It is designed to be *massively distributed*, *fault-tolerant*, extendable, and 
-easy to use.
+Basic set of nodes for River.
