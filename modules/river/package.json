@@ -23,13 +23,5 @@
   "repository": {
     "type": "git",
     "url": "git@github.com:protoboard/river.git"
-  },
-  "scripts": {
-    "build": "npm run clean && tsc && echo river built",
-    "clean": "rm -rf dist && echo river cleaned",
-    "jasmine": "jasmine dist/**/*.spec.js && echo river tests passed",
-    "ln": "npm ln && echo river linked",
-    "test": "npm run tslint && npm run jasmine",
-    "tslint": "tslint -c ../../tslint.json src/**/*.ts && echo river tslint passed"
   }
 }

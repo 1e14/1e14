@@ -19,13 +19,5 @@
   },
   "dependencies": {
     "@protoboard/river": "^0.1.0"
-  },
-  "scripts": {
-    "build": "npm run clean && tsc && echo river-stdlib built",
-    "clean": "rm -rf dist && echo river-stdlib cleaned",
-    "jasmine": "jasmine dist/**/*.spec.js && echo river-stdlib tests passed",
-    "ln": "npm ln @protoboard/river npm ln && echo river-stdlib linked",
-    "test": "npm run tslint && npm run jasmine",
-    "tslint": "tslint -c ../../tslint.json src/**/*.ts && echo river-stdlib tslint passed"
   }
 }

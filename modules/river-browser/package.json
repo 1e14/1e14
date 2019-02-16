@@ -22,13 +22,5 @@
   },
   "devDependencies": {
     "@types/node": "^10.12.18"
-  },
-  "scripts": {
-    "build": "npm run clean && tsc && echo river-browser built",
-    "clean": "rm -rf dist && echo river-browser cleaned",
-    "jasmine": "jasmine dist/**/*.spec.js && echo river-browser tests passed",
-    "ln": "npm ln @protoboard/river && npm ln && echo river-browser linked",
-    "test": "npm run tslint && npm run jasmine",
-    "tslint": "tslint -c ../../tslint.json src/**/*.ts && echo river-browser tslint passed"
   }
 }

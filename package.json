@@ -9,39 +9,19 @@
     "url": "git@github.com:protoboard/river.git"
   },
   "devDependencies": {
+    "@types/grunt": "^0.4.24",
     "@types/jasmine": "^2.8.16",
+    "grunt": "^1.0.3",
+    "grunt-contrib-clean": "^2.0.0",
+    "grunt-contrib-watch": "^1.1.0",
+    "grunt-exec": "^3.0.0",
+    "grunt-notify": "^0.4.5",
+    "grunt-tslint": "^5.0.2",
     "jasmine": "^3.3.1",
     "tslint": "^5.12.1",
     "typescript": "^3.3.3"
   },
   "scripts": {
-    "build": "npm run build-river && npm run build-stdlib && npm run build-nodejs && npm run build-browser",
-    "build-browser": "cd modules/river-browser && npm run build",
-    "build-river": "cd modules/river && npm run build",
-    "build-nodejs": "cd modules/river-nodejs && npm run build",
-    "build-stdlib": "cd modules/river-stdlib && npm run build",
-    "clean": "npm run clean-river && npm run clean-stdlib && npm run clean-nodejs && npm run clean-browser",
-    "clean-browser": "cd modules/river-browser && npm run clean",
-    "clean-river": "cd modules/river && npm run clean",
-    "clean-nodejs": "cd modules/river-nodejs && npm run clean",
-    "clean-stdib": "cd modules/river-stdlib && npm run clean",
-    "i-browser": "cd modules/river-browser && npm i",
-    "i-river": "cd modules/river && npm i",
-    "i-nodejs": "cd modules/river-nodejs && npm i",
-    "i-stdlib": "cd modules/river-stdlib && npm i",
-    "ln-browser": "cd modules/river-browser && npm run ln",
-    "ln-river": "cd modules/river && npm run ln",
-    "ln-nodejs": "cd modules/river-nodejs && npm run ln",
-    "ln-stdlib": "cd modules/river-stdlib && npm run ln",
-    "postinstall": "npm run postinstall-river && npm run postinstall-stdlib && npm run postinstall-nodejs && npm run postinstall-browser",
-    "postinstall-browser": "npm run ln-browser && npm run i-browser",
-    "postinstall-river": "npm run ln-river && npm run i-river",
-    "postinstall-nodejs": "npm run ln-nodejs && npm run i-nodejs",
-    "postinstall-stdlib": "npm run ln-stdlib && npm run i-stdlib",
-    "test": "npm run test-river && npm run test-stdlib && npm run test-nodejs && npm run test-browser",
-    "test-browser": "cd modules/river-browser && npm run test",
-    "test-river": "cd modules/river && npm run test",
-    "test-nodejs": "cd modules/river-nodejs && npm run test",
-    "test-stdlib": "cd modules/river-stdlib && npm run test"
+    "postinstall": "grunt postinstall"
   }
 }
