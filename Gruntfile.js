@@ -97,7 +97,7 @@ module.exports = function (grunt) {
       `exec:ts-${module}`, `notify:build-${module}`]);
     grunt.registerTask(`build-${module}`, [`clean:${module}`,
       `tslint:${module}`, `exec:ts-${module}`,
-      `exec:test-${module}`, `notify:build-${module}`]);
+      `test-${module}`, `notify:build-${module}`]);
   });
   grunt.registerTask("ts", modules
   .map((module) => `exec:ts-${module}`));
