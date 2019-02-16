@@ -18,8 +18,7 @@
     "url": "git@github.com:protoboard/river.git"
   },
   "dependencies": {
-    "@protoboard/river": "^0.1.0",
-    "@types/node": "^10.12.18"
+    "@protoboard/river": "^0.1.0"
   },
   "scripts": {
     "build": "npm run clean && tsc && echo river-stdlib built",
