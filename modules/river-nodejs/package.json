@@ -1,7 +1,7 @@
 {
   "name": "@protoboard/river-nodejs",
   "version": "0.1.0",
-  "description": "NodeJS-specific nodes",
+  "description": "NodeJS-specific River nodes",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
