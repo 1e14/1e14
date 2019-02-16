@@ -1,0 +1,32 @@
+{
+  "name": "@protoboard/river-stdlib",
+  "version": "0.1.0",
+  "description": "Basic nodes for River",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "!dist/**/*.spec.*",
+    "package.json",
+    "README.md"
+  ],
+  "keywords": [],
+  "author": "Dan Stocker <dan@kwaia.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:protoboard/river.git"
+  },
+  "dependencies": {
+    "@protoboard/river": "^0.1.0",
+    "@types/node": "^10.12.18"
+  },
+  "scripts": {
+    "build": "npm run clean && tsc && echo river-stdlib built",
+    "clean": "rm -rf dist && echo river-stdlib cleaned",
+    "jasmine": "jasmine dist/**/*.spec.js && echo river-stdlib tests passed",
+    "ln": "npm ln @protoboard/river npm ln && echo river-stdlib linked",
+    "test": "npm run tslint && npm run jasmine",
+    "tslint": "tslint -c ../../tslint.json src/**/*.ts && echo river-stdlib tslint passed"
+  }
+}

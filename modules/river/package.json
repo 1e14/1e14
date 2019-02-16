@@ -24,6 +24,9 @@
     "type": "git",
     "url": "git@github.com:protoboard/river.git"
   },
+  "dependencies": {
+    "@types/node": "^10.12.18"
+  },
   "scripts": {
     "build": "npm run clean && tsc && echo river built",
     "clean": "rm -rf dist && echo river cleaned",
