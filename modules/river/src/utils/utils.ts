@@ -1,4 +1,4 @@
-import {TOutPorts, TTag} from "../node";
+import {TInPort, TOutPort, TOutPorts, TTag} from "../types";
 
 /**
  * Creates output ports for the specified fields.
@@ -36,3 +36,28 @@ export function createOutputs<O>(outPorts: TOutPorts<O>): TOutputs<O> {
 }
 
 export const noop = () => null;
+
+/**
+ * Establishes a connection between an output port and an input port. Data
+ * emitted on an output port are automatically forwarded to connected input
+ * ports.
+ * @param outPort
+ * @param inPort
+ */
+export function connect<V>(outPort: TOutPort<V>, inPort: TInPort<V>): void {
+  outPort.add(inPort);
+}
+
+/**
+ * Tears down the connection between the specified ports, or, when the input
+ * port is omitted, tears down all downstream connections of the output port.
+ * @param outPort
+ * @param inPort
+ */
+export function disconnect<V>(outPort: TOutPort<V>, inPort?: TInPort<V>): void {
+  if (inPort) {
+    outPort.delete(inPort);
+  } else {
+    outPort.clear();
+  }
+}
