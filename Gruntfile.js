@@ -11,11 +11,13 @@ module.exports = function (grunt) {
 
   grunt.initConfig({
     clean: modules.reduce((config, module) => {
+      config[`${module}-package-lock`] = [`modules/${module}/package-lock.json`];
       config[`${module}-dist`] = [`modules/${module}/dist`];
       config[`${module}-node_modules`] = [`modules/${module}/node_modules`];
       return config;
     }, {
-      "node_modules": ["node_modules"]
+      "node_modules": ["node_modules"],
+      "package-lock": ["package-lock.json"]
     }),
 
     watch: modules.reduce((config, module) => {
@@ -100,36 +102,40 @@ module.exports = function (grunt) {
   modules.forEach((module) => {
     grunt.registerTask(`test-${module}`, [
       `tslint:${module}`,
-      `exec:jasmine-${module}`]);
+      `exec:jasmine-${module}`
+    ]);
     grunt.registerTask(`build-quick-${module}`, [
       `clean:${module}-dist`,
-      `exec:ts-${module}`, `notify:build-${module}`]);
+      `exec:ts-${module}`, `notify:build-${module}`
+    ]);
     grunt.registerTask(`build-${module}`, [
       `clean:${module}-dist`,
       `tslint:${module}`, `exec:ts-${module}`,
-      `test-${module}`, `notify:build-${module}`]);
+      `test-${module}`, `notify:build-${module}`
+    ]);
   });
-  grunt.registerTask("clean-dist", modules.map(
-      (module) => `clean:${module}-dist`));
-  grunt.registerTask("clean-node_modules", modules.reduce(
-      (tasks, module) => {
-        tasks.push(`clean:${module}-node_modules`);
-        tasks.push(`exec:unlink-${module}`);
-        return tasks;
-      }, ["clean:node_modules"]));
-  grunt.registerTask("ts", modules.map(
-      (module) => `exec:ts-${module}`));
-  grunt.registerTask("test", modules.map(
-      (module) => `test-${module}`));
-  grunt.registerTask("build-quick", [
-    "clean-dist", "ts", "notify:build"]);
+  grunt.registerTask("clean-dist", modules
+  .map((module) => `clean:${module}-dist`));
+  grunt.registerTask("clean-package-lock", modules
+  .map((module) => `clean:${module}-package-lock`)
+  .concat("clean:package-lock"));
+  grunt.registerTask("clean-node_modules", modules
+  .reduce((tasks, module) => {
+    tasks.push(`clean:${module}-node_modules`);
+    tasks.push(`exec:unlink-${module}`);
+    return tasks;
+  }, ["clean:node_modules"]));
+  grunt.registerTask("ts", modules
+  .map((module) => `exec:ts-${module}`));
+  grunt.registerTask("test", modules
+  .map((module) => `test-${module}`));
+  grunt.registerTask("build-quick", ["clean-dist", "ts", "notify:build"]);
   grunt.registerTask("build", [
     "clean-dist", "tslint", "ts", "test", "notify:build"]);
-  grunt.registerTask("postinstall", modules.reduce(
-      (tasks, module) => {
-        tasks.push(`exec:link-${module}-deps`, `exec:link-${module}-self`);
-        return tasks;
-      }, []));
-  grunt.registerTask("default", [
-    "build-quick", "watch"]);
+  grunt.registerTask("postinstall", modules
+  .reduce((tasks, module) => {
+    tasks.push(`exec:link-${module}-deps`, `exec:link-${module}-self`);
+    return tasks;
+  }, []));
+  grunt.registerTask("default", ["build-quick", "watch"]);
 };
