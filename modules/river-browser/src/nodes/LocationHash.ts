@@ -12,6 +12,7 @@ export type Outputs = {
 export type LocationHash = Node<Inputs, Outputs>;
 
 let instance: LocationHash;
+let counter: number = 0;
 
 export function createLocationHash(): LocationHash {
   if (!instance) {
@@ -29,11 +30,11 @@ export function createLocationHash(): LocationHash {
     };
 
     document.addEventListener("DOMContentLoaded", () => {
-      outputs.d_val(location.hash);
+      outputs.d_val(location.hash, `LocationHash-${counter++}`);
     });
 
     document.addEventListener("hashchange", () => {
-      outputs.d_val(location.hash);
+      outputs.d_val(location.hash, `LocationHash-${counter++}`);
     });
 
     instance = {i, o};

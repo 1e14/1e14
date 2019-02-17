@@ -69,7 +69,9 @@ describe("createLocationHash()", () => {
       const spy = jasmine.createSpy();
       connect(node.o.d_val, spy);
       onDomContentLoaded();
-      expect(spy).toHaveBeenCalledWith("bar", undefined);
+      const args = spy.calls.mostRecent().args;
+      expect(args[0]).toBe("bar");
+      expect(args[1]).toMatch(/LocationHash-\d+/);
     });
   });
 
@@ -85,7 +87,9 @@ describe("createLocationHash()", () => {
       const spy = jasmine.createSpy();
       connect(node.o.d_val, spy);
       onHashChange();
-      expect(spy).toHaveBeenCalledWith("bar", undefined);
+      const args = spy.calls.mostRecent().args;
+      expect(args[0]).toBe("bar");
+      expect(args[1]).toMatch(/LocationHash-\d+/);
     });
   });
 });
