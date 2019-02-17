@@ -47,11 +47,6 @@ module.exports = function (grunt) {
         cwd: `modules/${module}`,
         cmd: "npx jasmine dist/**/*.spec.js"
       };
-      config[`install-${module}`] = {
-        cwd: `modules/${module}`,
-        cmd: "npm i",
-        exitCode: [0, 1]
-      };
 
       const pkg = grunt.file.readJSON(`modules/${module}/package.json`);
       const deps = Object.keys(pkg.dependencies || {})
@@ -132,7 +127,7 @@ module.exports = function (grunt) {
     "clean-dist", "tslint", "ts", "test", "notify:build"]);
   grunt.registerTask("postinstall", modules.reduce(
       (tasks, module) => {
-        tasks.push(`exec:link-${module}-deps`, `exec:install-${module}`, `exec:link-${module}-self`);
+        tasks.push(`exec:link-${module}-deps`, `exec:link-${module}-self`);
         return tasks;
       }, []));
   grunt.registerTask("default", [
