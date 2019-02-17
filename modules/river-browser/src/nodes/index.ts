@@ -1,2 +1,2 @@
-export {createLocalStorage, LocalStorage} from "./LocalStorage";
+export {createLocalStorageItem, LocalStorageItem} from "./LocalStorageItem";
 export {createLocationHash, LocationHash} from "./LocationHash";
