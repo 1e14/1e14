@@ -11,9 +11,12 @@ module.exports = function (grunt) {
 
   grunt.initConfig({
     clean: modules.reduce((config, module) => {
-      config[module] = [`modules/${module}/dist`];
+      config[`${module}-dist`] = [`modules/${module}/dist`];
+      config[`${module}-node_modules`] = [`modules/${module}/node_modules`];
       return config;
-    }, {}),
+    }, {
+      "node_modules": ["node_modules"]
+    }),
 
     watch: modules.reduce((config, module) => {
       config[module] = {
@@ -38,7 +41,7 @@ module.exports = function (grunt) {
     exec: modules.reduce((config, module) => {
       config[`ts-${module}`] = {
         cwd: `modules/${module}`,
-        cmd: "tsc"
+        cmd: "npx --no-install tsc"
       };
       config[`jasmine-${module}`] = {
         cwd: `modules/${module}`,
@@ -46,18 +49,27 @@ module.exports = function (grunt) {
       };
       config[`install-${module}`] = {
         cwd: `modules/${module}`,
-        cmd: "npm i"
+        cmd: "npm i",
+        exitCode: [0, 1]
       };
 
       const pkg = grunt.file.readJSON(`modules/${module}/package.json`);
       const deps = Object.keys(pkg.dependencies || {})
-      .filter((name) => /^@protoboard\/river.*$/.test(name));
-      config[`link-${module}`] = {
+      .filter((name) => /^@protoboard.*$/.test(name));
+      config[`link-${module}-deps`] = {
         cwd: `modules/${module}`,
         cmd: deps
         .map((dep) => `npm ln ${dep}`)
-        .concat("npm ln")
-        .join(" && ")
+        .join(" && ") || "echo noop"
+      };
+      config[`link-${module}-self`] = {
+        cwd: `modules/${module}`,
+        cmd: "npm ln",
+        exitCode: [0, 1]
+      };
+      config[`unlink-${module}`] = {
+        cwd: `modules/${module}`,
+        cmd: "npm unlink"
       };
 
       return config;
@@ -91,25 +103,38 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks("grunt-notify");
 
   modules.forEach((module) => {
-    grunt.registerTask(`test-${module}`, [`tslint:${module}`,
+    grunt.registerTask(`test-${module}`, [
+      `tslint:${module}`,
       `exec:jasmine-${module}`]);
-    grunt.registerTask(`build-quick-${module}`, [`clean:${module}`,
+    grunt.registerTask(`build-quick-${module}`, [
+      `clean:${module}-dist`,
       `exec:ts-${module}`, `notify:build-${module}`]);
-    grunt.registerTask(`build-${module}`, [`clean:${module}`,
+    grunt.registerTask(`build-${module}`, [
+      `clean:${module}-dist`,
       `tslint:${module}`, `exec:ts-${module}`,
       `test-${module}`, `notify:build-${module}`]);
   });
-  grunt.registerTask("ts", modules
-  .map((module) => `exec:ts-${module}`));
-  grunt.registerTask("test", modules
-  .map((module) => `test-${module}`));
-  grunt.registerTask("build-quick", ["clean", "ts", "notify:build"]);
-  grunt.registerTask("build", ["clean", "tslint", "ts", "test",
-    "notify:build"]);
-  grunt.registerTask("postinstall", modules
-  .reduce((tasks, module) => {
-    tasks.push(`exec:link-${module}`, `exec:install-${module}`);
-    return tasks;
-  }, []));
-  grunt.registerTask("default", ["build-quick", "watch"]);
+  grunt.registerTask("clean-dist", modules.map(
+      (module) => `clean:${module}-dist`));
+  grunt.registerTask("clean-node_modules", modules.reduce(
+      (tasks, module) => {
+        tasks.push(`clean:${module}-node_modules`);
+        tasks.push(`exec:unlink-${module}`);
+        return tasks;
+      }, ["clean:node_modules"]));
+  grunt.registerTask("ts", modules.map(
+      (module) => `exec:ts-${module}`));
+  grunt.registerTask("test", modules.map(
+      (module) => `test-${module}`));
+  grunt.registerTask("build-quick", [
+    "clean-dist", "ts", "notify:build"]);
+  grunt.registerTask("build", [
+    "clean-dist", "tslint", "ts", "test", "notify:build"]);
+  grunt.registerTask("postinstall", modules.reduce(
+      (tasks, module) => {
+        tasks.push(`exec:link-${module}-deps`, `exec:install-${module}`, `exec:link-${module}-self`);
+        return tasks;
+      }, []));
+  grunt.registerTask("default", [
+    "build-quick", "watch"]);
 };
