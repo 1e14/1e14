@@ -1,9 +1,9 @@
 import {connect} from "@protoboard/river";
-import {createDiverter, TDiverter} from "./Diverter";
+import {createDiverter, Diverter} from "./Diverter";
 
 describe("createDiverter()", () => {
   describe("on input (all)", () => {
-    let node: TDiverter<"foo" | "bar" | "baz", number>;
+    let node: Diverter<"foo" | "bar" | "baz", number>;
 
     beforeEach(() => {
       node = createDiverter(["foo", "bar", "baz"]);
@@ -33,7 +33,7 @@ describe("createDiverter()", () => {
   });
 
   describe("on input (d_val)", () => {
-    let node: TDiverter<"foo" | "bar" | "baz", number>;
+    let node: Diverter<"foo" | "bar" | "baz", number>;
 
     beforeEach(() => {
       node = createDiverter(["foo", "bar", "baz"], "foo");
@@ -48,7 +48,7 @@ describe("createDiverter()", () => {
   });
 
   describe("on input (st_pos)", () => {
-    let node: TDiverter<"foo" | "bar" | "baz", number>;
+    let node: Diverter<"foo" | "bar" | "baz", number>;
 
     beforeEach(() => {
       node = createDiverter(["foo", "bar", "baz"], "foo");

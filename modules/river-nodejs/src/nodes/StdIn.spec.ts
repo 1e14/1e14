@@ -1,5 +1,5 @@
 import {connect} from "@protoboard/river";
-import {createStdIn, TStdIn} from "./StdIn";
+import {createStdIn, StdIn} from "./StdIn";
 
 describe("createStdIn", () => {
   it("should be singleton", () => {
@@ -7,7 +7,7 @@ describe("createStdIn", () => {
   });
 
   describe("on stdin readable", () => {
-    let node: TStdIn;
+    let node: StdIn;
 
     beforeEach(() => {
       node = createStdIn();

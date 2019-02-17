@@ -1,10 +1,10 @@
 import {connect} from "@protoboard/river";
 import * as net from "net";
-import {createRemoteInTcp, TRemoteInTcp} from "./RemoteInTcp";
+import {createRemoteInTcp, RemoteInTcp} from "./RemoteInTcp";
 
 describe("createRemoteInTcp()", () => {
   describe("on data", () => {
-    let node: TRemoteInTcp<number>;
+    let node: RemoteInTcp<number>;
     let onData: (data) => void;
     const socket = {
       on: (event, cb) => {

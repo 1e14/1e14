@@ -1,9 +1,9 @@
 import {connect} from "@protoboard/river";
-import {createChangeFilter, TChangeFilter} from "./ChangeFilter";
+import {ChangeFilter, createChangeFilter} from "./ChangeFilter";
 
 describe("createChangeFilter", () => {
   describe("when callback is specified", () => {
-    let node: TChangeFilter<number>;
+    let node: ChangeFilter<number>;
 
     beforeEach(() => {
       node = createChangeFilter((a, b) => a % 2 === b % 2);
@@ -57,7 +57,7 @@ describe("createChangeFilter", () => {
   });
 
   describe("when callback is not specified", () => {
-    let node: TChangeFilter<number>;
+    let node: ChangeFilter<number>;
 
     beforeEach(() => {
       node = createChangeFilter();

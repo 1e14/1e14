@@ -1,6 +1,6 @@
-import {createOutPorts, createOutputs, INode, TInPorts} from "@protoboard/river";
+import {createOutPorts, createOutputs, InPorts, Node} from "@protoboard/river";
 
-export interface IInputs<P extends string | number, V> {
+export type Inputs<P extends string | number, V> = {
   /**
    * Value to be diverted.
    */
@@ -10,14 +10,14 @@ export interface IInputs<P extends string | number, V> {
    * Current position of the diverter.
    */
   st_pos: P;
-}
+};
 
-export type TSwitchPositions<P extends string | number, V> = {
+export type SwitchPositions<P extends string | number, V> = {
   [K in P]: V;
 };
 
-export type TOutputs<P extends string | number, V> =
-  TSwitchPositions<P, V> & { b_st_pos: P; };
+export type Outputs<P extends string | number, V> =
+  SwitchPositions<P, V> & { b_st_pos: P; };
 
 /**
  * Forwards input value to one of the output ports, depending on the
@@ -30,12 +30,12 @@ export type TOutputs<P extends string | number, V> =
  * diverter.i.st_pos("foo");
  * diverter.i.d_val("a"); // logs: "a"
  */
-export type TDiverter<P extends string | number, V> =
-  INode<IInputs<P, V> & { all: IInputs<P, V> }, TOutputs<P, V>>;
+export type Diverter<P extends string | number, V> =
+  Node<Inputs<P, V> & { all: Inputs<P, V> }, Outputs<P, V>>;
 
 /**
  * Creates a Diverter node.
- * TODO: Remove <any> typecasts once TS supports string patterns in types
+ * TODO: Remove <any> typecasts once S supports string patterns in types
  * @link https://github.com/Microsoft/TypeScript/issues/12754
  * @param positions List of all possible positions.
  * @param position Initial position.
@@ -43,13 +43,13 @@ export type TDiverter<P extends string | number, V> =
 export function createDiverter<P extends string | number, V>(
   positions: Array<P>,
   position?: P
-): TDiverter<P, V> {
-  const o = createOutPorts((<Array<keyof TOutputs<P, V>>>positions).concat("b_st_pos"));
-  const outputs = createOutputs<TOutputs<P, V>>(o);
+): Diverter<P, V> {
+  const o = createOutPorts((<Array<keyof Outputs<P, V>>>positions).concat("b_st_pos"));
+  const outputs = createOutputs<Outputs<P, V>>(o);
 
   const positionSet = new Set(positions);
 
-  const i: TInPorts<IInputs<P, V> & { all: IInputs<P, V> }> = {
+  const i: InPorts<Inputs<P, V> & { all: Inputs<P, V> }> = {
     all: ({d_val, st_pos}, tag) => {
       if (positionSet.has(st_pos)) {
         position = st_pos;

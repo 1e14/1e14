@@ -1,9 +1,9 @@
 import {connect} from "@protoboard/river";
-import {createGate, TGate} from "./Gate";
+import {createGate, Gate} from "./Gate";
 
 describe("createGate()", () => {
   describe("on input (all)", () => {
-    let node: TGate<number>;
+    let node: Gate<number>;
 
     beforeEach(() => {
       node = createGate();
@@ -30,7 +30,7 @@ describe("createGate()", () => {
 
   describe("on input (d_val)", () => {
     describe("when open", () => {
-      let node: TGate<number>;
+      let node: Gate<number>;
 
       beforeEach(() => {
         node = createGate(true);
@@ -45,7 +45,7 @@ describe("createGate()", () => {
     });
 
     describe("when closed", () => {
-      let node: TGate<number>;
+      let node: Gate<number>;
 
       beforeEach(() => {
         node = createGate(false);

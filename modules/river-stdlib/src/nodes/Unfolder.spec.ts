@@ -1,9 +1,9 @@
 import {connect} from "@protoboard/river";
-import {createUnfolder, TUnfolder} from "./Unfolder";
+import {createUnfolder, Unfolder} from "./Unfolder";
 
 describe("createUnfolder()", () => {
   describe("on input (d_fold)", () => {
-    let node: TUnfolder<Array<number>, number>;
+    let node: Unfolder<Array<number>, number>;
 
     beforeEach(() => {
       node = createUnfolder(function* (value) {

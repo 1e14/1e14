@@ -1,4 +1,4 @@
-import {createStdOut, TStdOut} from "./StdOut";
+import {createStdOut, StdOut} from "./StdOut";
 
 describe("createStdOut", () => {
   it("should be singleton", () => {
@@ -6,7 +6,7 @@ describe("createStdOut", () => {
   });
 
   describe("on input (d_val)", () => {
-    let node: TStdOut;
+    let node: StdOut;
 
     beforeEach(() => {
       node = createStdOut();

@@ -1,10 +1,10 @@
-import {TEqualityCallback} from "../nodes";
+import {EqualityCallback} from "../nodes";
 import {eqProperty} from "./eq";
 
 describe("equal", () => {
   describe("eqProperty", () => {
     describe("when callback is specified", () => {
-      let cb: TEqualityCallback<number>;
+      let cb: EqualityCallback<number>;
 
       beforeEach(() => {
         cb = (a, b) => a % 2 === b % 2;

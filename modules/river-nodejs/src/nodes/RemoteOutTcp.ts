@@ -1,14 +1,20 @@
-import {createOutPorts, createOutputs, INode, TInPorts, TTag} from "@protoboard/river";
+import {
+  createOutPorts,
+  createOutputs,
+  InPorts,
+  Node,
+  Tag
+} from "@protoboard/river";
 import {Socket} from "net";
 
-export interface IInputs<V> {
+export type Inputs<V> = {
   /**
    * Value to be sent to remote node.
    */
   d_val: V;
-}
+};
 
-export interface IOutputs<V> {
+export type Outputs<V> = {
   /**
    * Bounced input value.
    */
@@ -18,13 +24,13 @@ export interface IOutputs<V> {
    * Error message.
    */
   ev_err: string;
-}
+};
 
 /**
- * Sends data to a RemoteInTcp node on a remote server through TCP connection.
+ * Sends data to a RemoteInTcp node on a remote server through CP connection.
  * Bounces input, and emits error on socket error.
  */
-export type TRemoteOutTcp<V> = INode<IInputs<V>, IOutputs<V>>;
+export type RemoteOutTcp<V> = Node<Inputs<V>, Outputs<V>>;
 
 const socketCache: Map<string, Socket> = new Map();
 
@@ -34,10 +40,10 @@ const socketCache: Map<string, Socket> = new Map();
  * @param port Port of the remote server.
  * @param id Identifies RemoteInTcp node on remote server.
  */
-export function createRemoteOutTcp<V>(host: string, port: number, id: string): TRemoteOutTcp<V> {
+export function createRemoteOutTcp<V>(host: string, port: number, id: string): RemoteOutTcp<V> {
   const o = createOutPorts(["b_d_val", "ev_err"]);
   const outputs = createOutputs(o);
-  const inputCache: Set<{ tag: TTag, value: any }> = new Set();
+  const inputCache: Set<{ tag: Tag, value: any }> = new Set();
 
   const socketId = `${host}:${port}`;
   let socket: Socket = socketCache[socketId];
@@ -58,7 +64,7 @@ export function createRemoteOutTcp<V>(host: string, port: number, id: string): T
     outputs.ev_err(String(err));
   });
 
-  const i: TInPorts<IInputs<V>> = {
+  const i: InPorts<Inputs<V>> = {
     d_val: (value, tag) => {
       const wrapped = {value, tag};
       inputCache.add(wrapped);

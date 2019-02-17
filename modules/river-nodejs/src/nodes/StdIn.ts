@@ -1,26 +1,26 @@
-import {createOutPorts, createOutputs, INode} from "@protoboard/river";
+import {createOutPorts, createOutputs, Node} from "@protoboard/river";
 
-interface IOutputs {
+type Outputs = {
   /**
    * Value coming from stdin.
    */
   d_val: string | Buffer;
-}
+};
 
 /**
  * Emits data coming through the standard input (stdin).
  * Environments: Node.js.
  */
-export type TStdIn = INode<{}, IOutputs>;
+export type StdIn = Node<{}, Outputs>;
 
-let instance: TStdIn;
+let instance: StdIn;
 
 /**
  * Creates a StdIn node.
  * Returns a singleton, ie. subsequent calls to `createStdIn` will return the
  * same object.
  */
-export function createStdIn(): TStdIn {
+export function createStdIn(): StdIn {
   if (instance) {
     return instance;
   }

@@ -1,9 +1,9 @@
 import {connect} from "@protoboard/river";
-import {createChangeDetector, TChangeDetector} from "./ChangeDetector";
+import {ChangeDetector, createChangeDetector} from "./ChangeDetector";
 
 describe("createChangeDetector()", () => {
   describe("when callback is specified", () => {
-    let node: TChangeDetector<number>;
+    let node: ChangeDetector<number>;
 
     beforeEach(() => {
       node = createChangeDetector((a, b) => a % 2 === b % 2);
@@ -61,7 +61,7 @@ describe("createChangeDetector()", () => {
   });
 
   describe("when callback is not specified", () => {
-    let node: TChangeDetector<number>;
+    let node: ChangeDetector<number>;
 
     beforeEach(() => {
       node = createChangeDetector();

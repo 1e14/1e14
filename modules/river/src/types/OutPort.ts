@@ -1,4 +1,4 @@
-import {TInPort} from "./TInPort";
+import {InPort} from "./InPort";
 
 /**
  * Describes an output port.
@@ -6,4 +6,4 @@ import {TInPort} from "./TInPort";
  * From a technical standpoint, output ports are but a set of input ports.
  * (Of other nodes.)
  */
-export type TOutPort<V> = Set<TInPort<V>>;
+export type OutPort<V> = Set<InPort<V>>;

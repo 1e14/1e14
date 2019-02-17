@@ -1,31 +1,26 @@
-import {
-  createOutPorts,
-  createOutputs,
-  INode,
-  TInPorts
-} from "@protoboard/river";
+import {createOutPorts, createOutputs, InPorts, Node} from "@protoboard/river";
 
-export interface IInputs {
+export type Inputs = {
   clear: any;
   getItem: string;
   removeItem: string;
   setItem: [string, string];
-}
+};
 
-export interface IOutputs {
+export type Outputs = {
   getItem: string;
-}
+};
 
-export type TLocalStorage = INode<IInputs, IOutputs>;
+export type LocalStorage = Node<Inputs, Outputs>;
 
-let instance: TLocalStorage;
+let instance: LocalStorage;
 
-export function createLocalStorage(): TLocalStorage {
+export function createLocalStorage(): LocalStorage {
   if (!instance) {
     const o = createOutPorts(["getItem"]);
     const outputs = createOutputs(o);
 
-    const i: TInPorts<IInputs> = {
+    const i: InPorts<Inputs> = {
       clear: () => {
         localStorage.clear();
       },

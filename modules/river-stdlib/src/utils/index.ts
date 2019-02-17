@@ -1,2 +1,2 @@
 export * from "./utils";
-export {IMuxed} from "./IMuxed";
+export {Muxed} from "./Muxed";

@@ -1,9 +1,9 @@
 import {connect} from "@protoboard/river";
-import {createDelayer, TDelayer} from "./Delayer";
+import {createDelayer, Delayer} from "./Delayer";
 
 describe("createDelayer()", () => {
   describe("on input (d_val)", () => {
-    let node: TDelayer<number>;
+    let node: Delayer<number>;
 
     beforeEach(() => {
       node = createDelayer(500);

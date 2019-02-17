@@ -1,20 +1,20 @@
-import {TInPort, TOutPort, TOutPorts, TTag} from "../types";
+import {InPort, OutPort, OutPorts, Tag} from "../types";
 
 /**
  * Creates output ports for the specified fields.
  * @param fields List of fields.
  */
-export function createOutPorts<O>(fields: Array<keyof O>): TOutPorts<O> {
-  const outPorts = <TOutPorts<O>>{};
+export function createOutPorts<O>(fields: Array<keyof O>): OutPorts<O> {
+  const outPorts = <OutPorts<O>>{};
   for (const field of fields) {
     outPorts[field] = new Set();
   }
   return outPorts;
 }
 
-export type TOutput<V> = (value: V, tag?: TTag) => void;
-export type TOutputs<O> = {
-  [K in keyof O]: TOutput<O[K]>
+export type Output<V> = (value: V, tag?: Tag) => void;
+export type Outputs<O> = {
+  [K in keyof O]: Output<O[K]>
 };
 
 /**
@@ -22,8 +22,8 @@ export type TOutputs<O> = {
  * The result is used in implementing atomic nodes.
  * @param outPorts List of output callbacks.
  */
-export function createOutputs<O>(outPorts: TOutPorts<O>): TOutputs<O> {
-  const outputs = <TOutputs<O>>{};
+export function createOutputs<O>(outPorts: OutPorts<O>): Outputs<O> {
+  const outputs = <Outputs<O>>{};
   for (const field in outPorts) {
     const inPorts = outPorts[field];
     outputs[field] = (value, tag) => {
@@ -44,7 +44,7 @@ export const noop = () => null;
  * @param outPort
  * @param inPort
  */
-export function connect<V>(outPort: TOutPort<V>, inPort: TInPort<V>): void {
+export function connect<V>(outPort: OutPort<V>, inPort: InPort<V>): void {
   outPort.add(inPort);
 }
 
@@ -54,7 +54,7 @@ export function connect<V>(outPort: TOutPort<V>, inPort: TInPort<V>): void {
  * @param outPort
  * @param inPort
  */
-export function disconnect<V>(outPort: TOutPort<V>, inPort?: TInPort<V>): void {
+export function disconnect<V>(outPort: OutPort<V>, inPort?: InPort<V>): void {
   if (inPort) {
     outPort.delete(inPort);
   } else {

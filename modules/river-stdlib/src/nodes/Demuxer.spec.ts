@@ -1,9 +1,9 @@
 import {connect} from "@protoboard/river";
-import {createDemuxer, TDemuxer} from "./Demuxer";
+import {createDemuxer, Demuxer} from "./Demuxer";
 
 describe("createDemuxer()", () => {
   describe("on input (d_mux)", () => {
-    let node: TDemuxer<{ foo: number, bar: number }>;
+    let node: Demuxer<{ foo: number, bar: number }>;
 
     beforeEach(() => {
       node = createDemuxer(["foo", "bar"]);

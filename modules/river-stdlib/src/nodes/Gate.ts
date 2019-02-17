@@ -1,6 +1,6 @@
-import {createOutPorts, createOutputs, INode, TInPorts} from "@protoboard/river";
+import {createOutPorts, createOutputs, InPorts, Node} from "@protoboard/river";
 
-export interface IInputs<V> {
+export type Inputs<V> = {
   /**
    * Value to be forwarded.
    */
@@ -10,14 +10,14 @@ export interface IInputs<V> {
    * Whether gate is open.
    */
   st_open: boolean;
-}
+};
 
-export interface IOutputs<V> {
+export type Outputs<V> = {
   /**
    * Forwarded value.
    */
   d_val: V;
-}
+};
 
 /**
  * Forwards input value when gate is open.
@@ -30,17 +30,17 @@ export interface IOutputs<V> {
  * gate.i.st_open(true);
  * gate.i.d_val("b"); // logs: "b"
  */
-export type TGate<V> = INode<IInputs<V> & { all: IInputs<V> }, IOutputs<V>>;
+export type Gate<V> = Node<Inputs<V> & { all: Inputs<V> }, Outputs<V>>;
 
 /**
  * Creates a Gate node.
  * @param open Initial 'open' state.
  */
-export function createGate<V>(open?: boolean): TGate<V> {
+export function createGate<V>(open?: boolean): Gate<V> {
   const o = createOutPorts(["d_val"]);
   const outputs = createOutputs(o);
 
-  const i: TInPorts<IInputs<V> & { all: IInputs<V> }> = {
+  const i: InPorts<Inputs<V> & { all: Inputs<V> }> = {
     all: ({d_val, st_open}, tag) => {
       if (st_open) {
         outputs.d_val(d_val, tag);

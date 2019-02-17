@@ -1,15 +1,21 @@
-import {createOutPorts, createOutputs, INode, TInPorts, TTag} from "@protoboard/river";
+import {
+  createOutPorts,
+  createOutputs,
+  InPorts,
+  Node,
+  Tag
+} from "@protoboard/river";
 
-export type TUnfolderCallback<I, O> = (value: I, tag?: TTag) => IterableIterator<O>;
+export type UnfolderCallback<I, O> = (value: I, tag?: Tag) => IterableIterator<O>;
 
-export interface IInputs<I> {
+export type Inputs<I> = {
   /**
    * Value to unfold.
    */
   d_fold: I;
-}
+};
 
-export interface IOutputs<I, O> {
+export type Outputs<I, O> = {
   /**
    * Bounced input value.
    */
@@ -24,7 +30,7 @@ export interface IOutputs<I, O> {
    * Error message.
    */
   ev_err: string;
-}
+};
 
 /**
  * Opposite of Folder.
@@ -37,17 +43,17 @@ export interface IOutputs<I, O> {
  * river.connect(unfolder.o.d_val, console.log);
  * unfolder.i.d_fold(5); // logs: 5, 4, 3, 2, 1
  */
-export type TUnfolder<I, O> = INode<IInputs<I>, IOutputs<I, O>>;
+export type Unfolder<I, O> = Node<Inputs<I>, Outputs<I, O>>;
 
 /**
  * Creates an Unfolder node.
  * @param cb Unfolder callback (generator).
  */
-export function createUnfolder<I, O>(cb: TUnfolderCallback<I, O>): TUnfolder<I, O> {
+export function createUnfolder<I, O>(cb: UnfolderCallback<I, O>): Unfolder<I, O> {
   const o = createOutPorts(["b_d_fold", "d_val", "ev_err"]);
   const outputs = createOutputs(o);
 
-  const i: TInPorts<IInputs<I>> = {
+  const i: InPorts<Inputs<I>> = {
     d_fold: (value, tag) => {
       try {
         const iterable = cb(value, tag);

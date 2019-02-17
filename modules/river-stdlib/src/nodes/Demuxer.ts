@@ -1,14 +1,14 @@
-import {createOutPorts, createOutputs, INode, TInPorts} from "@protoboard/river";
-import {IMuxed} from "../utils";
+import {createOutPorts, createOutputs, InPorts, Node} from "@protoboard/river";
+import {Muxed} from "../utils";
 
-export interface IInputs<T> {
+export type Inputs<T> = {
   /**
    * Multiplexed input value.
    */
-  d_mux: IMuxed<T>;
-}
+  d_mux: Muxed<T>;
+};
 
-export type TOutputs<T> = T;
+export type Outputs<T> = T;
 
 /**
  * De-multiplexes input value.
@@ -19,17 +19,17 @@ export type TOutputs<T> = T;
  * river.connect(demuxer.o.foo, console.log);
  * demuxer.i.d_mux({field: "foo", value: "a"}); // logs: "a"
  */
-export type TDemuxer<T> = INode<IInputs<T>, TOutputs<T>>;
+export type Demuxer<T> = Node<Inputs<T>, Outputs<T>>;
 
 /**
  * Creates a Demuxer node.
  * @param fields List of output fields.
  */
-export function createDemuxer<T>(fields: Array<keyof T>): TDemuxer<T> {
+export function createDemuxer<T>(fields: Array<keyof T>): Demuxer<T> {
   const o = createOutPorts(fields);
   const outputs = createOutputs(o);
 
-  const i: TInPorts<IInputs<T>> = {
+  const i: InPorts<Inputs<T>> = {
     d_mux: ({field, value}, tag) => {
       outputs[field](value, tag);
     }

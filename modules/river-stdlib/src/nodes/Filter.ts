@@ -1,15 +1,21 @@
-import {createOutPorts, createOutputs, INode, TInPorts, TTag} from "@protoboard/river";
+import {
+  createOutPorts,
+  createOutputs,
+  InPorts,
+  Node,
+  Tag
+} from "@protoboard/river";
 
-export type TFilterCallback<V> = (value: V, tag?: TTag) => boolean;
+export type FilterCallback<V> = (value: V, tag?: Tag) => boolean;
 
-export interface IInputs<V> {
+export type Inputs<V> = {
   /**
    * Value to be filtered.
    */
   d_val: V;
-}
+};
 
-export interface IOutputs<V> {
+export type Outputs<V> = {
   /**
    * Bounced input value.
    */
@@ -24,7 +30,7 @@ export interface IOutputs<V> {
    * Error message.
    */
   ev_err: string;
-}
+};
 
 /**
  * Filters input values according to a filter callback.
@@ -37,17 +43,17 @@ export interface IOutputs<V> {
  * filter.i.d_val(5);
  * filter.i.d_val(8); // logs: 8
  */
-export type TFilter<V> = INode<IInputs<V>, IOutputs<V>>;
+export type Filter<V> = Node<Inputs<V>, Outputs<V>>;
 
 /**
  * Creates a Filter node.
  * @param cb Filter callback.
  */
-export function createFilter<V>(cb: TFilterCallback<V>): TFilter<V> {
+export function createFilter<V>(cb: FilterCallback<V>): Filter<V> {
   const o = createOutPorts(["b_d_val", "d_val", "ev_err"]);
   const outputs = createOutputs(o);
 
-  const i: TInPorts<IInputs<V>> = {
+  const i: InPorts<Inputs<V>> = {
     d_val: (value, tag) => {
       try {
         if (cb(value, tag)) {

@@ -1,14 +1,14 @@
-import {createOutPorts, createOutputs, INode, TInPorts} from "@protoboard/river";
-import {TEqualityCallback} from "./Comparer";
+import {createOutPorts, createOutputs, InPorts, Node} from "@protoboard/river";
+import {EqualityCallback} from "./Comparer";
 
-export interface IInputs<V> {
+export type Inputs<V> = {
   /**
    * Value to filter.
    */
   d_val: V;
-}
+};
 
-export interface IOutputs<V> {
+export type Outputs<V> = {
   /**
    * Bounced input value.
    */
@@ -23,7 +23,7 @@ export interface IOutputs<V> {
    * Error message.
    */
   ev_err: string;
-}
+};
 
 /**
  * Filters input value for changes.
@@ -38,19 +38,19 @@ export interface IOutputs<V> {
  * changeFilter.i.d_val("a");
  * changeFilter.i.d_val("b"); // logs: "b"
  */
-export type TChangeFilter<V> = INode<IInputs<V>, IOutputs<V>>;
+export type ChangeFilter<V> = Node<Inputs<V>, Outputs<V>>;
 
 /**
  * Creates a ChangeFilter node.
  * @param cb Equality callback
  */
-export function createChangeFilter<V>(cb?: TEqualityCallback<V>): TChangeFilter<V> {
+export function createChangeFilter<V>(cb?: EqualityCallback<V>): ChangeFilter<V> {
   const o = createOutPorts(["b_d_val", "d_val", "ev_err"]);
   const outputs = createOutputs(o);
 
   let last: V;
 
-  const i: TInPorts<IInputs<V>> = cb ? {
+  const i: InPorts<Inputs<V>> = cb ? {
     d_val: (value, tag) => {
       try {
         if (!cb(value, last)) {

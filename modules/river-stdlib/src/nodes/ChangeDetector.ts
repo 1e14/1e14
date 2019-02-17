@@ -1,14 +1,14 @@
-import {createOutPorts, createOutputs, INode, TInPorts} from "@protoboard/river";
-import {TEqualityCallback} from "./Comparer";
+import {createOutPorts, createOutputs, InPorts, Node} from "@protoboard/river";
+import {EqualityCallback} from "./Comparer";
 
-export interface IInputs<V> {
+export type Inputs<V> = {
   /**
    * Value to detect changes in.
    */
   d_val: V;
-}
+};
 
-export interface IOutputs<V> {
+export type Outputs<V> = {
   /**
    * Bounced input value.
    */
@@ -23,7 +23,7 @@ export interface IOutputs<V> {
    * Error message.
    */
   ev_err: string;
-}
+};
 
 /**
  * Detects changes in input value in impulse domain.
@@ -38,21 +38,21 @@ export interface IOutputs<V> {
  * changeDetector.i.d_val("b"); // logs: true
  * changeDetector.i.d_val("b"); // logs: false
  */
-export type TChangeDetector<V> = INode<IInputs<V>, IOutputs<V>>;
+export type ChangeDetector<V> = Node<Inputs<V>, Outputs<V>>;
 
 /**
  * Creates a ChangeDetector node.
  * @param cb Equality callback.
  */
 export function createChangeDetector<V>(
-  cb?: TEqualityCallback<V>
-): TChangeDetector<V> {
+  cb?: EqualityCallback<V>
+): ChangeDetector<V> {
   const o = createOutPorts(["b_d_val", "d_chg", "ev_err"]);
   const outputs = createOutputs(o);
 
   let last: V;
 
-  const i: TInPorts<IInputs<V>> = cb ? {
+  const i: InPorts<Inputs<V>> = cb ? {
     d_val: (value, tag) => {
       try {
         outputs.d_chg(!cb(value, last), tag);

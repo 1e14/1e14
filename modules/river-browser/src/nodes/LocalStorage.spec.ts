@@ -1,5 +1,5 @@
 import {connect} from "@protoboard/river";
-import {createLocalStorage, TLocalStorage} from "./LocalStorage";
+import {createLocalStorage, LocalStorage} from "./LocalStorage";
 
 describe("createLocalStorage", () => {
   const window = <any>global;
@@ -22,7 +22,7 @@ describe("createLocalStorage", () => {
   });
 
   describe("on data (clear)", () => {
-    let node: TLocalStorage;
+    let node: LocalStorage;
 
     beforeEach(() => {
       node = createLocalStorage();
@@ -36,7 +36,7 @@ describe("createLocalStorage", () => {
   });
 
   describe("on data (getItem)", () => {
-    let node: TLocalStorage;
+    let node: LocalStorage;
 
     beforeEach(() => {
       node = createLocalStorage();
@@ -52,7 +52,7 @@ describe("createLocalStorage", () => {
   });
 
   describe("on data (removeItem)", () => {
-    let node: TLocalStorage;
+    let node: LocalStorage;
 
     beforeEach(() => {
       node = createLocalStorage();
@@ -66,7 +66,7 @@ describe("createLocalStorage", () => {
   });
 
   describe("on data (setItem)", () => {
-    let node: TLocalStorage;
+    let node: LocalStorage;
 
     beforeEach(() => {
       node = createLocalStorage();

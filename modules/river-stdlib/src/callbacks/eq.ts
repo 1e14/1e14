@@ -1,4 +1,4 @@
-import {TEqualityCallback} from "../nodes";
+import {EqualityCallback} from "../nodes";
 
 /**
  * Creates an equality callback that checks whether the specified property
@@ -8,8 +8,8 @@ import {TEqualityCallback} from "../nodes";
  */
 export function eqProperty<I>(
   name: string,
-  cb?: TEqualityCallback<I[keyof I]>
-): TEqualityCallback<I> {
+  cb?: EqualityCallback<I[keyof I]>
+): EqualityCallback<I> {
   return cb ?
     (a, b) => {
       return a && b && cb(a[name], b[name]);

@@ -1,9 +1,9 @@
 import {connect} from "@protoboard/river";
-import {createMuxer, TMuxer} from "./Muxer";
+import {createMuxer, Muxer} from "./Muxer";
 
 describe("createMuxer()", () => {
   describe("on input", () => {
-    let node: TMuxer<{ foo: number, bar: number }>;
+    let node: Muxer<{ foo: number, bar: number }>;
 
     beforeEach(() => {
       node = createMuxer(["foo", "bar"]);

@@ -1,4 +1,4 @@
-import {createStdErr, TStdErr} from "./StdErr";
+import {createStdErr, StdErr} from "./StdErr";
 
 describe("createStdErr", () => {
   it("should be singleton", () => {
@@ -6,7 +6,7 @@ describe("createStdErr", () => {
   });
 
   describe("on input (d_val)", () => {
-    let node: TStdErr;
+    let node: StdErr;
 
     beforeEach(() => {
       node = createStdErr();

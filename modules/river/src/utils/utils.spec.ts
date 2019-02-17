@@ -1,4 +1,4 @@
-import {TInPort, TOutPort} from "../types";
+import {InPort, OutPort} from "../types";
 import {connect, createOutPorts, disconnect, noop} from "./utils";
 
 describe("utils", () => {
@@ -13,8 +13,8 @@ describe("utils", () => {
   });
 
   describe("connect", () => {
-    let outPort: TOutPort<number>;
-    let inPort: TInPort<number>;
+    let outPort: OutPort<number>;
+    let inPort: InPort<number>;
 
     beforeEach(() => {
       outPort = new Set();
@@ -28,9 +28,9 @@ describe("utils", () => {
   });
 
   describe("disconnect", () => {
-    let outPort: TOutPort<number>;
-    let inPort1: TInPort<number>;
-    let inPort2: TInPort<number>;
+    let outPort: OutPort<number>;
+    let inPort1: InPort<number>;
+    let inPort2: InPort<number>;
 
     beforeEach(() => {
       outPort = new Set();

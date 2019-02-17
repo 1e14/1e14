@@ -1,6 +1,12 @@
-import {createOutPorts, createOutputs, INode, TInPorts, TTag} from "@protoboard/river";
+import {
+  createOutPorts,
+  createOutputs,
+  InPorts,
+  Node,
+  Tag
+} from "@protoboard/river";
 
-export interface IInputs<V> {
+export type Inputs<V> = {
   /**
    * Values to serialize.
    */
@@ -10,14 +16,14 @@ export interface IInputs<V> {
    * Reference input.
    */
   r_tag: any;
-}
+};
 
-export interface IOutputs<V> {
+export type Outputs<V> = {
   /**
    * Forwarded value.
    */
   d_val: V;
-}
+};
 
 /**
  * Forwards input values in an order matching the reference input.
@@ -30,19 +36,19 @@ export interface IOutputs<V> {
  * serializer.i.r_tag(null, 2);
  * serializer.i.d_val("b", 1); // logs: "b" 1, "a" 2
  */
-export type TSerializer<V> = INode<IInputs<V>, IOutputs<V>>;
+export type Serializer<V> = Node<Inputs<V>, Outputs<V>>;
 
 /**
  * Creates a Serializer node.
  */
-export function createSerializer<V>(): TSerializer<V> {
+export function createSerializer<V>(): Serializer<V> {
   const o = createOutPorts(["d_val"]);
   const outputs = createOutputs(o);
 
-  const values: Map<TTag, V> = new Map();
-  const order: Array<TTag> = [];
+  const values: Map<Tag, V> = new Map();
+  const order: Array<Tag> = [];
 
-  const i: TInPorts<IInputs<V>> = {
+  const i: InPorts<Inputs<V>> = {
     d_val: (value, tag) => {
       values.set(tag, value);
       flush();

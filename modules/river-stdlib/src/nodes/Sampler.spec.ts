@@ -1,9 +1,9 @@
 import {connect} from "@protoboard/river";
-import {createSampler, TSampler} from "./Sampler";
+import {createSampler, Sampler} from "./Sampler";
 
 describe("createSampler()", () => {
   describe("on input (ev_smp)", () => {
-    let node: TSampler<number>;
+    let node: Sampler<number>;
 
     beforeEach(() => {
       node = createSampler();

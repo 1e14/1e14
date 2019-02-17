@@ -1,10 +1,10 @@
 import {connect} from "@protoboard/river";
-import {createFolder, TFolder} from "./Folder";
+import {createFolder, Folder} from "./Folder";
 
 describe("createFolder()", () => {
   describe("when initialized", () => {
     describe("on input (all)", () => {
-      let node: TFolder<number, number>;
+      let node: Folder<number, number>;
 
       beforeEach(() => {
         node = createFolder((curr, next) => curr + next, 0);
@@ -48,7 +48,7 @@ describe("createFolder()", () => {
     });
 
     describe("on input (d_val)", () => {
-      let node: TFolder<number, number>;
+      let node: Folder<number, number>;
 
       beforeEach(() => {
         node = createFolder((curr, next) => curr + next, 0);
@@ -78,7 +78,7 @@ describe("createFolder()", () => {
     });
 
     describe("on input (ev_res)", () => {
-      let node: TFolder<number, number>;
+      let node: Folder<number, number>;
 
       beforeEach(() => {
         node = createFolder((curr, next) => curr + next, 0);
@@ -118,7 +118,7 @@ describe("createFolder()", () => {
 
   describe("when uninitialized", () => {
     describe("on input (all)", () => {
-      let node: TFolder<number, number>;
+      let node: Folder<number, number>;
 
       beforeEach(() => {
         node = createFolder((curr, next) => curr + next);
@@ -176,7 +176,7 @@ describe("createFolder()", () => {
     });
 
     describe("on input (d_val)", () => {
-      let node: TFolder<number, number>;
+      let node: Folder<number, number>;
 
       beforeEach(() => {
         node = createFolder((curr, next) => curr + next);
@@ -209,7 +209,7 @@ describe("createFolder()", () => {
     });
 
     describe("on input (ev_res)", () => {
-      let node: TFolder<number, number>;
+      let node: Folder<number, number>;
 
       beforeEach(() => {
         node = createFolder((curr, next) => curr + next);

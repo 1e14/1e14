@@ -1,6 +1,12 @@
-import {createOutPorts, createOutputs, INode, TInPorts, TTag} from "@protoboard/river";
+import {
+  createOutPorts,
+  createOutputs,
+  InPorts,
+  Node,
+  Tag
+} from "@protoboard/river";
 
-export interface IInputs<V> {
+export type Inputs<V> = {
   /**
    * Value to be buffered.
    */
@@ -10,9 +16,9 @@ export interface IInputs<V> {
    * Whether the buffer is open.
    */
   st_open: boolean;
-}
+};
 
-export interface IOutputs<V> {
+export type Outputs<V> = {
   /**
    * Forwarded value.
    */
@@ -22,7 +28,7 @@ export interface IOutputs<V> {
    * Current buffer size. Non-zero when only when buffer is closed.
    */
   st_size: number;
-}
+};
 
 /**
  * Buffers values.
@@ -38,19 +44,19 @@ export interface IOutputs<V> {
  * buffer.i.st_open(true); // logs: "a", "b"
  * buffer.i.d_val("c"); // logs: "c"
  */
-export type TBuffer<V> = INode<IInputs<V> & { all: IInputs<V> }, IOutputs<V>>;
+export type Buffer<V> = Node<Inputs<V> & { all: Inputs<V> }, Outputs<V>>;
 
 /**
  * Creates a Buffer node.
  * @param open Whether buffer is open initially.
  */
-export function createBuffer<V>(open?: boolean): TBuffer<V> {
+export function createBuffer<V>(open?: boolean): Buffer<V> {
   const o = createOutPorts(["d_val", "st_size"]);
   const outputs = createOutputs(o);
 
-  const buffer: Array<{ value: V, tag: TTag }> = [];
+  const buffer: Array<{ value: V, tag: Tag }> = [];
 
-  const i: TInPorts<IInputs<V> & { all: IInputs<V> }> = {
+  const i: InPorts<Inputs<V> & { all: Inputs<V> }> = {
     all: ({d_val, st_open}, tag) => {
       if (st_open && !open) {
         flush();

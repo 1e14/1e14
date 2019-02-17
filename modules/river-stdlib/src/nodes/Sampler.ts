@@ -1,6 +1,6 @@
-import {createOutPorts, createOutputs, INode, TInPorts} from "@protoboard/river";
+import {createOutPorts, createOutputs, InPorts, Node} from "@protoboard/river";
 
-export interface IInputs<V> {
+export type Inputs<V> = {
   /**
    * Value to be sampled.
    */
@@ -10,14 +10,14 @@ export interface IInputs<V> {
    * Sampling signal.
    */
   ev_smp: any;
-}
+};
 
-export interface IOutputs<V> {
+export type Outputs<V> = {
   /**
    * Sampled input value.
    */
   d_val: V;
-}
+};
 
 /**
  * Forwards last input value on receiving a sampling signal.
@@ -29,7 +29,7 @@ export interface IOutputs<V> {
  * sampler.i.d_val(3);
  * sampler.i.ev_smp(); // logs: 3
  */
-export type TSampler<V> = INode<IInputs<V>, IOutputs<V>>;
+export type Sampler<V> = Node<Inputs<V>, Outputs<V>>;
 
 /**
  * Creates a Sampler node.
@@ -40,7 +40,7 @@ export function createSampler<V>() {
 
   let input: V;
 
-  const i: TInPorts<IInputs<V>> = {
+  const i: InPorts<Inputs<V>> = {
     d_val: (value) => {
       input = value;
     },

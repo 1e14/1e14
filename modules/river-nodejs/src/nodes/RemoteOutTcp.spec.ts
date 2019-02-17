@@ -1,10 +1,10 @@
 import {connect} from "@protoboard/river";
 import * as net from "net";
-import {createRemoteOutTcp, TRemoteOutTcp} from "./RemoteOutTcp";
+import {createRemoteOutTcp, RemoteOutTcp} from "./RemoteOutTcp";
 
 describe("createRemoteOutTcp()", () => {
   describe("on input (d_val)", () => {
-    let node: TRemoteOutTcp<number>;
+    let node: RemoteOutTcp<number>;
     let onError: (error) => void;
     let onWrite: () => void;
     const socket = {

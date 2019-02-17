@@ -1,9 +1,9 @@
 import {connect} from "@protoboard/river";
-import {createSerializer, TSerializer} from "./Serializer";
+import {createSerializer, Serializer} from "./Serializer";
 
 describe("createSerializer()", () => {
   describe("on input (d_val)", () => {
-    let node: TSerializer<number>;
+    let node: Serializer<number>;
 
     beforeEach(() => {
       node = createSerializer();
@@ -39,7 +39,7 @@ describe("createSerializer()", () => {
   });
 
   describe("on input (r_tag)", () => {
-    let node: TSerializer<number>;
+    let node: Serializer<number>;
 
     beforeEach(() => {
       node = createSerializer();

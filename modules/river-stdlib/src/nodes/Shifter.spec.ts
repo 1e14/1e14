@@ -1,9 +1,9 @@
 import {connect} from "@protoboard/river";
-import {createShifter, TShifter} from "./Shifter";
+import {createShifter, Shifter} from "./Shifter";
 
 describe("createShifter()", () => {
   describe("on input (d_val)", () => {
-    let node: TShifter<number>;
+    let node: Shifter<number>;
 
     beforeEach(() => {
       node = createShifter();

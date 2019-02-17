@@ -1,9 +1,9 @@
 import {connect} from "@protoboard/river";
-import {createFilter, TFilter} from "./Filter";
+import {createFilter, Filter} from "./Filter";
 
 describe("createFilter()", () => {
   describe("on input (d_val)", () => {
-    let node: TFilter<number>;
+    let node: Filter<number>;
 
     beforeEach(() => {
       node = createFilter((value) => value > 5);

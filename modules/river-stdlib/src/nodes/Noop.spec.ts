@@ -1,9 +1,9 @@
 import {connect} from "@protoboard/river";
-import {createNoop, TNoop} from "./Noop";
+import {createNoop, Noop} from "./Noop";
 
 describe("createNoop()", () => {
   describe("on input (d_val)", () => {
-    let node: TNoop<number>;
+    let node: Noop<number>;
 
     beforeEach(() => {
       node = createNoop();

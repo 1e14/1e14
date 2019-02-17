@@ -1,19 +1,19 @@
-import {INode, TInPorts} from "@protoboard/river";
+import {InPorts, Node} from "@protoboard/river";
 
-interface IInputs {
+type Inputs = {
   /**
    * Value to be sent to stderr.
    */
   d_val: string | Buffer;
-}
+};
 
 /**
  * Forwards input to standard error output (stderr).
  * Environments: Node.js.
  */
-export type TStdErr = INode<IInputs, {}>;
+export type StdErr = Node<Inputs, {}>;
 
-let instance: TStdErr;
+let instance: StdErr;
 
 /**
  * Creates a StdErr node.
@@ -24,12 +24,12 @@ let instance: TStdErr;
  * stdErr = river.createStdErr();
  * stdErr.i.d_val("foo"); // writes to stderr: "foo"
  */
-export function createStdErr(): TStdErr {
+export function createStdErr(): StdErr {
   if (instance) {
     return instance;
   }
 
-  const i: TInPorts<IInputs> = {
+  const i: InPorts<Inputs> = {
     d_val: (value) => {
       process.stderr.write(value);
     }

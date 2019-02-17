@@ -1,9 +1,9 @@
 import {connect} from "@protoboard/river";
-import {createMerger, TMerger} from "./Merger";
+import {createMerger, Merger} from "./Merger";
 
 describe("createMerger()", () => {
   describe("on input", () => {
-    let node: TMerger<{ foo: number, bar: number }>;
+    let node: Merger<{ foo: number, bar: number }>;
 
     beforeEach(() => {
       node = createMerger(["foo", "bar"]);

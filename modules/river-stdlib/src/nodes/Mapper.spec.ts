@@ -1,9 +1,9 @@
 import {connect} from "@protoboard/river";
-import {createMapper, TMapper} from "./Mapper";
+import {createMapper, Mapper} from "./Mapper";
 
 describe("createMapper()", () => {
   describe("on input (d_val)", () => {
-    let node: TMapper<number, boolean>;
+    let node: Mapper<number, boolean>;
 
     beforeEach(() => {
       node = createMapper((value) => value > 5);

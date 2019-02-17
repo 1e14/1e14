@@ -1,9 +1,9 @@
 import {connect} from "@protoboard/river";
-import {createBuffer, TBuffer} from "./Buffer";
+import {Buffer, createBuffer} from "./Buffer";
 
 describe("createBuffer()", () => {
   describe("on input (all)", () => {
-    let node: TBuffer<number>;
+    let node: Buffer<number>;
 
     beforeEach(() => {
       node = createBuffer();
@@ -61,7 +61,7 @@ describe("createBuffer()", () => {
   });
 
   describe("on input (st_open)", () => {
-    let node: TBuffer<number>;
+    let node: Buffer<number>;
 
     beforeEach(() => {
       node = createBuffer(false);

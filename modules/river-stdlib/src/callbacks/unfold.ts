@@ -1,4 +1,4 @@
-import {TUnfolderCallback} from "../nodes";
+import {UnfolderCallback} from "../nodes";
 
 /**
  * Unfolds array by popping values out of it.
@@ -27,7 +27,7 @@ export function* unfoldShift(value: Array<any>): any {
  * the specified delimiter.
  * @param delimiter
  */
-export function unfoldSplit(delimiter: string): TUnfolderCallback<string, string> {
+export function unfoldSplit(delimiter: string): UnfolderCallback<string, string> {
   let fragment = "";
   return function* (value: string) {
     const items = (fragment + value).split(delimiter);

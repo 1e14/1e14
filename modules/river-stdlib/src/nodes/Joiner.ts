@@ -1,13 +1,19 @@
-import {createOutPorts, createOutputs, INode, TInPorts, TTag} from "@protoboard/river";
+import {
+  createOutPorts,
+  createOutputs,
+  InPorts,
+  Node,
+  Tag
+} from "@protoboard/river";
 
-export type TInputs<T> = T;
+export type Inputs<T> = T;
 
-export interface IOutputs<T> {
+export type Outputs<T> = {
   /**
    * Joined inputs.
    */
   all: T;
-}
+};
 
 /**
  * Joins input values from all ports having the same tag.
@@ -19,20 +25,20 @@ export interface IOutputs<T> {
  * joiner.i.foo("b", 1);
  * joiner.i.bar("c", 2); // logs: {foo: "a", bar: "c"} 2
  */
-export type TJoiner<T> = INode<TInputs<T>, IOutputs<T>>;
+export type Joiner<T> = Node<Inputs<T>, Outputs<T>>;
 
 /**
  * Creates a Joiner node.
  * @param fields List of input fields.
  */
-export function createJoiner<T>(fields: Array<keyof T>): TJoiner<T> {
+export function createJoiner<T>(fields: Array<keyof T>): Joiner<T> {
   const o = createOutPorts(["all"]);
   const outputs = createOutputs(o);
 
-  const inputSets: Map<TTag, T> = new Map();
-  const portSets: Map<TTag, Set<keyof T>> = new Map();
+  const inputSets: Map<Tag, T> = new Map();
+  const portSets: Map<Tag, Set<keyof T>> = new Map();
 
-  const i = <TInPorts<TInputs<T>>>{};
+  const i = <InPorts<Inputs<T>>>{};
   for (const field of fields) {
     i[field] = (value, tag) => {
       let inputs = inputSets.get(tag);

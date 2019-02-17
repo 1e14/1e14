@@ -10,6 +10,7 @@
       "generic"
     ],
     "forin": false,
+    "interface-over-type-literal": false,
     "no-angle-bracket-type-assertion": false,
     "only-arrow-functions": false,
     "space-before-function-paren": false,

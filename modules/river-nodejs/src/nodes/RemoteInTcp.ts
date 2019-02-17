@@ -1,7 +1,12 @@
-import {createOutPorts, createOutputs, INode, TOutputs} from "@protoboard/river";
+import {
+  createOutPorts,
+  createOutputs,
+  Node,
+  Outputs as OutputCallbacks
+} from "@protoboard/river";
 import {Server, Socket} from "net";
 
-export interface IOutputs<V> {
+export type Outputs<V> = {
   /**
    * Value received from remote node.
    */
@@ -11,25 +16,25 @@ export interface IOutputs<V> {
    * Error message.
    */
   ev_err: string;
-}
+};
 
 /**
- * Receives data from a RemoteOutTcp node on a remote server through TCP
+ * Receives data from a RemoteOutTcp node on a remote server through CP
  * connection.
  * Emits error on JSON parsing error.
  */
-export type TRemoteInTcp<V> = INode<{}, IOutputs<V>>;
+export type RemoteInTcp<V> = Node<{}, Outputs<V>>;
 
 const serverCache: Map<string, Server> = new Map();
-const outputCache: Map<string, TOutputs<IOutputs<any>>> = new Map();
+const outputCache: Map<string, OutputCallbacks<Outputs<any>>> = new Map();
 
 /**
  * Creates a RemoteInTcp node.
- * @param host Address of the local TCP server.
- * @param port Port of the local TCP server.
+ * @param host Address of the local CP server.
+ * @param port Port of the local CP server.
  * @param id Identifies this node.
  */
-export function createRemoteInTcp<V>(host: string, port: number, id: string): TRemoteInTcp<V> {
+export function createRemoteInTcp<V>(host: string, port: number, id: string): RemoteInTcp<V> {
   const o = createOutPorts(["d_val", "ev_err"]);
   outputCache.set(id, createOutputs(o));
 

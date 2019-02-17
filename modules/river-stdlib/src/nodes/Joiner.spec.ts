@@ -1,9 +1,9 @@
 import {connect} from "@protoboard/river";
-import {createJoiner, TJoiner} from "./Joiner";
+import {createJoiner, Joiner} from "./Joiner";
 
 describe("createJoiner()", () => {
   describe("on input", () => {
-    let node: TJoiner<{ foo: number, bar: number }>;
+    let node: Joiner<{ foo: number, bar: number }>;
 
     beforeEach(() => {
       node = createJoiner(["foo", "bar"]);

@@ -1,15 +1,15 @@
-import {createOutPorts, createOutputs, INode, TInPorts} from "@protoboard/river";
+import {createOutPorts, createOutputs, InPorts, Node} from "@protoboard/river";
 import {copy} from "../utils";
-import {TOutputs} from "./Demuxer";
+import {Outputs as DemuxerOutputs} from "./Demuxer";
 
-export type TInputs<T> = T;
+export type Inputs<T> = T;
 
-export interface IOutputs<T> {
+export type Outputs<T> = {
   /**
    * Merged inputs.
    */
   all: T;
-}
+};
 
 /**
  * Merges last input values from all ports.
@@ -21,19 +21,19 @@ export interface IOutputs<T> {
  * merger.i.foo("b"); // logs: {foo: "b"}
  * merger.i.bar("c"); // logs: {foo: "b", bar: "c"}
  */
-export type TMerger<T> = INode<TInputs<T>, IOutputs<T>>;
+export type Merger<T> = Node<Inputs<T>, Outputs<T>>;
 
 /**
  * Creates a Merger node.
  * @param fields List of input fields.
  */
-export function createMerger<T>(fields: Array<keyof T>): TMerger<T> {
+export function createMerger<T>(fields: Array<keyof T>): Merger<T> {
   const o = createOutPorts(["all"]);
   const outputs = createOutputs(o);
 
-  const inputs = <TOutputs<T>>{};
+  const inputs = <DemuxerOutputs<T>>{};
 
-  const i = <TInPorts<TInputs<T>>>{};
+  const i = <InPorts<Inputs<T>>>{};
   for (const field of fields) {
     i[field] = (value, tag) => {
       inputs[field] = value;

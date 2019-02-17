@@ -1,10 +1,10 @@
 import {connect} from "@protoboard/river";
-import {createComparer, TComparer} from "./Comparer";
+import {Comparer, createComparer} from "./Comparer";
 
 describe("createComparer()", () => {
   describe("with callback", () => {
     describe("on input (d_vals)", () => {
-      let node: TComparer<number>;
+      let node: Comparer<number>;
 
       beforeEach(() => {
         node = createComparer((a, b) => a === b);
@@ -43,7 +43,7 @@ describe("createComparer()", () => {
 
   describe("without callback", () => {
     describe("on input (d_vals)", () => {
-      let node: TComparer<number>;
+      let node: Comparer<number>;
 
       beforeEach(() => {
         node = createComparer();

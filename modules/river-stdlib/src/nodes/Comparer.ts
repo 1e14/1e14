@@ -1,8 +1,8 @@
-import {createOutPorts, createOutputs, INode, TInPorts} from "@protoboard/river";
+import {createOutPorts, createOutputs, InPorts, Node} from "@protoboard/river";
 
-export type TEqualityCallback<V> = (a: V, b: V, tag?: string) => boolean;
+export type EqualityCallback<V> = (a: V, b: V, tag?: string) => boolean;
 
-export interface IInputs<V> {
+export type Inputs<V> = {
   /**
    * Input value pair.
    */
@@ -10,9 +10,9 @@ export interface IInputs<V> {
     a: V;
     b: V;
   };
-}
+};
 
-export interface IOutputs<V> {
+export type Outputs<V> = {
   /**
    * Bounced input value pair.
    */
@@ -27,7 +27,7 @@ export interface IOutputs<V> {
    * Error message.
    */
   ev_err: string;
-}
+};
 
 /**
  * Compares a pair of input values according to an optional equality callback.
@@ -39,17 +39,17 @@ export interface IOutputs<V> {
  * comparer.i.d_vals({a: "foo", b: "foo"}); // logs: true
  * comparer.i.d_vals({a: "foo", b: "bar"}); // logs: false
  */
-export type TComparer<V> = INode<IInputs<V>, IOutputs<V>>;
+export type Comparer<V> = Node<Inputs<V>, Outputs<V>>;
 
 /**
  * Creates a Comparer node.
  * @param cb Equality callback.
  */
-export function createComparer<V>(cb?: TEqualityCallback<V>): TComparer<V> {
+export function createComparer<V>(cb?: EqualityCallback<V>): Comparer<V> {
   const o = createOutPorts(["b_d_vals", "d_eq", "ev_err"]);
   const outputs = createOutputs(o);
 
-  const i: TInPorts<IInputs<V>> = cb ? {
+  const i: InPorts<Inputs<V>> = cb ? {
     d_vals: (value, tag) => {
       try {
         outputs.d_eq(cb(value.a, value.b, tag), tag);

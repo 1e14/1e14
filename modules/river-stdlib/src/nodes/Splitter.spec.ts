@@ -1,9 +1,9 @@
 import {connect} from "@protoboard/river";
-import {createSplitter, TSplitter} from "./Splitter";
+import {createSplitter, Splitter} from "./Splitter";
 
 describe("createSplitter()", () => {
   describe("on input (d_val)", () => {
-    let node: TSplitter<{ foo: number, bar: number }>;
+    let node: Splitter<{ foo: number, bar: number }>;
 
     beforeEach(() => {
       node = createSplitter(["foo", "bar"]);

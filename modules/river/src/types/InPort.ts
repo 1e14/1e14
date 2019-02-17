@@ -1,4 +1,4 @@
-import {TTag} from "./TTag";
+import {Tag} from "./Tag";
 
 /**
  * Describes an input port.
@@ -6,4 +6,4 @@ import {TTag} from "./TTag";
  * state node's state and / or emit values on output ports.
  * Any function satisfying the signature qualifies as an input port.
  */
-export type TInPort<V> = (value: V, tag?: TTag) => void;
+export type InPort<V> = (value: V, tag?: Tag) => void;

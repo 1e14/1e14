@@ -1,12 +1,18 @@
-import {createOutPorts, createOutputs, INode, TInPorts, TTag} from "@protoboard/river";
+import {
+  createOutPorts,
+  createOutputs,
+  InPorts,
+  Node,
+  Tag
+} from "@protoboard/river";
 import {copy} from "../utils";
 
-export type TFolderCallback<I, O> = (
+export type FolderCallback<I, O> = (
   curr: O,
   next: I,
-  tag?: TTag) => O;
+  tag?: Tag) => O;
 
-export interface IInputs<I> {
+export type Inputs<I> = {
   /**
    * Value to be folded (aggregated).
    */
@@ -16,9 +22,9 @@ export interface IInputs<I> {
    * Reset signal.
    */
   ev_res: boolean;
-}
+};
 
-export interface IOutputs<I, O> {
+export type Outputs<I, O> = {
   /**
    * Bounced input value.
    */
@@ -33,7 +39,7 @@ export interface IOutputs<I, O> {
    * Error message.
    */
   ev_err: string;
-}
+};
 
 /**
  * Aggregates input values between reset signals, according to an aggregator
@@ -49,7 +55,7 @@ export interface IOutputs<I, O> {
  * folder.i.d_val(4);
  * folder.i.ev_res(true); // logs: 9
  */
-export type TFolder<I, O> = INode<IInputs<I> & { all: IInputs<I> }, IOutputs<I, O>>;
+export type Folder<I, O> = Node<Inputs<I> & { all: Inputs<I> }, Outputs<I, O>>;
 
 /**
  * Creates a Folder node.
@@ -57,16 +63,16 @@ export type TFolder<I, O> = INode<IInputs<I> & { all: IInputs<I> }, IOutputs<I, 
  * @param initial Initial value for aggregation.
  */
 export function createFolder<I, O>(
-  cb: TFolderCallback<I, O>,
+  cb: FolderCallback<I, O>,
   initial?: O
-): TFolder<I, O> {
+): Folder<I, O> {
   const o = createOutPorts(["b_d_val", "d_fold", "ev_err"]);
   const outputs = createOutputs(o);
   const initialized = arguments.length === 2;
   let folded: O;
   let first: boolean = true;
 
-  const i: TInPorts<IInputs<I> & { all: IInputs<I> }> = {
+  const i: InPorts<Inputs<I> & { all: Inputs<I> }> = {
     all: ({d_val, ev_res}, tag) => {
       try {
         if (first) {

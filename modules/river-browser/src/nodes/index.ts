@@ -1,1 +1,1 @@
-export {createLocalStorage, TLocalStorage} from "./LocalStorage";
+export {createLocalStorage, LocalStorage} from "./LocalStorage";

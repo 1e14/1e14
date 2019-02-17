@@ -1,4 +1,4 @@
-import {TUnfolderCallback} from "../nodes";
+import {UnfolderCallback} from "../nodes";
 import {unfoldPop, unfoldShift, unfoldSplit} from "./unfold";
 
 describe("unfold", () => {
@@ -42,7 +42,7 @@ describe("unfold", () => {
     });
 
     describe("on subsequent calls", () => {
-      let split: TUnfolderCallback<string, string>;
+      let split: UnfolderCallback<string, string>;
       let iterable: IterableIterator<string>;
 
       beforeEach(() => {
