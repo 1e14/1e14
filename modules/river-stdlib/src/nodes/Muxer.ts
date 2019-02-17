@@ -1,5 +1,5 @@
 import {createOutPorts, createOutputs, InPorts, Node} from "@protoboard/river";
-import {Muxed} from "../utils";
+import {Muxed} from "../types";
 
 export type Inputs<T> = T;
 
