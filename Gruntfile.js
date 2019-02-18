@@ -3,10 +3,10 @@ module.exports = function (grunt) {
   "use strict";
 
   const modules = [
-    "river",
-    "river-stdlib",
-    "river-nodejs",
-    "river-browser"
+    "core",
+    "stdlib",
+    "nodejs",
+    "browser"
   ];
 
   grunt.initConfig({
@@ -52,7 +52,7 @@ module.exports = function (grunt) {
 
       const pkg = grunt.file.readJSON(`modules/${module}/package.json`);
       const deps = Object.keys(pkg.dependencies || {})
-      .filter((name) => /^@protoboard.*$/.test(name));
+      .filter((name) => /^river-.*$/.test(name));
       config[`link-${module}-deps`] = {
         cwd: `modules/${module}`,
         cmd: deps

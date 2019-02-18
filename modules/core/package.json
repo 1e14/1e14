@@ -1,0 +1,26 @@
+{
+  "name": "river-core",
+  "version": "0.1.0",
+  "description": "Library for building computational graphs",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "!dist/**/*.spec.*",
+    "package.json",
+    "README.md"
+  ],
+  "keywords": [
+    "computational-graphs",
+    "reactive-programming",
+    "reactive-streams",
+    "stream-processing",
+    "distributed-computing"
+  ],
+  "author": "Dan Stocker <dan@kwaia.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:protoboard/river.git"
+  }
+}

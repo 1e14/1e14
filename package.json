@@ -1,9 +1,10 @@
 {
-  "name": "@protoboard/river-development",
+  "name": "river",
   "version": "0.1.0",
   "description": "",
   "author": "Dan Stocker <dan@kwaia.com>",
   "license": "MIT",
+  "private": true,
   "repository": {
     "type": "git",
     "url": "git@github.com:protoboard/river.git"
