@@ -100,6 +100,10 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks("grunt-notify");
 
   modules.forEach((module) => {
+    grunt.registerTask(`postinstall-${module}`, [
+      `exec:link-${module}-deps`,
+      `exec:link-${module}-self`
+    ]);
     grunt.registerTask(`test-${module}`, [
       `tslint:${module}`,
       `exec:jasmine-${module}`
@@ -133,9 +137,6 @@ module.exports = function (grunt) {
   grunt.registerTask("build", [
     "clean-dist", "tslint", "ts", "test", "notify:build"]);
   grunt.registerTask("postinstall", modules
-  .reduce((tasks, module) => {
-    tasks.push(`exec:link-${module}-deps`, `exec:link-${module}-self`);
-    return tasks;
-  }, []));
+  .map((module) => `postinstall-${module}`));
   grunt.registerTask("default", ["build-quick", "watch"]);
 };
