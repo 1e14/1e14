@@ -10,5 +10,6 @@ Getting started
 ---------------
 
 * Install: `npm i`
-* Build (all modules): `npm run build`
-* Test (all modules): `npm test`
+* Build (single module): `grunt build-[modulename]`
+* Build (all modules): `grunt build`
+* Test (all modules): `grunt test`
