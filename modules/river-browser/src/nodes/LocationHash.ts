@@ -33,7 +33,7 @@ export function createLocationHash(): LocationHash {
       outputs.d_val(location.hash, `LocationHash-${counter++}`);
     });
 
-    document.addEventListener("hashchange", () => {
+    window.addEventListener("hashchange", () => {
       outputs.d_val(location.hash, `LocationHash-${counter++}`);
     });
 

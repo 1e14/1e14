@@ -14,7 +14,12 @@ describe("createLocationHash()", () => {
           case "DOMContentLoaded":
             onDomContentLoaded = cb;
             break;
-
+        }
+      }
+    };
+    window.window = {
+      addEventListener: (event, cb) => {
+        switch (event) {
           case "hashchange":
             onHashChange = cb;
             break;
@@ -26,6 +31,7 @@ describe("createLocationHash()", () => {
   afterEach(() => {
     delete window.location;
     delete window.document;
+    delete window.window;
   });
 
   describe("on input (d_val)", () => {
