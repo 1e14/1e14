@@ -1,43 +1,40 @@
-import {createOutPorts, createOutputs, InPorts, Node} from "river-core";
+import {createNode, Node} from "river-core";
 
-export type Inputs = {
+export type In = {
   d_val: string;
   ev_smp: any;
 };
 
-export type Outputs = {
+export type Out = {
   d_val: string;
 };
 
-export type LocationHash = Node<Inputs, Outputs>;
+export type LocationHash = Node<In, Out>;
 
 let instance: LocationHash;
 let counter: number = 0;
 
 export function createLocationHash(): LocationHash {
   if (!instance) {
-    const o = createOutPorts(["d_val"]);
-    const outputs = createOutputs(o);
+    instance = createNode<In, Out>(["d_val"], (outputs) => {
+      document.addEventListener("DOMContentLoaded", () => {
+        outputs.d_val(location.hash, `LocationHash-${counter++}`);
+      });
 
-    const i: InPorts<Inputs> = {
-      d_val: (value) => {
-        location.hash = value;
-      },
+      window.addEventListener("hashchange", () => {
+        outputs.d_val(location.hash, `LocationHash-${counter++}`);
+      });
 
-      ev_smp: (value, tag) => {
-        outputs.d_val(location.hash, tag);
-      }
-    };
+      return {
+        d_val: (value) => {
+          location.hash = value;
+        },
 
-    document.addEventListener("DOMContentLoaded", () => {
-      outputs.d_val(location.hash, `LocationHash-${counter++}`);
+        ev_smp: (value, tag) => {
+          outputs.d_val(location.hash, tag);
+        }
+      };
     });
-
-    window.addEventListener("hashchange", () => {
-      outputs.d_val(location.hash, `LocationHash-${counter++}`);
-    });
-
-    instance = {i, o};
   }
 
   return instance;
