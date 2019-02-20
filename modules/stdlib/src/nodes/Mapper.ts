@@ -1,21 +1,15 @@
-import {
-  createOutPorts,
-  createOutputs,
-  InPorts,
-  Node,
-  Tag
-} from "river-core";
+import {createNode, Node, Tag} from "river-core";
 
 export type MapperCallback<I, O> = (value: I, tag?: Tag) => O;
 
-export type Inputs<I> = {
+export type In<I> = {
   /**
    * Value to be mapped.
    */
   d_val: I;
 };
 
-export type Outputs<I, O> = {
+export type Out<I, O> = {
   /**
    * Bounced input value.
    */
@@ -41,26 +35,24 @@ export type Outputs<I, O> = {
  * river.connect(mapper.o.d_val, console.log);
  * mapper.i.d_val(5); // logs: 10
  */
-export type Mapper<I, O> = Node<Inputs<I>, Outputs<I, O>>;
+export type Mapper<I, O> = Node<In<I>, Out<I, O>>;
 
 /**
  * Creates a Mapper node.
  * @param cb Mapper callback.
  */
 export function createMapper<I, O>(cb: MapperCallback<I, O>): Mapper<I, O> {
-  const o = createOutPorts(["b_d_val", "d_val", "ev_err"]);
-  const outputs = createOutputs(o);
-
-  const i: InPorts<Inputs<I>> = {
-    d_val: (value, tag) => {
-      try {
-        outputs.d_val(cb(value, tag), tag);
-      } catch (err) {
-        outputs.b_d_val(value, tag);
-        outputs.ev_err(String(err), tag);
+  return createNode<In<I>, Out<I, O>>
+  (["b_d_val", "d_val", "ev_err"], (outputs) => {
+    return {
+      d_val: (value, tag) => {
+        try {
+          outputs.d_val(cb(value, tag), tag);
+        } catch (err) {
+          outputs.b_d_val(value, tag);
+          outputs.ev_err(String(err), tag);
+        }
       }
-    }
-  };
-
-  return {i, o};
+    };
+  });
 }

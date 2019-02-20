@@ -1,13 +1,13 @@
-import {createOutPorts, createOutputs, InPorts, Node} from "river-core";
+import {createNode, Node} from "river-core";
 
-export type Inputs<V> = {
+export type In<V> = {
   /**
    * Value to be forwarded.
    */
   d_val: V;
 };
 
-export type Outputs<V> = {
+export type Out<V> = {
   /**
    * Forwarded input value.
    */
@@ -22,20 +22,17 @@ export type Outputs<V> = {
  * river.connect(noop.o.d_val, console.log);
  * noop.i.d_val(5); // logs: 5
  */
-export type Noop<V> = Node<Inputs<V>, Outputs<V>>;
+export type Noop<V> = Node<In<V>, Out<V>>;
 
 /**
  * Creates a Noop node.
  */
 export function createNoop<V>(): Noop<V> {
-  const o = createOutPorts(["d_val"]);
-  const outputs = createOutputs(o);
-
-  const i: InPorts<Inputs<V>> = {
-    d_val: (value, tag) => {
-      outputs.d_val(value, tag);
-    }
-  };
-
-  return {i, o};
+  return createNode<In<V>, Out<V>>(["d_val"], (outputs) => {
+    return {
+      d_val: (value, tag) => {
+        outputs.d_val(value, tag);
+      }
+    };
+  });
 }

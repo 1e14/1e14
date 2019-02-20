@@ -1,12 +1,6 @@
-import {
-  createOutPorts,
-  createOutputs,
-  InPorts,
-  Node,
-  Tag
-} from "river-core";
+import {createNode, Node, Tag} from "river-core";
 
-export type Inputs<V> = {
+export type In<V> = {
   /**
    * Values to serialize.
    */
@@ -18,7 +12,7 @@ export type Inputs<V> = {
   r_tag: any;
 };
 
-export type Outputs<V> = {
+export type Out<V> = {
   /**
    * Forwarded value.
    */
@@ -36,38 +30,35 @@ export type Outputs<V> = {
  * serializer.i.r_tag(null, 2);
  * serializer.i.d_val("b", 1); // logs: "b" 1, "a" 2
  */
-export type Serializer<V> = Node<Inputs<V>, Outputs<V>>;
+export type Serializer<V> = Node<In<V>, Out<V>>;
 
 /**
  * Creates a Serializer node.
  */
 export function createSerializer<V>(): Serializer<V> {
-  const o = createOutPorts(["d_val"]);
-  const outputs = createOutputs(o);
+  return createNode<In<V>, Out<V>>(["d_val"], (outputs) => {
+    const values: Map<Tag, V> = new Map();
+    const order: Array<Tag> = [];
 
-  const values: Map<Tag, V> = new Map();
-  const order: Array<Tag> = [];
-
-  const i: InPorts<Inputs<V>> = {
-    d_val: (value, tag) => {
-      values.set(tag, value);
-      flush();
-    },
-
-    r_tag: (value, tag) => {
-      order.push(tag);
-      flush();
+    function flush() {
+      while (values.has(order[0])) {
+        const tag = order.shift();
+        const value = values.get(tag);
+        values.delete(tag);
+        outputs.d_val(value, tag);
+      }
     }
-  };
 
-  function flush() {
-    while (values.has(order[0])) {
-      const tag = order.shift();
-      const value = values.get(tag);
-      values.delete(tag);
-      outputs.d_val(value, tag);
-    }
-  }
+    return {
+      d_val: (value, tag) => {
+        values.set(tag, value);
+        flush();
+      },
 
-  return {i, o};
+      r_tag: (value, tag) => {
+        order.push(tag);
+        flush();
+      }
+    };
+  });
 }

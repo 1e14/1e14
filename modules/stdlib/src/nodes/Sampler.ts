@@ -1,6 +1,6 @@
-import {createOutPorts, createOutputs, InPorts, Node} from "river-core";
+import {createNode, Node} from "river-core";
 
-export type Inputs<V> = {
+export type In<V> = {
   /**
    * Value to be sampled.
    */
@@ -12,7 +12,7 @@ export type Inputs<V> = {
   ev_smp: any;
 };
 
-export type Outputs<V> = {
+export type Out<V> = {
   /**
    * Sampled input value.
    */
@@ -29,26 +29,22 @@ export type Outputs<V> = {
  * sampler.i.d_val(3);
  * sampler.i.ev_smp(); // logs: 3
  */
-export type Sampler<V> = Node<Inputs<V>, Outputs<V>>;
+export type Sampler<V> = Node<In<V>, Out<V>>;
 
 /**
  * Creates a Sampler node.
  */
 export function createSampler<V>() {
-  const o = createOutPorts(["d_val"]);
-  const outputs = createOutputs(o);
+  return createNode<In<V>, Out<V>>(["d_val"], (outputs) => {
+    let input: V;
+    return {
+      d_val: (value) => {
+        input = value;
+      },
 
-  let input: V;
-
-  const i: InPorts<Inputs<V>> = {
-    d_val: (value) => {
-      input = value;
-    },
-
-    ev_smp: (value, tag) => {
-      outputs.d_val(input, tag);
-    }
-  };
-
-  return {i, o};
+      ev_smp: (value, tag) => {
+        outputs.d_val(input, tag);
+      }
+    };
+  });
 }

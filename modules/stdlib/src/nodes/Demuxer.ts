@@ -1,14 +1,14 @@
-import {createOutPorts, createOutputs, InPorts, Node} from "river-core";
+import {createNode, Node} from "river-core";
 import {Muxed} from "../types";
 
-export type Inputs<T> = {
+export type In<T> = {
   /**
    * Multiplexed input value.
    */
   d_mux: Muxed<T>;
 };
 
-export type Outputs<T> = T;
+export type Out<T> = T;
 
 /**
  * De-multiplexes input value.
@@ -19,21 +19,18 @@ export type Outputs<T> = T;
  * river.connect(demuxer.o.foo, console.log);
  * demuxer.i.d_mux({field: "foo", value: "a"}); // logs: "a"
  */
-export type Demuxer<T> = Node<Inputs<T>, Outputs<T>>;
+export type Demuxer<T> = Node<In<T>, Out<T>>;
 
 /**
  * Creates a Demuxer node.
  * @param fields List of output fields.
  */
 export function createDemuxer<T>(fields: Array<keyof T>): Demuxer<T> {
-  const o = createOutPorts(fields);
-  const outputs = createOutputs(o);
-
-  const i: InPorts<Inputs<T>> = {
-    d_mux: ({field, value}, tag) => {
-      outputs[field](value, tag);
-    }
-  };
-
-  return {i, o};
+  return createNode<In<T>, Out<T>>(fields, (outputs) => {
+    return {
+      d_mux: ({field, value}, tag) => {
+        outputs[field](value, tag);
+      }
+    };
+  });
 }

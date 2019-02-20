@@ -1,21 +1,15 @@
-import {
-  createOutPorts,
-  createOutputs,
-  InPorts,
-  Node,
-  Tag
-} from "river-core";
+import {createNode, Node, Tag} from "river-core";
 
 export type FilterCallback<V> = (value: V, tag?: Tag) => boolean;
 
-export type Inputs<V> = {
+export type In<V> = {
   /**
    * Value to be filtered.
    */
   d_val: V;
 };
 
-export type Outputs<V> = {
+export type Out<V> = {
   /**
    * Bounced input value.
    */
@@ -43,28 +37,26 @@ export type Outputs<V> = {
  * filter.i.d_val(5);
  * filter.i.d_val(8); // logs: 8
  */
-export type Filter<V> = Node<Inputs<V>, Outputs<V>>;
+export type Filter<V> = Node<In<V>, Out<V>>;
 
 /**
  * Creates a Filter node.
  * @param cb Filter callback.
  */
 export function createFilter<V>(cb: FilterCallback<V>): Filter<V> {
-  const o = createOutPorts(["b_d_val", "d_val", "ev_err"]);
-  const outputs = createOutputs(o);
-
-  const i: InPorts<Inputs<V>> = {
-    d_val: (value, tag) => {
-      try {
-        if (cb(value, tag)) {
-          outputs.d_val(value, tag);
+  return createNode<In<V>, Out<V>>
+  (["b_d_val", "d_val", "ev_err"], (outputs) => {
+    return {
+      d_val: (value, tag) => {
+        try {
+          if (cb(value, tag)) {
+            outputs.d_val(value, tag);
+          }
+        } catch (err) {
+          outputs.b_d_val(value, tag);
+          outputs.ev_err(String(err), tag);
         }
-      } catch (err) {
-        outputs.b_d_val(value, tag);
-        outputs.ev_err(String(err), tag);
       }
-    }
-  };
-
-  return {i, o};
+    };
+  });
 }

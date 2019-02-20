@@ -1,13 +1,13 @@
-import {createOutPorts, createOutputs, InPorts, Node} from "river-core";
+import {createNode, Node} from "river-core";
 
-export type Inputs<V> = {
+export type In<V> = {
   /**
    * Value to be shifted.
    */
   d_val: V;
 };
 
-export type Outputs<V> = {
+export type Out<V> = {
   /**
    * Shifted input value.
    */
@@ -24,23 +24,19 @@ export type Outputs<V> = {
  * shifter.i.d_val(3); // logs: 5
  * shifter.i.d_val(4); // logs: 3
  */
-export type Shifter<V> = Node<Inputs<V>, Outputs<V>>;
+export type Shifter<V> = Node<In<V>, Out<V>>;
 
 /**
  * Creates a Shifter node.
  */
 export function createShifter<V>(): Shifter<V> {
-  const o = createOutPorts(["d_val"]);
-  const outputs = createOutputs(o);
-
-  let last: V;
-
-  const i: InPorts<Inputs<V>> = {
-    d_val: (value, tag) => {
-      outputs.d_val(last, tag);
-      last = value;
-    }
-  };
-
-  return {i, o};
+  return createNode<In<V>, Out<V>>(["d_val"], (outputs) => {
+    let last: V;
+    return {
+      d_val: (value, tag) => {
+        outputs.d_val(last, tag);
+        last = value;
+      }
+    };
+  });
 }

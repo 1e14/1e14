@@ -1,13 +1,13 @@
-import {createOutPorts, createOutputs, InPorts, Node} from "river-core";
+import {createNode, Node} from "river-core";
 
-export type Inputs<V> = {
+export type In<V> = {
   /**
    * Value to be delayed.
    */
   d_val: V;
 };
 
-export type Outputs<V> = {
+export type Out<V> = {
   /**
    * Delayed value.
    */
@@ -22,23 +22,20 @@ export type Outputs<V> = {
  * river.connect(delayer.o.d_val, console.log);
  * delayer.i.d_val("a"); // logs after 1 second: "a"
  */
-export type Delayer<V> = Node<Inputs<V>, Outputs<V>>;
+export type Delayer<V> = Node<In<V>, Out<V>>;
 
 /**
  * Creates a Delayer node.
  * @param ms Number of milliseconds between receiving and forwarding input.
  */
 export function createDelayer<V>(ms: number): Delayer<V> {
-  const o = createOutPorts(["d_val"]);
-  const outputs = createOutputs(o);
-
-  const i: InPorts<Inputs<V>> = {
-    d_val: (value, tag) => {
-      setTimeout(() => {
-        outputs.d_val(value, tag);
-      }, ms);
-    }
-  };
-
-  return {i, o};
+  return createNode<In<V>, Out<V>>(["d_val"], (outputs) => {
+    return {
+      d_val: (value, tag) => {
+        setTimeout(() => {
+          outputs.d_val(value, tag);
+        }, ms);
+      }
+    };
+  });
 }

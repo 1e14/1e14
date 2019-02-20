@@ -1,10 +1,10 @@
-import {createOutPorts, createOutputs, InPorts, Node} from "river-core";
+import {createNode, InPorts, Node} from "river-core";
 import {copy} from "../utils";
-import {Outputs as DemuxerOutputs} from "./Demuxer";
+import {Out as DemuxerOutputs} from "./Demuxer";
 
-export type Inputs<T> = T;
+export type In<T> = T;
 
-export type Outputs<T> = {
+export type Out<T> = {
   /**
    * Merged inputs.
    */
@@ -21,25 +21,23 @@ export type Outputs<T> = {
  * merger.i.foo("b"); // logs: {foo: "b"}
  * merger.i.bar("c"); // logs: {foo: "b", bar: "c"}
  */
-export type Merger<T> = Node<Inputs<T>, Outputs<T>>;
+export type Merger<T> = Node<In<T>, Out<T>>;
 
 /**
  * Creates a Merger node.
  * @param fields List of input fields.
  */
 export function createMerger<T>(fields: Array<keyof T>): Merger<T> {
-  const o = createOutPorts(["all"]);
-  const outputs = createOutputs(o);
+  return createNode<In<T>, Out<T>>(["all"], (outputs) => {
+    const inputs = <DemuxerOutputs<T>>{};
+    const i = <InPorts<In<T>>>{};
+    for (const field of fields) {
+      i[field] = (value, tag) => {
+        inputs[field] = value;
+        outputs.all(copy(inputs), tag);
+      };
+    }
 
-  const inputs = <DemuxerOutputs<T>>{};
-
-  const i = <InPorts<Inputs<T>>>{};
-  for (const field of fields) {
-    i[field] = (value, tag) => {
-      inputs[field] = value;
-      outputs.all(copy(inputs), tag);
-    };
-  }
-
-  return {i, o};
+    return i;
+  });
 }

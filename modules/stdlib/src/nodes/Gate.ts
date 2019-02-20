@@ -1,6 +1,6 @@
-import {createOutPorts, createOutputs, InPorts, Node} from "river-core";
+import {createNode, Node} from "river-core";
 
-export type Inputs<V> = {
+export type In<V> = {
   /**
    * Value to be forwarded.
    */
@@ -12,7 +12,7 @@ export type Inputs<V> = {
   st_open: boolean;
 };
 
-export type Outputs<V> = {
+export type Out<V> = {
   /**
    * Forwarded value.
    */
@@ -30,33 +30,31 @@ export type Outputs<V> = {
  * gate.i.st_open(true);
  * gate.i.d_val("b"); // logs: "b"
  */
-export type Gate<V> = Node<Inputs<V> & { all: Inputs<V> }, Outputs<V>>;
+export type Gate<V> = Node<In<V> & { all: In<V> }, Out<V>>;
 
 /**
  * Creates a Gate node.
  * @param open Initial 'open' state.
  */
 export function createGate<V>(open?: boolean): Gate<V> {
-  const o = createOutPorts(["d_val"]);
-  const outputs = createOutputs(o);
+  return createNode<In<V> & { all: In<V> }, Out<V>>
+  (["d_val"], (outputs) => {
+    return {
+      all: ({d_val, st_open}, tag) => {
+        if (st_open) {
+          outputs.d_val(d_val, tag);
+        }
+      },
 
-  const i: InPorts<Inputs<V> & { all: Inputs<V> }> = {
-    all: ({d_val, st_open}, tag) => {
-      if (st_open) {
-        outputs.d_val(d_val, tag);
+      d_val: (value, tag) => {
+        if (open) {
+          outputs.d_val(value, tag);
+        }
+      },
+
+      st_open: (value) => {
+        open = value;
       }
-    },
-
-    d_val: (value, tag) => {
-      if (open) {
-        outputs.d_val(value, tag);
-      }
-    },
-
-    st_open: (value) => {
-      open = value;
-    }
-  };
-
-  return {i, o};
+    };
+  });
 }

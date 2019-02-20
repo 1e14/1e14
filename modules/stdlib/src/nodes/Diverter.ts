@@ -1,6 +1,6 @@
-import {createOutPorts, createOutputs, InPorts, Node} from "river-core";
+import {createNode, Node} from "river-core";
 
-export type Inputs<P extends string | number, V> = {
+export type In<P extends string | number, V> = {
   /**
    * Value to be diverted.
    */
@@ -16,7 +16,7 @@ export type SwitchPositions<P extends string | number, V> = {
   [K in P]: V;
 };
 
-export type Outputs<P extends string | number, V> =
+export type Out<P extends string | number, V> =
   SwitchPositions<P, V> & { b_st_pos: P; };
 
 /**
@@ -31,7 +31,7 @@ export type Outputs<P extends string | number, V> =
  * diverter.i.d_val("a"); // logs: "a"
  */
 export type Diverter<P extends string | number, V> =
-  Node<Inputs<P, V> & { all: Inputs<P, V> }, Outputs<P, V>>;
+  Node<In<P, V> & { all: In<P, V> }, Out<P, V>>;
 
 /**
  * Creates a Diverter node.
@@ -44,33 +44,31 @@ export function createDiverter<P extends string | number, V>(
   positions: Array<P>,
   position?: P
 ): Diverter<P, V> {
-  const o = createOutPorts((<Array<keyof Outputs<P, V>>>positions).concat("b_st_pos"));
-  const outputs = createOutputs<Outputs<P, V>>(o);
+  return createNode<In<P, V> & { all: In<P, V> }, Out<P, V>>
+  ((<Array<keyof Out<P, V>>>positions).concat("b_st_pos"), (outputs) => {
+    const positionSet = new Set(positions);
 
-  const positionSet = new Set(positions);
+    return {
+      all: ({d_val, st_pos}, tag) => {
+        if (positionSet.has(st_pos)) {
+          position = st_pos;
+          outputs[position](<any>d_val, tag);
+        } else {
+          outputs.b_st_pos(<any>st_pos, tag);
+        }
+      },
 
-  const i: InPorts<Inputs<P, V> & { all: Inputs<P, V> }> = {
-    all: ({d_val, st_pos}, tag) => {
-      if (positionSet.has(st_pos)) {
-        position = st_pos;
-        outputs[position](<any>d_val, tag);
-      } else {
-        outputs.b_st_pos(<any>st_pos, tag);
+      d_val: (value, tag) => {
+        outputs[position](<any>value, tag);
+      },
+
+      st_pos: (value, tag) => {
+        if (positionSet.has(value)) {
+          position = value;
+        } else {
+          outputs.b_st_pos(<any>value, tag);
+        }
       }
-    },
-
-    d_val: (value, tag) => {
-      outputs[position](<any>value, tag);
-    },
-
-    st_pos: (value, tag) => {
-      if (positionSet.has(value)) {
-        position = value;
-      } else {
-        outputs.b_st_pos(<any>value, tag);
-      }
-    }
-  };
-
-  return {i, o};
+    };
+  });
 }

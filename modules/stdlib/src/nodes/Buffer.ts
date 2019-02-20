@@ -1,11 +1,6 @@
-import {
-  createNode,
-  InPorts,
-  Node,
-  Tag
-} from "river-core";
+import {createNode, Node, Tag} from "river-core";
 
-export type Inputs<V> = {
+export type In<V> = {
   /**
    * Value to be buffered.
    */
@@ -17,7 +12,7 @@ export type Inputs<V> = {
   st_open: boolean;
 };
 
-export type Outputs<V> = {
+export type Out<V> = {
   /**
    * Forwarded value.
    */
@@ -43,14 +38,15 @@ export type Outputs<V> = {
  * buffer.i.st_open(true); // logs: "a", "b"
  * buffer.i.d_val("c"); // logs: "c"
  */
-export type Buffer<V> = Node<Inputs<V> & { all: Inputs<V> }, Outputs<V>>;
+export type Buffer<V> = Node<In<V> & { all: In<V> }, Out<V>>;
 
 /**
  * Creates a Buffer node.
  * @param open Whether buffer is open initially.
  */
 export function createBuffer<V>(open?: boolean): Buffer<V> {
-  return createNode(["d_val", "st_size"], (outputs) => {
+  return createNode<In<V> & { all: In<V> }, Out<V>>
+  (["d_val", "st_size"], (outputs) => {
     const buffer: Array<{ value: V, tag: Tag }> = [];
 
     function flush() {
@@ -61,7 +57,7 @@ export function createBuffer<V>(open?: boolean): Buffer<V> {
       }
     }
 
-    return <InPorts<Inputs<V> & { all: Inputs<V> }>>{
+    return {
       all: ({d_val, st_open}, tag) => {
         if (st_open && !open) {
           flush();

@@ -1,14 +1,8 @@
-import {
-  createOutPorts,
-  createOutputs,
-  InPorts,
-  Node,
-  Tag
-} from "river-core";
+import {createNode, InPorts, Node, Tag} from "river-core";
 
-export type Inputs<T> = T;
+export type In<T> = T;
 
-export type Outputs<T> = {
+export type Out<T> = {
   /**
    * Joined inputs.
    */
@@ -25,44 +19,43 @@ export type Outputs<T> = {
  * joiner.i.foo("b", 1);
  * joiner.i.bar("c", 2); // logs: {foo: "a", bar: "c"} 2
  */
-export type Joiner<T> = Node<Inputs<T>, Outputs<T>>;
+export type Joiner<T> = Node<In<T>, Out<T>>;
 
 /**
  * Creates a Joiner node.
  * @param fields List of input fields.
  */
 export function createJoiner<T>(fields: Array<keyof T>): Joiner<T> {
-  const o = createOutPorts(["all"]);
-  const outputs = createOutputs(o);
+  return createNode<In<T>, Out<T>>(["all"], (outputs) => {
+    const inputSets: Map<Tag, T> = new Map();
+    const portSets: Map<Tag, Set<keyof T>> = new Map();
 
-  const inputSets: Map<Tag, T> = new Map();
-  const portSets: Map<Tag, Set<keyof T>> = new Map();
+    const i = <InPorts<In<T>>>{};
+    for (const field of fields) {
+      i[field] = (value, tag) => {
+        let inputs = inputSets.get(tag);
+        if (!inputs) {
+          inputs = <T>{};
+          inputSets.set(tag, inputs);
+        }
 
-  const i = <InPorts<Inputs<T>>>{};
-  for (const field of fields) {
-    i[field] = (value, tag) => {
-      let inputs = inputSets.get(tag);
-      if (!inputs) {
-        inputs = <T>{};
-        inputSets.set(tag, inputs);
-      }
+        let ports = portSets.get(tag);
+        if (!ports) {
+          ports = new Set(fields);
+          portSets.set(tag, ports);
+        }
 
-      let ports = portSets.get(tag);
-      if (!ports) {
-        ports = new Set(fields);
-        portSets.set(tag, ports);
-      }
+        inputs[field] = value;
+        ports.delete(field);
 
-      inputs[field] = value;
-      ports.delete(field);
+        if (ports.size === 0) {
+          inputSets.delete(tag);
+          portSets.delete(tag);
+          outputs.all(inputs, tag);
+        }
+      };
+    }
 
-      if (ports.size === 0) {
-        inputSets.delete(tag);
-        portSets.delete(tag);
-        outputs.all(inputs, tag);
-      }
-    };
-  }
-
-  return {i, o};
+    return i;
+  });
 }

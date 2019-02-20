@@ -1,14 +1,14 @@
-import {createOutPorts, createOutputs, InPorts, Node} from "river-core";
+import {createNode, InPorts, Node} from "river-core";
 import {EqualityCallback} from "./Comparer";
 
-export type Inputs<V> = {
+export type In<V> = {
   /**
    * Value to detect changes in.
    */
   d_val: V;
 };
 
-export type Outputs<V> = {
+export type Out<V> = {
   /**
    * Bounced input value.
    */
@@ -38,7 +38,7 @@ export type Outputs<V> = {
  * changeDetector.i.d_val("b"); // logs: true
  * changeDetector.i.d_val("b"); // logs: false
  */
-export type ChangeDetector<V> = Node<Inputs<V>, Outputs<V>>;
+export type ChangeDetector<V> = Node<In<V>, Out<V>>;
 
 /**
  * Creates a ChangeDetector node.
@@ -47,27 +47,25 @@ export type ChangeDetector<V> = Node<Inputs<V>, Outputs<V>>;
 export function createChangeDetector<V>(
   cb?: EqualityCallback<V>
 ): ChangeDetector<V> {
-  const o = createOutPorts(["b_d_val", "d_chg", "ev_err"]);
-  const outputs = createOutputs(o);
+  return createNode<In<V>, Out<V>>
+  (["b_d_val", "d_chg", "ev_err"], (outputs) => {
+    let last: V;
 
-  let last: V;
-
-  const i: InPorts<Inputs<V>> = cb ? {
-    d_val: (value, tag) => {
-      try {
-        outputs.d_chg(!cb(value, last), tag);
-        last = value;
-      } catch (err) {
-        outputs.b_d_val(value, tag);
-        outputs.ev_err(String(err), tag);
+    return cb ? {
+      d_val: (value, tag) => {
+        try {
+          outputs.d_chg(!cb(value, last), tag);
+          last = value;
+        } catch (err) {
+          outputs.b_d_val(value, tag);
+          outputs.ev_err(String(err), tag);
+        }
       }
-    }
-  } : {
-    d_val: (value, tag) => {
-      outputs.d_chg(value !== last, tag);
-      last = value;
-    }
-  };
-
-  return {i, o};
+    } : {
+      d_val: (value, tag) => {
+        outputs.d_chg(value !== last, tag);
+        last = value;
+      }
+    };
+  });
 }

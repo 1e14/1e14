@@ -1,8 +1,8 @@
-import {createOutPorts, createOutputs, InPorts, Node} from "river-core";
+import {createNode, Node} from "river-core";
 
 export type EqualityCallback<V> = (a: V, b: V, tag?: string) => boolean;
 
-export type Inputs<V> = {
+export type In<V> = {
   /**
    * Input value pair.
    */
@@ -12,11 +12,14 @@ export type Inputs<V> = {
   };
 };
 
-export type Outputs<V> = {
+export type Out<V> = {
   /**
    * Bounced input value pair.
    */
-  b_d_vals: V;
+  b_d_vals: {
+    a: V;
+    b: V;
+  };
 
   /**
    * Whether input values are equal.
@@ -39,30 +42,28 @@ export type Outputs<V> = {
  * comparer.i.d_vals({a: "foo", b: "foo"}); // logs: true
  * comparer.i.d_vals({a: "foo", b: "bar"}); // logs: false
  */
-export type Comparer<V> = Node<Inputs<V>, Outputs<V>>;
+export type Comparer<V> = Node<In<V>, Out<V>>;
 
 /**
  * Creates a Comparer node.
  * @param cb Equality callback.
  */
 export function createComparer<V>(cb?: EqualityCallback<V>): Comparer<V> {
-  const o = createOutPorts(["b_d_vals", "d_eq", "ev_err"]);
-  const outputs = createOutputs(o);
-
-  const i: InPorts<Inputs<V>> = cb ? {
-    d_vals: (value, tag) => {
-      try {
-        outputs.d_eq(cb(value.a, value.b, tag), tag);
-      } catch (err) {
-        outputs.b_d_vals(value, tag);
-        outputs.ev_err(String(err), tag);
+  return createNode<In<V>, Out<V>>
+  (["b_d_vals", "d_eq", "ev_err"], (outputs) => {
+    return cb ? {
+      d_vals: (value, tag) => {
+        try {
+          outputs.d_eq(cb(value.a, value.b, tag), tag);
+        } catch (err) {
+          outputs.b_d_vals(value, tag);
+          outputs.ev_err(String(err), tag);
+        }
       }
-    }
-  } : {
-    d_vals: (value, tag) => {
-      outputs.d_eq(value.a === value.b, tag);
-    }
-  };
-
-  return {i, o};
+    } : {
+      d_vals: (value, tag) => {
+        outputs.d_eq(value.a === value.b, tag);
+      }
+    };
+  });
 }
