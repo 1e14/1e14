@@ -1,12 +1,12 @@
 import {Server, Socket} from "net";
 import {
-  createOutPorts,
-  createOutputs,
+  createNode,
+  InPorts,
   Node,
   Outputs as OutputCallbacks
 } from "river-core";
 
-export type Outputs<V> = {
+export type Out<V> = {
   /**
    * Value received from remote node.
    */
@@ -23,10 +23,10 @@ export type Outputs<V> = {
  * connection.
  * Emits error on JSON parsing error.
  */
-export type RemoteInTcp<V> = Node<{}, Outputs<V>>;
+export type RemoteInTcp<V> = Node<{}, Out<V>>;
 
 const serverCache: Map<string, Server> = new Map();
-const outputCache: Map<string, OutputCallbacks<Outputs<any>>> = new Map();
+const outputCache: Map<string, OutputCallbacks<Out<any>>> = new Map();
 
 /**
  * Creates a RemoteInTcp node.
@@ -35,15 +35,16 @@ const outputCache: Map<string, OutputCallbacks<Outputs<any>>> = new Map();
  * @param id Identifies this node.
  */
 export function createRemoteInTcp<V>(host: string, port: number, id: string): RemoteInTcp<V> {
-  const o = createOutPorts(["d_val", "ev_err"]);
-  outputCache.set(id, createOutputs(o));
+  return createNode<{}, Out<V>>(["d_val", "ev_err"], (outputs) => {
+    outputCache.set(id, outputs);
 
-  const serverId = `${host}:${port}`;
-  if (!serverCache.get(serverId)) {
-    serverCache.set(serverId, createServer(host, port));
-  }
+    const serverId = `${host}:${port}`;
+    if (!serverCache.get(serverId)) {
+      serverCache.set(serverId, createServer(host, port));
+    }
 
-  return {i: {}, o};
+    return <InPorts<{}>>{};
+  });
 }
 
 function createServer(host: string, port: number): Server {
@@ -51,7 +52,6 @@ function createServer(host: string, port: number): Server {
   server.listen(port, host);
   server.on("connection", (socket: Socket) => {
     socket.on("data", (data: string) => {
-      // tslint:disable
       try {
         const {id, tag, value} = JSON.parse(data);
         const outputs = outputCache.get(id);

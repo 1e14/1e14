@@ -1,6 +1,6 @@
-import {createOutPorts, createOutputs, Node} from "river-core";
+import {createNode, Node} from "river-core";
 
-type Outputs = {
+type Out = {
   /**
    * Value coming from stdin.
    */
@@ -11,7 +11,7 @@ type Outputs = {
  * Emits data coming through the standard input (stdin).
  * Environments: Node.js.
  */
-export type StdIn = Node<{}, Outputs>;
+export type StdIn = Node<{}, Out>;
 
 let instance: StdIn;
 
@@ -21,21 +21,17 @@ let instance: StdIn;
  * same object.
  */
 export function createStdIn(): StdIn {
-  if (instance) {
+  if (!instance) {
+    instance = createNode<{}, Out>(["d_val"], (outputs) => {
+      process.stdin.on("readable", () => {
+        const chunk = process.stdin.read();
+        if (chunk !== null) {
+          outputs.d_val(chunk);
+        }
+      });
+      return {};
+    });
+
     return instance;
   }
-
-  const o = createOutPorts(["d_val"]);
-  const outputs = createOutputs(o);
-
-  process.stdin.on("readable", () => {
-    const chunk = process.stdin.read();
-    if (chunk !== null) {
-      outputs.d_val(chunk);
-    }
-  });
-
-  instance = {i: {}, o};
-
-  return instance;
 }

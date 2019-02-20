@@ -1,6 +1,6 @@
 import {InPorts, Node} from "river-core";
 
-type Inputs = {
+export type In = {
   /**
    * Value to be sent to stdout.
    */
@@ -15,7 +15,7 @@ type Inputs = {
  * stdOut = river.createStdOut();
  * stdOut.i.d_val("foo"); // writes to stdout: "foo"
  */
-export type StdOut = Node<Inputs, {}>;
+export type StdOut = Node<In, {}>;
 
 let instance: StdOut;
 
@@ -29,7 +29,7 @@ export function createStdOut(): StdOut {
     return instance;
   }
 
-  const i: InPorts<Inputs> = {
+  const i: InPorts<In> = {
     d_val: (value) => {
       process.stdout.write(value);
     }
