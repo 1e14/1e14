@@ -1,6 +1,5 @@
 import {
-  createOutPorts,
-  createOutputs,
+  createNode,
   InPorts,
   Node,
   Tag
@@ -51,50 +50,47 @@ export type Buffer<V> = Node<Inputs<V> & { all: Inputs<V> }, Outputs<V>>;
  * @param open Whether buffer is open initially.
  */
 export function createBuffer<V>(open?: boolean): Buffer<V> {
-  const o = createOutPorts(["d_val", "st_size"]);
-  const outputs = createOutputs(o);
+  return createNode(["d_val", "st_size"], (outputs) => {
+    const buffer: Array<{ value: V, tag: Tag }> = [];
 
-  const buffer: Array<{ value: V, tag: Tag }> = [];
-
-  const i: InPorts<Inputs<V> & { all: Inputs<V> }> = {
-    all: ({d_val, st_open}, tag) => {
-      if (st_open && !open) {
-        flush();
+    function flush() {
+      const d_val = outputs.d_val;
+      while (buffer.length) {
+        const next = buffer.shift();
+        d_val(next.value, next.tag);
       }
-      open = st_open;
-      if (open) {
-        outputs.d_val(d_val, tag);
-      } else {
-        buffer.push({value: d_val, tag});
-      }
-      outputs.st_size(buffer.length, tag);
-    },
-
-    d_val: (value, tag) => {
-      if (open) {
-        outputs.d_val(value, tag);
-      } else {
-        buffer.push({value, tag});
-      }
-      outputs.st_size(buffer.length, tag);
-    },
-
-    st_open: (value, tag) => {
-      if (value && !open) {
-        flush();
-      }
-      open = value;
-      outputs.st_size(buffer.length, tag);
     }
-  };
 
-  function flush() {
-    const d_val = outputs.d_val;
-    while (buffer.length) {
-      const next = buffer.shift();
-      d_val(next.value, next.tag);
-    }
-  }
+    return <InPorts<Inputs<V> & { all: Inputs<V> }>>{
+      all: ({d_val, st_open}, tag) => {
+        if (st_open && !open) {
+          flush();
+        }
+        open = st_open;
+        if (open) {
+          outputs.d_val(d_val, tag);
+        } else {
+          buffer.push({value: d_val, tag});
+        }
+        outputs.st_size(buffer.length, tag);
+      },
 
-  return {i, o};
+      d_val: (value, tag) => {
+        if (open) {
+          outputs.d_val(value, tag);
+        } else {
+          buffer.push({value, tag});
+        }
+        outputs.st_size(buffer.length, tag);
+      },
+
+      st_open: (value, tag) => {
+        if (value && !open) {
+          flush();
+        }
+        open = value;
+        outputs.st_size(buffer.length, tag);
+      }
+    };
+  });
 }
