@@ -1,35 +1,18 @@
 import {InPort, InPorts, Node, OutPort, OutPorts, Outputs} from "../types";
 
-export const noop = () => null;
-
-export function createOutPorts<O>(fields: Array<keyof O>): OutPorts<O> {
-  const outPorts = <OutPorts<O>>{};
-  for (const field of fields) {
-    outPorts[field] = new Set();
-  }
-  return outPorts;
-}
-
-export function createOutputs<O>(outPorts: OutPorts<O>): Outputs<O> {
-  const outputs = <Outputs<O>>{};
-  for (const field in outPorts) {
-    const inPorts = outPorts[field];
-    outputs[field] = (value, tag) => {
-      for (const inPort of inPorts) {
-        inPort(value, tag);
-      }
-    };
-  }
-  return outputs;
-}
-
+/**
+ * Creates a node based on the specified output port names and input ports
+ * generator function.
+ * @param outFields List of output port names.
+ * @param createInPorts Creates a set of input ports.
+ */
 export function createNode<I, O>(
-  fields: Array<keyof O>,
+  outFields: Array<keyof O>,
   createInPorts: (outputs: Outputs<O>) => InPorts<I>
 ): Node<I, O> {
   const o = <OutPorts<O>>{};
   const outputs = <Outputs<O>>{};
-  for (const field of fields) {
+  for (const field of outFields) {
     o[field] = new Set();
   }
   for (const field in o) {

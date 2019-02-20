@@ -1,5 +1,5 @@
 import {InPort, OutPort} from "../types";
-import {connect, createNode, disconnect, noop} from "./utils";
+import {connect, createNode, disconnect} from "./utils";
 
 describe("utils", () => {
   describe("createNode()", () => {
@@ -22,7 +22,7 @@ describe("utils", () => {
 
     beforeEach(() => {
       outPort = new Set();
-      inPort = noop;
+      inPort = () => null;
     });
 
     it("should add port to connections", () => {
