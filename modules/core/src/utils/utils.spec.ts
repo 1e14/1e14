@@ -1,14 +1,18 @@
 import {InPort, OutPort} from "../types";
-import {connect, createOutPorts, disconnect, noop} from "./utils";
+import {connect, createNode, disconnect, noop} from "./utils";
 
 describe("utils", () => {
-  describe("createOutPorts()", () => {
+  describe("createNode()", () => {
     it("should return output port structure", () => {
-      const result = createOutPorts(["foo", "bar"]);
-      expect(result).toEqual({
-        bar: new Set(),
-        foo: new Set()
+      const result = createNode(["bar"], (outputs) => ({
+        foo: (value, tag) => {
+          outputs.bar(value, tag);
+        }
+      }));
+      expect(result.o).toEqual({
+        bar: new Set()
       });
+      expect(typeof result.i.foo).toBe("function");
     });
   });
 

@@ -1,9 +1,7 @@
-import {InPort, OutPort, OutPorts, Tag} from "../types";
+import {InPort, InPorts, Node, OutPort, OutPorts, Outputs} from "../types";
 
-/**
- * Creates output ports for the specified fields.
- * @param fields List of fields.
- */
+export const noop = () => null;
+
 export function createOutPorts<O>(fields: Array<keyof O>): OutPorts<O> {
   const outPorts = <OutPorts<O>>{};
   for (const field of fields) {
@@ -12,16 +10,6 @@ export function createOutPorts<O>(fields: Array<keyof O>): OutPorts<O> {
   return outPorts;
 }
 
-export type Output<V> = (value: V, tag?: Tag) => void;
-export type Outputs<O> = {
-  [K in keyof O]: Output<O[K]>
-};
-
-/**
- * Creates output callbacks for the specified output ports.
- * The result is used in implementing atomic nodes.
- * @param outPorts List of output callbacks.
- */
 export function createOutputs<O>(outPorts: OutPorts<O>): Outputs<O> {
   const outputs = <Outputs<O>>{};
   for (const field in outPorts) {
@@ -35,7 +23,26 @@ export function createOutputs<O>(outPorts: OutPorts<O>): Outputs<O> {
   return outputs;
 }
 
-export const noop = () => null;
+export function createNode<I, O>(
+  fields: Array<keyof O>,
+  createInPorts: (outputs: Outputs<O>) => InPorts<I>
+): Node<I, O> {
+  const o = <OutPorts<O>>{};
+  const outputs = <Outputs<O>>{};
+  for (const field of fields) {
+    o[field] = new Set();
+  }
+  for (const field in o) {
+    const inPorts = o[field];
+    outputs[field] = (value, tag) => {
+      for (const inPort of inPorts) {
+        inPort(value, tag);
+      }
+    };
+  }
+  const i: InPorts<I> = createInPorts(outputs);
+  return {i, o};
+}
 
 /**
  * Establishes a connection between an output port and an input port. Data
