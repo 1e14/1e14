@@ -1,8 +1,8 @@
 import {InPort, InPorts, Node, OutPort, OutPorts, Outputs} from "../types";
 
 /**
- * Creates a node based on the specified output port names and input ports
- * generator function.
+ * Creates a node based on the specified output port names and input port
+ * collection generator function.
  * @param outFields List of output port names.
  * @param createInPorts Creates a set of input ports.
  */

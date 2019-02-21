@@ -3,6 +3,10 @@ River Core
 
 "River Core" is a minimal set of functions for building *computational graphs*.
 
+Computational graphs are networks of functions, where functions receive and 
+assign their input and output parameters independently, and where input and 
+output parameters may be connected.
+
 Getting started
 ---------------
 
@@ -24,7 +28,12 @@ Both input and output functions take two arguments:
 * `value`, which is the value being sent ot / emitted by the node, and
 * `tag`, which identifies the impulse throughout the graph.
 
-#### Example / Typescript
+`createNode()` returns a `Node` object, with at least two properties:
+* `i`, a collection of functions that serve as the node's input ports
+* `o`, a collection of structures that serve as output ports (the specifics 
+of these structures are not relevant to their usage)
+
+#### Example / TypeScript
 
 ```typescript
 import {createNode} from "river-core";
@@ -35,17 +44,56 @@ const node = createNode<In, Out>(["d_out"], (outputs) => ({
 }));
 ```
 
-#### Example / Javascript
+#### Example / JavaScript
 
 ```javascript
 const core = require("river-core");
-const node = createNode(["d_out"], (outputs) => ({
+const node = core.createNode(["d_out"], (outputs) => ({
   d_in: (value, tag) => outputs.d_out(value, tag)
 }));
 ```
 
-`connect(outPort, inPort)`
---------------------------
+### `connect(outPort, inPort)`
 
-`disconnect(outPort, [inPort])`
--------------------------------
+Connects an output port to an input port. After a connection is made, when a 
+node emits a value on one of its connected output ports, that value will be 
+used to invoke all connected input ports.
+
+#### Example / TypeScript
+
+```typescript
+import {connect} from "river-core";
+// initializing node1 & node2 
+connect(node1.o.d_out, node2.i.d_in);
+```
+
+#### Example / JavaScript
+
+```javascript
+const core = require("river-core");
+// initializing node1 & node2 
+core.connect(node1.o.d_out, node2.i.d_in);
+```
+
+### `disconnect(outPort, [inPort])`
+
+Disconnects an input port from an output port, or, disconnect all input ports
+from an output port.
+
+#### Example / TypeScript
+
+```typescript
+import {disconnect} from "river-core";
+// initializing & connecting node1 & node2 
+disconnect(node1.o.d_out, node2.i.d_in);
+disconnect(node1.o.d_out);
+```
+
+#### Example / JavaScript
+
+```javascript
+const core = require("river-core");
+// initializing & connecting node1 & node2 
+core.disconnect(node1.o.d_out, node2.i.d_in);
+core.disconnect(node1.o.d_out);
+```
