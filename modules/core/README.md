@@ -135,3 +135,48 @@ function createForwarder() {
     }));
 }
 ```
+
+Composite nodes
+---------------
+
+One of the most useful features of computational graphs is their 
+composability. A number of interconnected nodes may act as as a single node 
+themselves, making it easier to compartmentalize functionality, as well as 
+reason about different parts of the application.
+
+Implementing a composite node is quite simple with a factory function, which 
+will create multiple nodes, establish internal connections, and expose
+specific ports of its components as its own.
+
+#### Example / TypeScript
+
+```typescript
+import {connect, Node} from "river-core";
+type In = {d_in: number};
+type Out = {d_out: number};
+type Composite = Node<In, Out>;
+function createComposite<In, Out>(): Composite {
+    const forwarder1 = createForwarder();
+    const forwarder2 = createForwarder();
+    connect(forwarder1.o.d_out, forwarder2.i.d_in);
+    return {
+        i: {d_in: forwarder1.i.d_in},
+        o: {d_out: forwarder2.o.d_out}
+    };
+}
+``` 
+
+#### Example / ES6
+
+```javascript
+const core = require("river-core");
+function createComposite() {
+    const forwarder1 = createForwarder();
+    const forwarder2 = createForwarder();
+    connect(forwarder1.o.d_out, forwarder2.i.d_in);
+    return {
+        i: {d_in: forwarder1.i.d_in},
+        o: {d_out: forwarder2.o.d_out}
+    };
+}
+``` 
