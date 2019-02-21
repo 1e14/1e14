@@ -1,5 +1,5 @@
-import {Output} from "./Output";
+import {InPort} from "./InPort";
 
 export type Outputs<O> = {
-  [K in keyof O]: Output<O[K]>
+  [K in keyof O]: InPort<O[K]>
 };

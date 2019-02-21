@@ -4,6 +4,5 @@ export {InPort} from "./InPort";
 export {Node} from "./Node";
 export {OutPorts} from "./OutPorts";
 export {OutPort} from "./OutPort";
-export {Output} from "./Output";
 export {Outputs} from "./Outputs";
 export {Tag} from "./Tag";

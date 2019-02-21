@@ -99,6 +99,23 @@ core.disconnect(node1.o.d_out, node2.i.d_in);
 core.disconnect(node1.o.d_out);
 ```
 
+### Types
+
+River Core exports the following types:
+
+* `Any`: Lookup with string keys
+* `InPort`: Describes an input port
+* `InPorts`: Describes a set of input ports. Usually corresponds to the `i` 
+property of nodes.
+* `Node<In, Out>`: Describes a node, where `In` and `Out` describe the value 
+type carried by each input and output port, respectively.
+* `OutPort`: Describes an output port
+* `OutPorts`: Describes a set of input ports. Usually corresponds to the `o` 
+property of nodes.
+* `Outputs`: Describes a set of functions that invoke connected input ports.
+* `Tag`: Identifies *impulses*. (In turn, an impulse is an identifiable input
+ that ripples through multiple nodes throughout the graph.)
+
 Custom nodes
 ------------
 
