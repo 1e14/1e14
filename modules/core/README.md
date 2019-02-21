@@ -3,9 +3,10 @@ River Core
 
 "River Core" is a minimal set of functions for building *computational graphs*.
 
-Computational graphs are networks of functions, where functions receive and 
-assign their input and output parameters independently, and where input and 
-output parameters may be connected.
+Computational graphs, in essence, are networks of *functions*. But unlike 
+functions, River nodes receive their inputs and emit their outputs 
+independently from one another, and instead of *parameters*, values get 
+passed in and emitted through *ports*.
 
 Getting started
 ---------------
@@ -44,7 +45,7 @@ const node = createNode<In, Out>(["d_out"], (outputs) => ({
 }));
 ```
 
-#### Example / JavaScript
+#### Example / ES6
 
 ```javascript
 const core = require("river-core");
@@ -67,7 +68,7 @@ import {connect} from "river-core";
 connect(node1.o.d_out, node2.i.d_in);
 ```
 
-#### Example / JavaScript
+#### Example / ES6
 
 ```javascript
 const core = require("river-core");
@@ -89,11 +90,48 @@ disconnect(node1.o.d_out, node2.i.d_in);
 disconnect(node1.o.d_out);
 ```
 
-#### Example / JavaScript
+#### Example / ES6
 
 ```javascript
 const core = require("river-core");
 // initializing & connecting node1 & node2 
 core.disconnect(node1.o.d_out, node2.i.d_in);
 core.disconnect(node1.o.d_out);
+```
+
+Custom nodes
+------------
+
+In practice, `createNode()` is not invoked directly, as one would have to 
+supply types (for TypeScript), output port names, and the function 
+`createInPorts()` on each call. Instead, `createNode()` usually gets wrapped 
+inside an outer factory function which has these already bundled.
+
+The example below will produce the same node as the ones above, in a reusable
+way. For those coming from an OOP background, this would be analogous to 
+subclassing.
+
+#### Example / TypeScript
+
+```typescript
+import {createNode, Node} from "river-core";
+type In = {d_in: number};
+type Out = {d_out: number};
+type Forwarder<V> = Node<In, Out>
+function createForwarder<V>(): Node {
+    return createNode<In, Out>(["d_out"], (outputs) => ({
+      d_in: (value, tag) => outputs.d_out(value, tag)
+    }));
+}
+```
+
+#### Example / ES6
+
+```javascript
+const core = require("river-core");
+function createForwarder() {
+    return createNode(["d_out"], (outputs) => ({
+      d_in: (value, tag) => outputs.d_out(value, tag)
+    }));
+}
 ```
