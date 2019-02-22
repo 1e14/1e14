@@ -6,7 +6,8 @@ module.exports = function (grunt) {
     "core",
     "stdlib",
     "nodejs",
-    "browser"
+    "browser",
+    "dist-nodejs"
   ];
 
   grunt.initConfig({
