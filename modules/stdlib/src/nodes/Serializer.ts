@@ -22,9 +22,9 @@ export type Out<V> = {
 /**
  * Forwards input values in an order matching the reference input.
  * @example
- * river = require("river-core");
- * serializer = river.createSerializer();
- * river.connect(serializer.o.d_val, console.log);
+ * import {connect, createSerializer} from "river-stdlib";
+ * const serializer = createSerializer();
+ * connect(serializer.o.d_val, console.log);
  * serializer.i.d_val("a", 2);
  * serializer.i.r_tag(null, 1);
  * serializer.i.r_tag(null, 2);

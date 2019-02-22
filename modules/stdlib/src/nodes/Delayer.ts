@@ -17,9 +17,9 @@ export type Out<V> = {
 /**
  * Forwards input value with the specified delay.
  * @example
- * river = require("river-core");
- * delayer = river.createDelayer(1000);
- * river.connect(delayer.o.d_val, console.log);
+ * import {connect, createDelayer} from "river-stdlib";
+ * const delayer = createDelayer(1000);
+ * connect(delayer.o.d_val, console.log);
  * delayer.i.d_val("a"); // logs after 1 second: "a"
  */
 export type Delayer<V> = Node<In<V>, Out<V>>;

@@ -36,9 +36,9 @@ export type Out<V> = {
  * Compares a pair of input values according to an optional equality callback.
  * Bounces input, and emits error on callback exception.
  * @example
- * river = require("river-core");
- * comparer = river.createComparer();
- * river.connect(comparer.o.d_eq, console.log);
+ * import {connect, createComparer} from "river-stdlib";
+ * const comparer = createComparer();
+ * connect(comparer.o.d_eq, console.log);
  * comparer.i.d_vals({a: "foo", b: "foo"}); // logs: true
  * comparer.i.d_vals({a: "foo", b: "bar"}); // logs: false
  */

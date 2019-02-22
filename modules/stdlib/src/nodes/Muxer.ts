@@ -14,9 +14,9 @@ export type Out<T> = {
  * Multiplexes input value.
  * Forwards multiplexed input value to a single output port.
  * @example
- * river = require("river-core");
- * muxer = river.createMuxer(["foo", "bar"]);
- * river.connect(muxer.o.d_mux, console.log);
+ * import {connect, createMuxer} from "river-stdlib";
+ * const muxer = createMuxer(["foo", "bar"]);
+ * connect(muxer.o.d_mux, console.log);
  * muxer.i.foo("a"); // logs: {field: "foo", value: "a"}
  */
 export type Muxer<T> = Node<In<T>, Out<T>>;

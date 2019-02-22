@@ -41,9 +41,9 @@ export type Out<I, O> = {
  * Bounces input, and emits error on callback exception.
  * Operates with either independent or joined inputs.
  * @example
- * river = require("river-core");
- * folder = river.createFolder((curr, next) => curr + next);
- * river.connect(folder.o.d_fold, console.log);
+ * import {connect, createFolder} from "river-stdlib";
+ * const folder = createFolder((curr, next) => curr + next);
+ * connect(folder.o.d_fold, console.log);
  * folder.i.d_val(2);
  * folder.i.d_val(3);
  * folder.i.d_val(4);

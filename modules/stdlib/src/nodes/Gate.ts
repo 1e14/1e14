@@ -23,9 +23,9 @@ export type Out<V> = {
  * Forwards input value when gate is open.
  * Operates with either independent or joined inputs.
  * @example
- * river = require("river-core");
- * gate = river.createGate(false);
- * river.connect(gate.o.d_val, console.log);
+ * import {connect, createGate} from "river-stdlib";
+ * const gate = createGate(false);
+ * connect(gate.o.d_val, console.log);
  * gate.i.d_val("a");
  * gate.i.st_open(true);
  * gate.i.d_val("b"); // logs: "b"

@@ -12,9 +12,9 @@ export type Out<T> = {
 /**
  * Joins input values from all ports having the same tag.
  * @example
- * river = require("river-core");
- * joiner = river.createJoiner(["foo", "bar"]);
- * river.connect(joiner.o.all, console.log);
+ * import {connect, createJoiner} from "river-stdlib";
+ * const joiner = createJoiner(["foo", "bar"]);
+ * connect(joiner.o.all, console.log);
  * joiner.i.foo("a", 2);
  * joiner.i.foo("b", 1);
  * joiner.i.bar("c", 2); // logs: {foo: "a", bar: "c"} 2

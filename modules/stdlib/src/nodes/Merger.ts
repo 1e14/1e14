@@ -14,9 +14,9 @@ export type Out<T> = {
 /**
  * Merges last input values from all ports.
  * @example
- * river = require("river-core");
- * merger = river.createMerger(["foo", "bar"]);
- * river.connect(merger.o.all, console.log);
+ * import {connect, createMerger} from "river-stdlib";
+ * const merger = createMerger(["foo", "bar"]);
+ * connect(merger.o.all, console.log);
  * merger.i.foo("a"); // logs: {foo: "a"}
  * merger.i.foo("b"); // logs: {foo: "b"}
  * merger.i.bar("c"); // logs: {foo: "b", bar: "c"}

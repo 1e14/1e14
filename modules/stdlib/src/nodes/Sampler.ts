@@ -22,9 +22,9 @@ export type Out<V> = {
 /**
  * Forwards last input value on receiving a sampling signal.
  * @example
- * river = require("river-core");
- * sampler = river.createSampler();
- * river.connect(sampler.o.d_val, console.log);
+ * import {connect, createSampler} from "river-stdlib";
+ * const sampler = createSampler();
+ * connect(sampler.o.d_val, console.log);
  * sampler.i.d_val(5);
  * sampler.i.d_val(3);
  * sampler.i.ev_smp(); // logs: 3

@@ -17,9 +17,9 @@ export type Out<V> = {
 /**
  * Forwards input value unconditionally.
  * @example
- * river = require("river-core");
- * noop = river.createNoop();
- * river.connect(noop.o.d_val, console.log);
+ * import {connect, createNoop} from "river-stdlib";
+ * const noop = createNoop();
+ * connect(noop.o.d_val, console.log);
  * noop.i.d_val(5); // logs: 5
  */
 export type Noop<V> = Node<In<V>, Out<V>>;

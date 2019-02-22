@@ -1,4 +1,4 @@
-import {createNode, InPorts, Node} from "river-core";
+import {createNode, Node} from "river-core";
 import {EqualityCallback} from "./Comparer";
 
 export type In<V> = {
@@ -31,9 +31,9 @@ export type Out<V> = {
  * last one, according to optional equality callback.
  * Bounces input, and emits error on callback exception.
  * @example
- * river = require("river-core");
- * changeDetector = river.createChangeDetector();
- * river.connect(changeDetector.o.d_chg, console.log);
+ * import {connect, createBuffer} from "river-stdlib";
+ * const changeDetector = createChangeDetector();
+ * connect(changeDetector.o.d_chg, console.log);
  * changeDetector.i.d_val("a"); // logs: true
  * changeDetector.i.d_val("b"); // logs: true
  * changeDetector.i.d_val("b"); // logs: false

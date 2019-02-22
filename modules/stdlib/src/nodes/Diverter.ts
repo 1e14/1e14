@@ -24,9 +24,9 @@ export type Out<P extends string | number, V> =
  * node's current 'position' state.
  * Operates with either independent or joined inputs.
  * @example
- * river = require("river-core");
- * diverter = river.createDiverter(["foo", "bar"]);
- * river.connect(diverter.o.foo, console.log);
+ * import {connect, createDiverter} from "river-stdlib";
+ * const diverter = createDiverter(["foo", "bar"]);
+ * connect(diverter.o.foo, console.log);
  * diverter.i.st_pos("foo");
  * diverter.i.d_val("a"); // logs: "a"
  */

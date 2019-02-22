@@ -32,9 +32,9 @@ export type Out<I, O> = {
  * (generator) callback.
  * Bounces input, and emits error on callback exception.
  * @example
- * river = require("river-core");
- * unfolder = river.createUnfolder(function *(value) {while (value > 0) yield value--});
- * river.connect(unfolder.o.d_val, console.log);
+ * import {connect, createUnfolder} from "river-stdlib";
+ * const unfolder = createUnfolder(function *(value) {while (value > 0) yield value--});
+ * connect(unfolder.o.d_val, console.log);
  * unfolder.i.d_fold(5); // logs: 5, 4, 3, 2, 1
  */
 export type Unfolder<I, O> = Node<In<I>, Out<I, O>>;

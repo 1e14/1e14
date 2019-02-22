@@ -31,9 +31,9 @@ export type Out<V> = {
  * optional equality callback.
  * Bounces input, and emits error on callback exception.
  * @example
- * river = require("river-core");
- * changeFilter = river.createChangeFilter();
- * river.connect(changeFilter.o.d_val, console.log);
+ * import {connect, createChangeFilter} from "river-stdlib";
+ * const changeFilter = createChangeFilter();
+ * connect(changeFilter.o.d_val, console.log);
  * changeFilter.i.d_val("a"); // logs: "a"
  * changeFilter.i.d_val("a");
  * changeFilter.i.d_val("b"); // logs: "b"

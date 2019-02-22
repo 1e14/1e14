@@ -30,9 +30,9 @@ export type Out<V> = {
  * open it releases stored values and forwards input value.
  * Operates with either independent or joined inputs.
  * @example
- * river = require("river-core");
- * buffer = river.createBuffer(false);
- * river.connect(buffer.o.d_val, console.log);
+ * import {connect, createBuffer} from "river-stdlib";
+ * const buffer = createBuffer(false);
+ * connect(buffer.o.d_val, console.log);
  * buffer.i.d_val("a");
  * buffer.i.d_val("b");
  * buffer.i.st_open(true); // logs: "a", "b"

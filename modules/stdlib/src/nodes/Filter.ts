@@ -30,9 +30,9 @@ export type Out<V> = {
  * Filters input values according to a filter callback.
  * Bounces input, and emits error on callback exception.
  * @example
- * river = require("river-core");
- * filter = river.createFilter(next => next > 5);
- * river.connect(filter.o.d_val, console.log);
+ * import {connect, createFilter} from "river-stdlib";
+ * const filter = createFilter(next => next > 5);
+ * connect(filter.o.d_val, console.log);
  * filter.i.d_val(3);
  * filter.i.d_val(5);
  * filter.i.d_val(8); // logs: 8

@@ -12,10 +12,10 @@ export type Out<T> = T;
 /**
  * Splits object input into its properties.
  * @example
- * river = require("river-core");
- * splitter = river.createSplitter(["foo", "bar"]);
- * river.connect(splitter.o.foo, console.log);
- * river.connect(splitter.o.bar, console.log);
+ * import {connect, createSplitter} from "river-stdlib";
+ * const splitter = createSplitter(["foo", "bar"]);
+ * connect(splitter.o.foo, console.log);
+ * connect(splitter.o.bar, console.log);
  * splitter.i.all({foo: "a", bar: "b"}); // logs: "a", "b"
  */
 export type Splitter<T> = Node<In<T>, Out<T>>;
