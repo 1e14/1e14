@@ -4,7 +4,7 @@ River Core
 "River Core" is a minimal set of functions for building *computational graphs*.
 
 Computational graphs, in essence, are networks of *functions*. But unlike 
-functions, River nodes receive their inputs and emit their outputs 
+common functions, River nodes receive their inputs and emit their outputs 
 independently from one another, and instead of *parameters*, values get 
 passed in and emitted through *ports*.
 
