@@ -20,8 +20,8 @@ let instance: StdErr;
  * Returns a singleton, ie. subsequent calls to `createStdErr` will return the
  * same object.
  * @example
- * river = require("river-core");
- * stdErr = river.createStdErr();
+ * import {connect, createStdErr} from "river-nodejs";
+ * const stdErr = createStdErr();
  * stdErr.i.d_val("foo"); // writes to stderr: "foo"
  */
 export function createStdErr(): StdErr {

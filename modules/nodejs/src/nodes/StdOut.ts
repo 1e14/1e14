@@ -11,8 +11,8 @@ export type In = {
  * Forwards input to standard output (stdout).
  * Environments: Node.js.
  * @example
- * river = require("river-core");
- * stdOut = river.createStdOut();
+ * import {connect, createStdOut} from "river-nodejs";
+ * const stdOut = createStdOut();
  * stdOut.i.d_val("foo"); // writes to stdout: "foo"
  */
 export type StdOut = Node<In, {}>;
