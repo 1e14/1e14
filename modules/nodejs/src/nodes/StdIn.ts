@@ -31,7 +31,7 @@ export function createStdIn(): StdIn {
       });
       return {};
     });
-
-    return instance;
   }
+
+  return instance;
 }
