@@ -16,6 +16,12 @@ Getting started
 API
 ---
 
+The River core API consists of three functions:
+
+* `createNode()`
+* `connect()`
+* `disconnect()`
+
 ### `createNode(outFields, createInPorts)`
 
 Creates a node with the specified output and input ports. As output ports 
