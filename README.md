@@ -1,7 +1,7 @@
 River
 =====
 
-River is a low-level *computational graph* library.
+River is a set of low-level libraries for building *computational graphs*.
 
 It is designed to be *massively distributed*, *fault-tolerant*, extendable, and 
 easy to use.
