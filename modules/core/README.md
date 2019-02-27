@@ -18,9 +18,9 @@ API
 
 The River core API consists of three functions:
 
-* `createNode()`
-* `connect()`
-* `disconnect()`
+* `createNode(outFields, createInPorts)`
+* `connect(outPort, inPort)`
+* `disconnect(outPort[, inPort])`
 
 ### `createNode(outFields, createInPorts)`
 
@@ -66,6 +66,9 @@ Connects an output port to an input port. After a connection is made, when a
 node emits a value on one of its connected output ports, that value will be 
 used to invoke all connected input ports.
 
+It's worth noting that input ports are simply functions, and therefore it's 
+possible to 'connect' an output port to a function, eg. `console.log`. 
+
 #### Example / TypeScript
 
 ```typescript
@@ -82,7 +85,7 @@ const core = require("river-core");
 core.connect(node1.o.d_out, node2.i.d_in);
 ```
 
-### `disconnect(outPort, [inPort])`
+### `disconnect(outPort[, inPort])`
 
 Disconnects an input port from an output port, or, disconnect all input ports
 from an output port.
