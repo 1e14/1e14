@@ -3,6 +3,13 @@ River-Stdlib
 
 "River Stdlib" implements a standard set of commonly used River nodes.
 
+---
+
+"River" is a family of libraries for building *computational graphs*, that 
+are *massively distributed*, *fault-tolerant*, extendable, and easy to use. 
+
+---
+
 Nodes
 -----
 

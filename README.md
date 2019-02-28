@@ -10,6 +10,14 @@ Getting started
 ---------------
 
 * Install: `npm i`
-* Build (single module): `grunt build-[modulename]`
 * Build (all modules): `grunt build`
 * Test (all modules): `grunt test`
+
+Modules
+-------
+
+* [river-browser](modules/browser/README.md)
+* [river-core](modules/core/README.md)
+* [river-dist-nodejs](modules/dist-nodejs/README.md)
+* [river-nodejs](modules/nodejs/README.md)
+* [river-stdlib](modules/stdlib/README.md)

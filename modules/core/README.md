@@ -3,6 +3,13 @@ River Core
 
 "River Core" is a minimal set of functions for building *computational graphs*.
 
+---
+
+"River" is a family of libraries for building *computational graphs*, that 
+are *massively distributed*, *fault-tolerant*, extendable, and easy to use. 
+
+---
+
 Computational graphs, in essence, are networks of *functions*. But unlike 
 common functions, River nodes receive their inputs and emit their outputs 
 independently from one another, and instead of *parameters*, values get 

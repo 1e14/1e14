@@ -1,8 +1,15 @@
 River-Browser
 =============
 
-"River NodeJS" is a set of commonly used browser-specific nodes that wrap 
+"River Browser" is a set of commonly used browser-specific nodes that wrap 
 around different browser APIs.
+
+---
+
+"River" is a family of libraries for building *computational graphs*, that 
+are *massively distributed*, *fault-tolerant*, extendable, and easy to use. 
+
+---
 
 Nodes
 -----
