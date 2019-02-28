@@ -44,11 +44,11 @@ module.exports = function (grunt) {
     exec: modules.reduce((config, module) => {
       config[`ts-${module}`] = {
         cwd: `modules/${module}`,
-        cmd: "npx --no-install tsc"
+        cmd: "../../node_modules/.bin/tsc"
       };
       config[`jasmine-${module}`] = {
         cwd: `modules/${module}`,
-        cmd: "npx jasmine dist/**/*.spec.js"
+        cmd: "../../node_modules/.bin/jasmine dist/**/*.spec.js"
       };
 
       const pkg = grunt.file.readJSON(`modules/${module}/package.json`);
