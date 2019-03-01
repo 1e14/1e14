@@ -1,4 +1,6 @@
 /* jshint node:true */
+const {resolve} = require("path");
+
 module.exports = function (grunt) {
   "use strict";
 
@@ -44,11 +46,11 @@ module.exports = function (grunt) {
     exec: modules.reduce((config, module) => {
       config[`ts-${module}`] = {
         cwd: `modules/${module}`,
-        cmd: "../../node_modules/.bin/tsc"
+        cmd: resolve("node_modules/.bin/tsc")
       };
       config[`jasmine-${module}`] = {
         cwd: `modules/${module}`,
-        cmd: "../../node_modules/.bin/jasmine dist/**/*.spec.js"
+        cmd: `${resolve("node_modules/.bin/jasmine")} dist/**/*.spec.js`
       };
 
       const pkg = grunt.file.readJSON(`modules/${module}/package.json`);
