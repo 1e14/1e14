@@ -1,4 +1,3 @@
-export {Any} from "./Any";
 export {InPorts} from "./InPorts";
 export {InPort} from "./InPort";
 export {Node} from "./Node";
