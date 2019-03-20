@@ -1,19 +1,10 @@
-River Core
-==========
+1e14
+====
 
-"River Core" is a minimal set of functions for building *computational graphs*.
+**1e14 == 100000000000000 == one hundred trillion = approx. number of synapses 
+in the human brain**
 
----
-
-"River" is a family of libraries for building *computational graphs*, that 
-are *massively distributed*, *fault-tolerant*, extendable, and easy to use. 
-
----
-
-Computational graphs, in essence, are networks of *functions*. But unlike 
-common functions, River nodes receive their inputs and emit their outputs 
-independently from one another, and instead of *parameters*, values get 
-passed in and emitted through *ports*.
+1e14 is a minimal set of functions for building *function graphs*.
 
 Getting started
 ---------------
@@ -117,7 +108,7 @@ core.disconnect(node1.o.d_out);
 
 ### Types
 
-River Core exports the following types:
+1e14 exports the following types:
 
 * `Any`: Lookup with string keys
 * `InPort`: Describes an input port
