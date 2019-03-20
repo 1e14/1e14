@@ -18,7 +18,7 @@
     "url": "git@github.com:protoboard/river.git"
   },
   "dependencies": {
-    "river-core": "^0.1.0"
+    "1e14": "^0.1.0"
   },
   "devDependencies": {
     "@types/node": "^10.12.18"

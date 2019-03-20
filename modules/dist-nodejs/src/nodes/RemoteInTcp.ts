@@ -4,7 +4,7 @@ import {
   InPorts,
   Node,
   Outputs as OutputCallbacks
-} from "river-core";
+} from "../../../1e14";
 
 export type Out<V> = {
   /**

@@ -1,4 +1,4 @@
-import {createNode, Node, Tag} from "river-core";
+import {createNode, Node, Tag} from "../../../1e14";
 
 export type MapperCallback<I, O> = (value: I, tag?: Tag) => O;
 

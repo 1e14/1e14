@@ -1,4 +1,4 @@
-import {createNode, Node, Tag} from "river-core";
+import {createNode, Node, Tag} from "../../../1e14";
 import {copy} from "../utils";
 
 export type FolderCallback<I, O> = (

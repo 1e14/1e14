@@ -1,5 +1,5 @@
 import * as net from "net";
-import {connect} from "river-core";
+import {connect} from "../../../1e14";
 import {createRemoteInTcp, RemoteInTcp} from "./RemoteInTcp";
 
 describe("createRemoteInTcp()", () => {

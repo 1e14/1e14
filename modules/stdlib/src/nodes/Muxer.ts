@@ -1,4 +1,4 @@
-import {createNode, InPorts, Node} from "river-core";
+import {createNode, InPorts, Node} from "../../../1e14";
 import {Muxed} from "../types";
 
 export type In<T> = T;

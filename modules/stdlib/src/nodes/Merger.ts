@@ -1,4 +1,4 @@
-import {createNode, InPorts, Node} from "river-core";
+import {createNode, InPorts, Node} from "../../../1e14";
 import {copy} from "../utils";
 import {Out as DemuxerOutputs} from "./Demuxer";
 

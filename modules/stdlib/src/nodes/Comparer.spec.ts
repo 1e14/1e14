@@ -1,4 +1,4 @@
-import {connect} from "river-core";
+import {connect} from "../../../1e14";
 import {Comparer, createComparer} from "./Comparer";
 
 describe("createComparer()", () => {

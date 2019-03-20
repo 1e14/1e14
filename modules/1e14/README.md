@@ -18,12 +18,12 @@ passed in and emitted through *ports*.
 Getting started
 ---------------
 
-`npm i river-core`
+`npm i 1e14`
 
 API
 ---
 
-The River core API consists of three functions:
+The 1e14 core API consists of three functions:
 
 * `createNode(outFields, createInPorts)`
 * `connect(outPort, inPort)`
@@ -50,7 +50,7 @@ of these structures are not relevant to their usage)
 #### Example / TypeScript
 
 ```typescript
-import {createNode} from "river-core";
+import {createNode} from "1e14";
 type In = {d_in: number};
 type Out = {d_out: number};
 const node = createNode<In, Out>(["d_out"], (outputs) => ({
@@ -61,7 +61,7 @@ const node = createNode<In, Out>(["d_out"], (outputs) => ({
 #### Example / ES6
 
 ```javascript
-const core = require("river-core");
+const core = require("1e14");
 const node = core.createNode(["d_out"], (outputs) => ({
   d_in: (value, tag) => outputs.d_out(value, tag)
 }));
@@ -79,7 +79,7 @@ possible to 'connect' an output port to a function, eg. `console.log`.
 #### Example / TypeScript
 
 ```typescript
-import {connect} from "river-core";
+import {connect} from "1e14";
 // initializing node1 & node2 
 connect(node1.o.d_out, node2.i.d_in);
 ```
@@ -87,7 +87,7 @@ connect(node1.o.d_out, node2.i.d_in);
 #### Example / ES6
 
 ```javascript
-const core = require("river-core");
+const core = require("1e14");
 // initializing node1 & node2 
 core.connect(node1.o.d_out, node2.i.d_in);
 ```
@@ -100,7 +100,7 @@ from an output port.
 #### Example / TypeScript
 
 ```typescript
-import {disconnect} from "river-core";
+import {disconnect} from "1e14";
 // initializing & connecting node1 & node2 
 disconnect(node1.o.d_out, node2.i.d_in);
 disconnect(node1.o.d_out);
@@ -109,7 +109,7 @@ disconnect(node1.o.d_out);
 #### Example / ES6
 
 ```javascript
-const core = require("river-core");
+const core = require("1e14");
 // initializing & connecting node1 & node2 
 core.disconnect(node1.o.d_out, node2.i.d_in);
 core.disconnect(node1.o.d_out);
@@ -147,7 +147,7 @@ subclassing.
 #### Example / TypeScript
 
 ```typescript
-import {createNode, Node} from "river-core";
+import {createNode, Node} from "1e14";
 type In = {d_in: number};
 type Out = {d_out: number};
 type Forwarder<V> = Node<In, Out>
@@ -161,7 +161,7 @@ function createForwarder<V>(): Node {
 #### Example / ES6
 
 ```javascript
-const core = require("river-core");
+const core = require("1e14");
 function createForwarder() {
     return createNode(["d_out"], (outputs) => ({
       d_in: (value, tag) => outputs.d_out(value, tag)
@@ -184,7 +184,7 @@ specific ports of its components as its own.
 #### Example / TypeScript
 
 ```typescript
-import {connect, Node} from "river-core";
+import {connect, Node} from "1e14";
 type In = {d_in: number};
 type Out = {d_out: number};
 type Composite = Node<In, Out>;
@@ -202,7 +202,7 @@ function createComposite<In, Out>(): Composite {
 #### Example / ES6
 
 ```javascript
-const core = require("river-core");
+const core = require("1e14");
 function createComposite() {
     const forwarder1 = createForwarder();
     const forwarder2 = createForwarder();

@@ -1,4 +1,4 @@
-import {connect} from "river-core";
+import {connect} from "../../../1e14";
 import {createLocationHash, LocationHash} from "./LocationHash";
 
 describe("createLocationHash()", () => {

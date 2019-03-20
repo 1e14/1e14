@@ -1,4 +1,4 @@
-import {createNode, InPorts, Node} from "river-core";
+import {createNode, InPorts, Node} from "../../../1e14";
 import {EqualityCallback} from "./Comparer";
 
 export type In<V> = {

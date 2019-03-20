@@ -1,7 +1,7 @@
 {
-  "name": "river-core",
+  "name": "1e14",
   "version": "0.1.0",
-  "description": "Library for building computational graphs",
+  "description": "Library for building function graphs",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -12,6 +12,8 @@
   ],
   "keywords": [
     "computational-graphs",
+    "dataflow-programming",
+    "flow-based-programming",
     "reactive-programming",
     "reactive-streams",
     "stream-processing",
@@ -21,6 +23,6 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git@github.com:protoboard/river.git"
+    "url": "git@github.com:protoboard/1e14.git"
   }
 }

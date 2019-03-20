@@ -5,7 +5,7 @@ module.exports = function (grunt) {
   "use strict";
 
   const modules = [
-    "core",
+    "1e14",
     "stdlib",
     "nodejs",
     "browser",

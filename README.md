@@ -17,7 +17,7 @@ Modules
 -------
 
 * [river-browser](modules/browser/README.md)
-* [river-core](modules/core/README.md)
+* [1e14](modules/1e14/README.md)
 * [river-dist-nodejs](modules/dist-nodejs/README.md)
 * [river-nodejs](modules/nodejs/README.md)
 * [river-stdlib](modules/stdlib/README.md)

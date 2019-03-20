@@ -1,4 +1,4 @@
-import {createNode, Node} from "river-core";
+import {createNode, Node} from "../../../1e14";
 
 export type EqualityCallback<V> = (a: V, b: V, tag?: string) => boolean;
 
