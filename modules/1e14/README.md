@@ -110,7 +110,6 @@ core.disconnect(node1.o.d_out);
 
 1e14 exports the following types:
 
-* `Any`: Lookup with string keys
 * `InPort`: Describes an input port
 * `InPorts`: Describes a set of input ports. Usually corresponds to the `i` 
 property of nodes.
