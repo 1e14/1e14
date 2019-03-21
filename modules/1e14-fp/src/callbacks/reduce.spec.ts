@@ -1,76 +1,66 @@
-import {
-  foldAdd,
-  foldConcat,
-  foldCount,
-  foldFirst,
-  foldLast,
-  foldMax,
-  foldMin,
-  foldPush,
-  foldUnshift
-} from "./reduce";
+import * as reduce from "./reduce";
 
 describe("fold", () => {
-  describe("foldCount()", () => {
+  describe("count()", () => {
     it("should count inputs", () => {
       const input = [1, 2, 3, 4, 5];
-      expect(input.reduce(foldCount, 0)).toEqual(5);
+      expect(input.reduce(reduce.count, 0)).toEqual(5);
     });
   });
 
-  describe("foldPush()", () => {
+  describe("push()", () => {
     it("should append items to array", () => {
       const input = [1, 2, 3, 4, 5];
-      expect(input.reduce(foldPush, [])).toEqual([1, 2, 3, 4, 5]);
+      expect(input.reduce(reduce.push, [])).toEqual([1, 2, 3, 4, 5]);
     });
   });
 
-  describe("foldUnshift()", () => {
+  describe("unshift()", () => {
     it("should prepend items to array", () => {
       const input = [1, 2, 3, 4, 5];
-      expect(input.reduce(foldUnshift, [])).toEqual([5, 4, 3, 2, 1]);
+      expect(input.reduce(reduce.unshift, [])).toEqual([5, 4, 3, 2, 1]);
     });
   });
 
-  describe("foldConcat()", () => {
+  describe("concat()", () => {
     it("should concat items to array", () => {
       const input = [[1, 2], [3, 4], [5]];
-      expect(input.reduce(foldConcat, [])).toEqual([1, 2, 3, 4, 5]);
+      expect(input.reduce(reduce.concat, [])).toEqual([1, 2, 3, 4, 5]);
     });
   });
 
-  describe("foldLast()", () => {
+  describe("last()", () => {
     it("should return last item", () => {
       const input = [1, 2, 3, 4, 5];
-      expect(input.reduce(foldLast)).toEqual(5);
+      expect(input.reduce(reduce.last)).toEqual(5);
     });
   });
 
-  describe("foldFirst()", () => {
+  describe("first()", () => {
     it("should return first item", () => {
       const input = [1, 2, 3, 4, 5];
-      expect(input.reduce(foldFirst)).toEqual(1);
+      expect(input.reduce(reduce.first)).toEqual(1);
     });
   });
 
-  describe("foldAdd()", () => {
+  describe("add()", () => {
     it("should return joined string", () => {
       const input = ["1", "2", "3", "4", "5"];
-      expect(input.reduce(foldAdd, "")).toEqual("12345");
+      expect(input.reduce(reduce.add, "")).toEqual("12345");
     });
   });
 
-  describe("foldMin()", () => {
+  describe("min()", () => {
     it("should return minimum item", () => {
       const input = [1, 2, 3, 4, 5];
-      expect(input.reduce(foldMin, Infinity)).toEqual(1);
+      expect(input.reduce(reduce.min, Infinity)).toEqual(1);
     });
   });
 
-  describe("foldMax()", () => {
+  describe("max()", () => {
     it("should return maximum item", () => {
       const input = [1, 2, 3, 4, 5];
-      expect(input.reduce(foldMax, -Infinity)).toEqual(5);
+      expect(input.reduce(reduce.max, -Infinity)).toEqual(5);
     });
   });
 });

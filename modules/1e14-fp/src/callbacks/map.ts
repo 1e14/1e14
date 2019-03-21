@@ -4,7 +4,7 @@ import {MapperCallback} from "../types";
  * Creates a function that maps any value to the specified constant.
  * @param value
  */
-export function mapConstant(value: any): MapperCallback<any, any> {
+export function constant(value: any): MapperCallback<any, any> {
   return () => value;
 }
 
@@ -12,7 +12,7 @@ export function mapConstant(value: any): MapperCallback<any, any> {
  * Creates a function that splits strings along the specified delimiter.
  * @param delimiter
  */
-export function mapSplit(delimiter: string): MapperCallback<string, Array<string>> {
+export function split(delimiter: string): MapperCallback<string, Array<string>> {
   return (next: string) => next.split(delimiter);
 }
 
@@ -20,7 +20,7 @@ export function mapSplit(delimiter: string): MapperCallback<string, Array<string
  * Creates a function that plucks the specified property from objects.
  * @param property
  */
-export function mapPluck<T>(property: string): MapperCallback<T, T[keyof T]> {
+export function pluck<T>(property: string): MapperCallback<T, T[keyof T]> {
   return (value: T) => value[property];
 }
 
@@ -29,7 +29,7 @@ export function mapPluck<T>(property: string): MapperCallback<T, T[keyof T]> {
  * specified order.
  * @param fields
  */
-export function mapMpluck<T>(fields: Array<string>): MapperCallback<T, Array<T[keyof T]>> {
+export function mpluck<T>(fields: Array<string>): MapperCallback<T, Array<T[keyof T]>> {
   return (next: T) => {
     const result = [];
     for (const field of fields) {
@@ -43,7 +43,7 @@ export function mapMpluck<T>(fields: Array<string>): MapperCallback<T, Array<T[k
  * Creates a function that joins lists of string, using the specified delimiter.
  * @param delimiter
  */
-export function mapJoin(delimiter: string): MapperCallback<Array<string>, string> {
+export function join(delimiter: string): MapperCallback<Array<string>, string> {
   return (next: Array<string>) => {
     return next.join(delimiter);
   };
@@ -53,7 +53,7 @@ export function mapJoin(delimiter: string): MapperCallback<Array<string>, string
  * Creates a function that appends the specified postfix to strings.
  * @param postfix
  */
-export function mapAppend(postfix: string): MapperCallback<string, string> {
+export function append(postfix: string): MapperCallback<string, string> {
   return (next: string) => {
     return next + postfix;
   };
@@ -63,7 +63,7 @@ export function mapAppend(postfix: string): MapperCallback<string, string> {
  * Creates a function that prepends the specified prefix to strings.
  * @param prefix
  */
-export function mapPrepend(prefix: string): MapperCallback<string, string> {
+export function prepend(prefix: string): MapperCallback<string, string> {
   return (next: string) => {
     return prefix + next;
   };
@@ -74,7 +74,7 @@ export function mapPrepend(prefix: string): MapperCallback<string, string> {
  * precision is 0, returns Math.round.
  * @param precision
  */
-export function mapRound(precision?: number): MapperCallback<number, number> {
+export function round(precision?: number): MapperCallback<number, number> {
   const factor = Math.pow(10, precision);
   return precision ?
     (next: number) => {

@@ -4,7 +4,7 @@
  * @param curr
  */
 
-export function foldCount(curr: number) {
+export function count(curr: number) {
   return ++curr;
 }
 
@@ -14,7 +14,7 @@ export function foldCount(curr: number) {
  * @param curr
  * @param next
  */
-export function foldPush(curr: Array<any>, next: any): Array<any> {
+export function push(curr: Array<any>, next: any): Array<any> {
   curr.push(next);
   return curr;
 }
@@ -25,7 +25,7 @@ export function foldPush(curr: Array<any>, next: any): Array<any> {
  * @param curr
  * @param next
  */
-export function foldUnshift(curr: Array<any>, next: any): Array<any> {
+export function unshift(curr: Array<any>, next: any): Array<any> {
   curr.unshift(next);
   return curr;
 }
@@ -35,7 +35,7 @@ export function foldUnshift(curr: Array<any>, next: any): Array<any> {
  * @param curr
  * @param next
  */
-export function foldConcat(curr: Array<any>, next: Array<any>): Array<any> {
+export function concat(curr: Array<any>, next: Array<any>): Array<any> {
   return curr.concat(next);
 }
 
@@ -43,7 +43,7 @@ export function foldConcat(curr: Array<any>, next: Array<any>): Array<any> {
  * Selects first item.
  * @param curr
  */
-export function foldFirst(curr: any): any {
+export function first(curr: any): any {
   return curr;
 }
 
@@ -52,7 +52,7 @@ export function foldFirst(curr: any): any {
  * @param curr
  * @param next
  */
-export function foldLast(curr: any, next: any): any {
+export function last(curr: any, next: any): any {
   return next;
 }
 
@@ -61,16 +61,16 @@ export function foldLast(curr: any, next: any): any {
  * @param curr
  * @param next
  */
-export function foldAdd(curr: string, next: string): string;
+export function add(curr: string, next: string): string;
 
 /**
  * Sums items.
  * @param curr
  * @param next
  */
-export function foldAdd(curr: number, next: number): string;
+export function add(curr: number, next: number): string;
 
-export function foldAdd(curr: any, next: any): any {
+export function add(curr: any, next: any): any {
   return curr + next;
 }
 
@@ -80,7 +80,7 @@ export function foldAdd(curr: any, next: any): any {
  * @param curr
  * @param next
  */
-export function foldMin(curr: number, next: number): number {
+export function min(curr: number, next: number): number {
   return next < curr ? next : curr;
 }
 
@@ -90,6 +90,6 @@ export function foldMin(curr: number, next: number): number {
  * @param curr
  * @param next
  */
-export function foldMax(curr: number, next: number): number {
+export function max(curr: number, next: number): number {
   return next > curr ? next : curr;
 }

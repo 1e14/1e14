@@ -1,2 +1,4 @@
-export * from "./reduce";
-export * from "./map";
+import * as map from "./map";
+import * as reduce from "./reduce";
+
+export {map, reduce};
