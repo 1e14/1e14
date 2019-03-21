@@ -1,7 +1,7 @@
 1e14-flow
 =========
 
-Flow control nodes for 1e14.
+Flow control for 1e14.
 
 Nodes
 -----

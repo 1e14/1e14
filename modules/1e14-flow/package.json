@@ -1,7 +1,7 @@
 {
   "name": "1e14-flow",
   "version": "0.1.0",
-  "description": "Flow control nodes for 1e14",
+  "description": "Flow control for 1e14",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [

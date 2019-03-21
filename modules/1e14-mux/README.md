@@ -1,7 +1,7 @@
 1e14-mux
 ========
 
-Multiplexing / demultiplexing nodes for 1e14.
+Multiplexing / demultiplexing for 1e14.
 
 Nodes
 -----

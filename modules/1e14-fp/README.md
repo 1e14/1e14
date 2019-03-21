@@ -1,7 +1,7 @@
 1e14-fp
 =======
 
-Functional programming nodes for 1e14.
+Functional programming for 1e14.
 
 Nodes
 -----
