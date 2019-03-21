@@ -6,6 +6,7 @@ module.exports = function (grunt) {
 
   const modules = [
     "1e14",
+    "1e14-fp",
     "stdlib",
     "nodejs",
     "browser",
