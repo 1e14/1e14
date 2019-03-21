@@ -22,20 +22,20 @@ export type Out<V> = {
 /**
  * Forwards input values in an order matching the reference input.
  * @example
- * import {connect, createSerializer} from "river-stdlib";
- * const serializer = createSerializer();
+ * import {connect, createSequencer} from "river-stdlib";
+ * const serializer = createSequencer();
  * connect(serializer.o.d_val, console.log);
  * serializer.i.d_val("a", 2);
  * serializer.i.r_tag(null, 1);
  * serializer.i.r_tag(null, 2);
  * serializer.i.d_val("b", 1); // logs: "b" 1, "a" 2
  */
-export type Serializer<V> = Node<In<V>, Out<V>>;
+export type Sequencer<V> = Node<In<V>, Out<V>>;
 
 /**
- * Creates a Serializer node.
+ * Creates a Sequencer node.
  */
-export function createSerializer<V>(): Serializer<V> {
+export function createSequencer<V>(): Sequencer<V> {
   return createNode<In<V>, Out<V>>(["d_val"], (outputs) => {
     const values: Map<Tag, V> = new Map();
     const order: Array<Tag> = [];

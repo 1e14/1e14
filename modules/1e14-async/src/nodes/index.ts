@@ -1,2 +1,2 @@
 export {Sampler, createSampler} from "./Sampler";
-export {Serializer, createSerializer} from "./Serializer";
+export {Sequencer, createSequencer} from "./Sequencer";

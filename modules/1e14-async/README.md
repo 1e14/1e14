@@ -7,5 +7,5 @@ Nodes
 -----
 
 * `Sampler` / `createSampler()`: Forwards last input value on signal.
-* `Serializer` / `createSerializer()`: Forwards values in an order set by a reference 
+* `Sequencer` / `createSequencer()`: Forwards values in an order set by a reference 
 input.

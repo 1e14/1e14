@@ -1,12 +1,12 @@
 import {connect} from "1e14";
-import {createSerializer, Serializer} from "./Serializer";
+import {createSequencer, Sequencer} from "./Sequencer";
 
-describe("createSerializer()", () => {
+describe("createSequencer()", () => {
   describe("on input (d_val)", () => {
-    let node: Serializer<number>;
+    let node: Sequencer<number>;
 
     beforeEach(() => {
-      node = createSerializer();
+      node = createSequencer();
     });
 
     describe("when there is no matching tag", () => {
@@ -39,10 +39,10 @@ describe("createSerializer()", () => {
   });
 
   describe("on input (r_tag)", () => {
-    let node: Serializer<number>;
+    let node: Sequencer<number>;
 
     beforeEach(() => {
-      node = createSerializer();
+      node = createSequencer();
     });
 
     describe("when there is no matching value", () => {
