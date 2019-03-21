@@ -12,7 +12,8 @@ export type Out<T> = {
 /**
  * Merges last input values from all ports.
  * @example
- * import {connect, createMerger} from "river-stdlib";
+ * import {connect} from "1e14";
+ * import {createMerger} from "1e14-flow";
  * const merger = createMerger(["foo", "bar"]);
  * connect(merger.o.all, console.log);
  * merger.i.foo("a"); // logs: {foo: "a"}

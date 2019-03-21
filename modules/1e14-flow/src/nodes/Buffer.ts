@@ -30,7 +30,8 @@ export type Out<V> = {
  * open it releases stored values and forwards input value.
  * Operates with either independent or joined inputs.
  * @example
- * import {connect, createBuffer} from "river-stdlib";
+ * import {connect} from "1e14";
+ * import {createBuffer} from "1e14-flow";
  * const buffer = createBuffer(false);
  * connect(buffer.o.d_val, console.log);
  * buffer.i.d_val("a");

@@ -12,7 +12,8 @@ export type Out<T> = T;
 /**
  * Splits object input into its properties.
  * @example
- * import {connect, createSplitter} from "river-stdlib";
+ * import {connect} from "1e14";
+ * import {createSplitter} from "1e14-flow";
  * const splitter = createSplitter(["foo", "bar"]);
  * connect(splitter.o.foo, console.log);
  * connect(splitter.o.bar, console.log);
