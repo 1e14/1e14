@@ -10,11 +10,7 @@ module.exports = function (grunt) {
     "1e14-flow",
     "1e14-mux",
     "1e14-async",
-    "1e14-time",
-    "stdlib",
-    "nodejs",
-    "browser",
-    "dist-nodejs"
+    "1e14-time"
   ];
 
   grunt.initConfig({
