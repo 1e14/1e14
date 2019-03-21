@@ -12,20 +12,20 @@ export type Out<T> = {
 /**
  * Joins input values from all ports having the same tag.
  * @example
- * import {connect, createJoiner} from "river-stdlib";
- * const joiner = createJoiner(["foo", "bar"]);
+ * import {connect, createSyncer} from "river-stdlib";
+ * const joiner = createSyncer(["foo", "bar"]);
  * connect(joiner.o.all, console.log);
  * joiner.i.foo("a", 2);
  * joiner.i.foo("b", 1);
  * joiner.i.bar("c", 2); // logs: {foo: "a", bar: "c"} 2
  */
-export type Joiner<T> = Node<In<T>, Out<T>>;
+export type Syncer<T> = Node<In<T>, Out<T>>;
 
 /**
- * Creates a Joiner node.
+ * Creates a Syncer node.
  * @param fields List of input fields.
  */
-export function createJoiner<T>(fields: Array<keyof T>): Joiner<T> {
+export function createSyncer<T>(fields: Array<keyof T>): Syncer<T> {
   return createNode<In<T>, Out<T>>(["all"], (outputs) => {
     const inputSets: Map<Tag, T> = new Map();
     const portSets: Map<Tag, Set<keyof T>> = new Map();

@@ -1,12 +1,12 @@
 import {connect} from "1e14";
-import {createJoiner, Joiner} from "./Joiner";
+import {createSyncer, Syncer} from "./Syncer";
 
-describe("createJoiner()", () => {
+describe("createSyncer()", () => {
   describe("on input", () => {
-    let node: Joiner<{ foo: number, bar: number }>;
+    let node: Syncer<{ foo: number, bar: number }>;
 
     beforeEach(() => {
-      node = createJoiner(["foo", "bar"]);
+      node = createSyncer(["foo", "bar"]);
     });
 
     describe("on input (before first full set)", () => {
