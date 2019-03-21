@@ -1,0 +1,23 @@
+{
+  "name": "1e14-time",
+  "version": "0.1.0",
+  "description": "Timing for 1e14",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "!dist/**/*.spec.*",
+    "package.json",
+    "README.md"
+  ],
+  "keywords": [],
+  "author": "Dan Stocker <dan@kwaia.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:1e14/1e14.git"
+  },
+  "dependencies": {
+    "1e14": "^0.1.0"
+  }
+}
