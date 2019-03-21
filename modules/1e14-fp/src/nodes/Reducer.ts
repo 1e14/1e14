@@ -1,6 +1,5 @@
-import {createNode, Node} from "1e14";
+import {copy, createNode, Node} from "1e14";
 import {ReducerCallback} from "../types";
-import {copy} from "../utils";
 
 export type In<I> = {
   /**
