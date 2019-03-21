@@ -7,7 +7,7 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "git@github.com:protoboard/river.git"
+    "url": "git@github.com:1e14/1e14.git"
   },
   "devDependencies": {
     "@types/grunt": "^0.4.24",

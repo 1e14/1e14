@@ -17,7 +17,8 @@ export type Out<V> = {
 /**
  * Forwards input value with the specified delay.
  * @example
- * import {connect, createDelayer} from "river-stdlib";
+ * import {connect} from "1e14";
+ * import {createDelayer} from "1e14-time";
  * const delayer = createDelayer(1000);
  * connect(delayer.o.d_val, console.log);
  * delayer.i.d_val("a"); // logs after 1 second: "a"

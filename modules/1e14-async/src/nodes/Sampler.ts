@@ -22,7 +22,8 @@ export type Out<V> = {
 /**
  * Forwards last input value on receiving a sampling signal.
  * @example
- * import {connect, createSampler} from "river-stdlib";
+ * import {connect} from "1e14";
+ * import {createSampler} from "1e14-async";
  * const sampler = createSampler();
  * connect(sampler.o.d_val, console.log);
  * sampler.i.d_val(5);

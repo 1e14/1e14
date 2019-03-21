@@ -56,7 +56,7 @@ module.exports = function (grunt) {
 
       const pkg = grunt.file.readJSON(`modules/${module}/package.json`);
       const deps = Object.keys(pkg.dependencies || {})
-      .filter((name) => /^(?:river-|1e14).*$/.test(name));
+      .filter((name) => /^(?:1e14).*$/.test(name));
       config[`link-${module}-deps`] = {
         cwd: `modules/${module}`,
         cmd: deps

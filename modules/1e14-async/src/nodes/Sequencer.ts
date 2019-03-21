@@ -22,7 +22,8 @@ export type Out<V> = {
 /**
  * Forwards input values in an order matching the reference input.
  * @example
- * import {connect, createSequencer} from "river-stdlib";
+ * import {connect} from "1e14";
+ * import {createSequencer} from "1e14-async";
  * const serializer = createSequencer();
  * connect(serializer.o.d_val, console.log);
  * serializer.i.d_val("a", 2);
