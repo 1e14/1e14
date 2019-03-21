@@ -29,7 +29,7 @@ export type Out<I, O> = {
  * Maps input value according to mapper callback.
  * Bounces input, and emits error on callback exception.
  * @example
- * import {connect, createMapper} from "river-stdlib";
+ * import {connect, createMapper} from "1e14";
  * const mapper = createMapper(next => 2 * next);
  * connect(mapper.o.d_val, console.log);
  * mapper.i.d_val(5); // logs: 10
