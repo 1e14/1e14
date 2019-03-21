@@ -8,6 +8,7 @@ module.exports = function (grunt) {
     "1e14",
     "1e14-fp",
     "1e14-flow",
+    "1e14-mux",
     "stdlib",
     "nodejs",
     "browser",
