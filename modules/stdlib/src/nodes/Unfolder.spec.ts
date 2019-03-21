@@ -1,4 +1,4 @@
-import {connect} from "../../../1e14";
+import {connect} from "1e14";
 import {createUnfolder, Unfolder} from "./Unfolder";
 
 describe("createUnfolder()", () => {

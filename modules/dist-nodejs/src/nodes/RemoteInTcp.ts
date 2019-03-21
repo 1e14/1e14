@@ -1,10 +1,5 @@
+import {createNode, InPorts, Node, Outputs as OutputCallbacks} from "1e14";
 import {Server, Socket} from "net";
-import {
-  createNode,
-  InPorts,
-  Node,
-  Outputs as OutputCallbacks
-} from "../../../1e14";
 
 export type Out<V> = {
   /**

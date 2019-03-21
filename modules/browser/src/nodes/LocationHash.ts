@@ -1,4 +1,4 @@
-import {createNode, Node} from "../../../1e14";
+import {createNode, Node} from "1e14";
 
 export type In = {
   d_val: string;

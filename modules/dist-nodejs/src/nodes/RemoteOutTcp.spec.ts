@@ -1,5 +1,5 @@
+import {connect} from "1e14";
 import * as net from "net";
-import {connect} from "../../../1e14";
 import {createRemoteOutTcp, RemoteOutTcp} from "./RemoteOutTcp";
 
 describe("createRemoteOutTcp()", () => {

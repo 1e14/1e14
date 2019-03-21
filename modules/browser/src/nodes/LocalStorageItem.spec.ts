@@ -1,4 +1,4 @@
-import {connect} from "../../../1e14";
+import {connect} from "1e14";
 import {createLocalStorageItem, LocalStorageItem} from "./LocalStorageItem";
 
 describe("createLocalStorageItem", () => {

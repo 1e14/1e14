@@ -1,4 +1,4 @@
-import {InPorts, Node} from "../../../1e14";
+import {InPorts, Node} from "1e14";
 
 type Inputs = {
   /**

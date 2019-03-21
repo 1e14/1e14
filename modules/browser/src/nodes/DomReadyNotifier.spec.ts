@@ -1,4 +1,4 @@
-import {connect} from "../../../1e14";
+import {connect} from "1e14";
 import {createDomReadyNotifier, DomReadyNotifier} from "./DomReadyNotifier";
 
 describe("createDomReadyNotifier()", () => {

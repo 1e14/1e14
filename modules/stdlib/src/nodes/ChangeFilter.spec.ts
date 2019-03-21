@@ -1,4 +1,4 @@
-import {connect} from "../../../1e14";
+import {connect} from "1e14";
 import {ChangeFilter, createChangeFilter} from "./ChangeFilter";
 
 describe("createChangeFilter", () => {

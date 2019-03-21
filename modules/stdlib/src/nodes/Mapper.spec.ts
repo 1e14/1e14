@@ -1,4 +1,4 @@
-import {connect} from "../../../1e14";
+import {connect} from "1e14";
 import {createMapper, Mapper} from "./Mapper";
 
 describe("createMapper()", () => {

@@ -1,4 +1,4 @@
-import {createNode, InPorts, Node, Tag} from "../../../1e14";
+import {createNode, InPorts, Node, Tag} from "1e14";
 
 export type In<T> = T;
 

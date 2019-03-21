@@ -1,5 +1,5 @@
+import {createNode, Node, Tag} from "1e14";
 import {Socket} from "net";
-import {createNode, Node, Tag} from "../../../1e14";
 
 export type In<V> = {
   /**
