@@ -36,7 +36,8 @@ export type Out<I, O> = {
  * Bounces input, and emits error on callback exception.
  * Operates with either independent or joined inputs.
  * @example
- * import {connect, createReducer} from "1e14";
+ * import {connect} from "1e14";
+ * import {createReducer} from "1e14-fp";
  * const reducer = createReducer((curr, next) => curr + next);
  * connect(reducer.o.d_val, console.log);
  * reducer.i.d_val(2);

@@ -29,7 +29,8 @@ export type Out<V> = {
  * Filters input values according to a filter callback.
  * Bounces input, and emits error on callback exception.
  * @example
- * import {connect, createFilter} from "1e14";
+ * import {connect} from "1e14";
+ * import {createFilter} from "1e14-fp";
  * const filter = createFilter(next => next > 5);
  * connect(filter.o.d_val, console.log);
  * filter.i.d_val(3);
