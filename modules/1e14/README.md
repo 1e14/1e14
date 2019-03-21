@@ -13,11 +13,12 @@ Getting started
 API
 ---
 
-The 1e14 core API consists of three functions:
+The core *1e14* API consists of three functions, and a node:
 
 * `createNode(outFields, createInPorts)`
 * `connect(outPort, inPort)`
 * `disconnect(outPort[, inPort])`
+* `createNoop()`
 
 ### `createNode(outFields, createInPorts)`
 
@@ -51,8 +52,8 @@ const node = createNode<In, Out>(["d_out"], (outputs) => ({
 #### Example / ES6
 
 ```javascript
-const core = require("1e14");
-const node = core.createNode(["d_out"], (outputs) => ({
+const {createNode} = require("1e14");
+const node = createNode(["d_out"], (outputs) => ({
   d_in: (value, tag) => outputs.d_out(value, tag)
 }));
 ```
@@ -77,9 +78,9 @@ connect(node1.o.d_out, node2.i.d_in);
 #### Example / ES6
 
 ```javascript
-const core = require("1e14");
+const {connect} = require("1e14");
 // initializing node1 & node2 
-core.connect(node1.o.d_out, node2.i.d_in);
+connect(node1.o.d_out, node2.i.d_in);
 ```
 
 ### `disconnect(outPort[, inPort])`
@@ -99,10 +100,10 @@ disconnect(node1.o.d_out);
 #### Example / ES6
 
 ```javascript
-const core = require("1e14");
+const {disconnect} = require("1e14");
 // initializing & connecting node1 & node2 
-core.disconnect(node1.o.d_out, node2.i.d_in);
-core.disconnect(node1.o.d_out);
+disconnect(node1.o.d_out, node2.i.d_in);
+disconnect(node1.o.d_out);
 ```
 
 ### Types
@@ -150,7 +151,7 @@ function createForwarder<V>(): Node {
 #### Example / ES6
 
 ```javascript
-const core = require("1e14");
+const {createNode} = require("1e14");
 function createForwarder() {
     return createNode(["d_out"], (outputs) => ({
       d_in: (value, tag) => outputs.d_out(value, tag)
@@ -191,7 +192,7 @@ function createComposite<In, Out>(): Composite {
 #### Example / ES6
 
 ```javascript
-const core = require("1e14");
+const {connect} = require("1e14");
 function createComposite() {
     const forwarder1 = createForwarder();
     const forwarder2 = createForwarder();
