@@ -1,7 +1,6 @@
 1e14
 ====
 
-* [1e14](modules/1e14/README.md)
-* [1e14-fp](modules/1e14-fp/README.md)
-* [1e14-flow](modules/1e14-flow/README.md)
-* [1e14-mux](modules/1e14-mux/README.md)
+**1e14** is a minimal API for building *function graphs*.
+
+For documentation, check the [**1e14** wiki](https://github.com/1e14/1e14/wiki)

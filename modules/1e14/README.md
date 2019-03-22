@@ -1,9 +1,7 @@
 1e14
 ====
 
-    1e14 = 100,000,000,000,000 = hundred trillion = approx. number of synapses in the human brain
-
-**1e14 is a minimal API for building *function graphs*.**
+**1e14** is a minimal API for building *function graphs*.
 
 Getting started
 ---------------
