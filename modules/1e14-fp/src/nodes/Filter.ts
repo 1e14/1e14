@@ -36,10 +36,11 @@ export type Filter<V> = Node<In<V>, Out<V>>;
 export function createFilter<V>(cb: FilterCallback<V>): Filter<V> {
   return createNode<In<V>, Out<V>>
   (["d_val"], (outputs) => {
+    const o_d_val = outputs.d_val;
     return {
       d_val: (value, tag) => {
         if (cb(value, tag)) {
-          outputs.d_val(value, tag);
+          o_d_val(value, tag);
         }
       }
     };

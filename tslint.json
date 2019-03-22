@@ -15,6 +15,11 @@
     "only-arrow-functions": false,
     "space-before-function-paren": false,
     "trailing-comma": false,
+    "variable-name": [
+      true,
+      "check-format",
+      "allow-snake-case"
+    ],
     "whitespace": [
       true,
       "check-branch",

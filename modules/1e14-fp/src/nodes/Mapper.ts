@@ -34,9 +34,10 @@ export type Mapper<I, O> = Node<In<I>, Out<O>>;
 export function createMapper<I, O>(cb: MapperCallback<I, O>): Mapper<I, O> {
   return createNode<In<I>, Out<O>>
   (["d_val"], (outputs) => {
+    const o_d_val = outputs.d_val;
     return {
       d_val: (value, tag) => {
-        outputs.d_val(cb(value, tag), tag);
+        o_d_val(cb(value, tag), tag);
       }
     };
   });

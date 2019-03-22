@@ -28,6 +28,7 @@ export type Syncer<T> = Node<In<T>, Out<T>>;
  */
 export function createSyncer<T>(fields: Array<keyof T>): Syncer<T> {
   return createNode<In<T>, Out<T>>(["all"], (outputs) => {
+    const o_all = outputs.all;
     const inputSets: Map<Tag, T> = new Map();
     const portSets: Map<Tag, Set<keyof T>> = new Map();
 
@@ -52,7 +53,7 @@ export function createSyncer<T>(fields: Array<keyof T>): Syncer<T> {
         if (ports.size === 0) {
           inputSets.delete(tag);
           portSets.delete(tag);
-          outputs.all(inputs, tag);
+          o_all(inputs, tag);
         }
       };
     }

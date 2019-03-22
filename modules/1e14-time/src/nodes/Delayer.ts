@@ -31,10 +31,11 @@ export type Delayer<V> = Node<In<V>, Out<V>>;
  */
 export function createDelayer<V>(ms: number): Delayer<V> {
   return createNode<In<V>, Out<V>>(["d_val"], (outputs) => {
+    const o_d_val = outputs.d_val;
     return {
       d_val: (value, tag) => {
         setTimeout(() => {
-          outputs.d_val(value, tag);
+          o_d_val(value, tag);
         }, ms);
       }
     };

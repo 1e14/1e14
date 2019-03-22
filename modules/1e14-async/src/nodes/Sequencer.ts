@@ -38,6 +38,7 @@ export type Sequencer<V> = Node<In<V>, Out<V>>;
  */
 export function createSequencer<V>(): Sequencer<V> {
   return createNode<In<V>, Out<V>>(["d_val"], (outputs) => {
+    const o_d_val = outputs.d_val;
     const values: Map<Tag, V> = new Map();
     const order: Array<Tag> = [];
 
@@ -46,7 +47,7 @@ export function createSequencer<V>(): Sequencer<V> {
         const tag = order.shift();
         const value = values.get(tag);
         values.delete(tag);
-        outputs.d_val(value, tag);
+        o_d_val(value, tag);
       }
     }
 

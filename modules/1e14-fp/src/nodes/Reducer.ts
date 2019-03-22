@@ -48,6 +48,7 @@ export function createReducer<I, O>(
 ): Reducer<I, O> {
   return createNode<In<I> & { all: In<I> }, Out<O>>
   (["d_val"], (outputs) => {
+    const o_d_val = outputs.d_val;
     const initialized = arguments.length === 2;
     let folded: O;
     let first: boolean = true;
@@ -63,7 +64,7 @@ export function createReducer<I, O>(
           folded = cb(folded, d_val, tag);
         }
         if (ev_res) {
-          outputs.d_val(folded, tag);
+          o_d_val(folded, tag);
           first = true;
         }
       },
@@ -81,7 +82,7 @@ export function createReducer<I, O>(
 
       ev_res: (value, tag) => {
         if (value) {
-          outputs.d_val(folded, tag);
+          o_d_val(folded, tag);
           first = true;
         }
       }

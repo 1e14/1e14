@@ -28,12 +28,13 @@ export type Merger<T> = Node<In<T>, Out<T>>;
  */
 export function createMerger<T>(fields: Array<keyof T>): Merger<T> {
   return createNode<In<T>, Out<T>>(["all"], (outputs) => {
+    const o_all = outputs.all;
     const inputs = <T>{};
     const i = <InPorts<In<T>>>{};
     for (const field of fields) {
       i[field] = (value, tag) => {
         inputs[field] = value;
-        outputs.all(copy(inputs), tag);
+        o_all(copy(inputs), tag);
       };
     }
 

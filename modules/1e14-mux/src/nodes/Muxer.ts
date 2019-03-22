@@ -28,10 +28,11 @@ export type Muxer<T> = Node<In<T>, Out<T>>;
  */
 export function createMuxer<T>(fields: Array<keyof T>): Muxer<T> {
   return createNode<In<T>, Out<T>>(["d_mux"], (outputs) => {
+    const o_d_mux = outputs.d_mux;
     const i = <InPorts<In<T>>>{};
     for (const field of fields) {
       i[field] = (value, tag) => {
-        outputs.d_mux({field, value}, tag);
+        o_d_mux({field, value}, tag);
       };
     }
     return i;

@@ -31,9 +31,7 @@ export type Noop<V> = Node<In<V>, Out<V>>;
 export function createNoop<V>(): Noop<V> {
   return createNode<In<V>, Out<V>>(["d_val"], (outputs) => {
     return {
-      d_val: (value, tag) => {
-        outputs.d_val(value, tag);
-      }
+      d_val: outputs.d_val
     };
   });
 }

@@ -48,13 +48,14 @@ export type Buffer<V> = Node<In<V> & { all: In<V> }, Out<V>>;
 export function createBuffer<V>(open?: boolean): Buffer<V> {
   return createNode<In<V> & { all: In<V> }, Out<V>>
   (["d_val", "st_size"], (outputs) => {
+    const o_d_val = outputs.d_val;
+    const o_st_size = outputs.st_size;
     const buffer: Array<{ value: V, tag: Tag }> = [];
 
     function flush() {
-      const d_val = outputs.d_val;
       while (buffer.length) {
         const next = buffer.shift();
-        d_val(next.value, next.tag);
+        o_d_val(next.value, next.tag);
       }
     }
 
@@ -65,20 +66,20 @@ export function createBuffer<V>(open?: boolean): Buffer<V> {
         }
         open = st_open;
         if (open) {
-          outputs.d_val(d_val, tag);
+          o_d_val(d_val, tag);
         } else {
           buffer.push({value: d_val, tag});
         }
-        outputs.st_size(buffer.length, tag);
+        o_st_size(buffer.length, tag);
       },
 
       d_val: (value, tag) => {
         if (open) {
-          outputs.d_val(value, tag);
+          o_d_val(value, tag);
         } else {
           buffer.push({value, tag});
         }
-        outputs.st_size(buffer.length, tag);
+        o_st_size(buffer.length, tag);
       },
 
       st_open: (value, tag) => {
@@ -86,7 +87,7 @@ export function createBuffer<V>(open?: boolean): Buffer<V> {
           flush();
         }
         open = value;
-        outputs.st_size(buffer.length, tag);
+        o_st_size(buffer.length, tag);
       }
     };
   });

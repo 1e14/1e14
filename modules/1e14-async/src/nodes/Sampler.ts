@@ -37,6 +37,7 @@ export type Sampler<V> = Node<In<V>, Out<V>>;
  */
 export function createSampler<V>() {
   return createNode<In<V>, Out<V>>(["d_val"], (outputs) => {
+    const o_d_val = outputs.d_val;
     let input: V;
     return {
       d_val: (value) => {
@@ -44,7 +45,7 @@ export function createSampler<V>() {
       },
 
       ev_smp: (value, tag) => {
-        outputs.d_val(input, tag);
+        o_d_val(input, tag);
       }
     };
   });

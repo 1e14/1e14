@@ -40,16 +40,17 @@ export type Gate<V> = Node<In<V> & { all: In<V> }, Out<V>>;
 export function createGate<V>(open?: boolean): Gate<V> {
   return createNode<In<V> & { all: In<V> }, Out<V>>
   (["d_val"], (outputs) => {
+    const o_d_val = outputs.d_val;
     return {
       all: ({d_val, st_open}, tag) => {
         if (st_open) {
-          outputs.d_val(d_val, tag);
+          o_d_val(d_val, tag);
         }
       },
 
       d_val: (value, tag) => {
         if (open) {
-          outputs.d_val(value, tag);
+          o_d_val(value, tag);
         }
       },
 
