@@ -10,19 +10,9 @@ export type In<V> = {
 
 export type Out<V> = {
   /**
-   * Bounced input value.
-   */
-  b_d_val: V;
-
-  /**
    * Forwarded value.
    */
   d_val: V;
-
-  /**
-   * Error message.
-   */
-  ev_err: string;
 };
 
 /**
@@ -45,16 +35,11 @@ export type Filter<V> = Node<In<V>, Out<V>>;
  */
 export function createFilter<V>(cb: FilterCallback<V>): Filter<V> {
   return createNode<In<V>, Out<V>>
-  (["b_d_val", "d_val", "ev_err"], (outputs) => {
+  (["d_val"], (outputs) => {
     return {
       d_val: (value, tag) => {
-        try {
-          if (cb(value, tag)) {
-            outputs.d_val(value, tag);
-          }
-        } catch (err) {
-          outputs.b_d_val(value, tag);
-          outputs.ev_err(String(err), tag);
+        if (cb(value, tag)) {
+          outputs.d_val(value, tag);
         }
       }
     };

@@ -26,27 +26,5 @@ describe("createFilter()", () => {
         expect(spy).not.toHaveBeenCalled();
       });
     });
-
-    describe("when callback throws", () => {
-      beforeEach(() => {
-        node = createFilter(() => {
-          throw new Error();
-        });
-      });
-
-      it("should bounce d_val", () => {
-        const spy = jasmine.createSpy();
-        connect(node.o.b_d_val, spy);
-        node.i.d_val(6, "1");
-        expect(spy).toHaveBeenCalledWith(6, "1");
-      });
-
-      it("should emit on ev_err", () => {
-        const spy = jasmine.createSpy();
-        connect(node.o.ev_err, spy);
-        node.i.d_val(6, "1");
-        expect(spy).toHaveBeenCalledWith("Error", "1");
-      });
-    });
   });
 });

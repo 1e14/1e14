@@ -13,21 +13,11 @@ export type In<I> = {
   ev_res: boolean;
 };
 
-export type Out<I, O> = {
-  /**
-   * Bounced input value.
-   */
-  b_d_val: I;
-
+export type Out<O> = {
   /**
    * Folded (aggregated) value.
    */
   d_val: O;
-
-  /**
-   * Error message.
-   */
-  ev_err: string;
 };
 
 /**
@@ -45,7 +35,7 @@ export type Out<I, O> = {
  * reducer.i.d_val(4);
  * reducer.i.ev_res(true); // logs: 9
  */
-export type Reducer<I, O> = Node<In<I> & { all: In<I> }, Out<I, O>>;
+export type Reducer<I, O> = Node<In<I> & { all: In<I> }, Out<O>>;
 
 /**
  * Creates a Reducer node.
@@ -56,46 +46,36 @@ export function createReducer<I, O>(
   cb: ReducerCallback<I, O>,
   initial?: O
 ): Reducer<I, O> {
-  return createNode<In<I> & { all: In<I> }, Out<I, O>>
-  (["b_d_val", "d_val", "ev_err"], (outputs) => {
+  return createNode<In<I> & { all: In<I> }, Out<O>>
+  (["d_val"], (outputs) => {
     const initialized = arguments.length === 2;
     let folded: O;
     let first: boolean = true;
 
     return {
       all: ({d_val, ev_res}, tag) => {
-        try {
-          if (first) {
-            folded = initialized ?
-              cb(copy(initial), d_val, tag) :
-              <any>d_val;
-            first = ev_res;
-          } else {
-            folded = cb(folded, d_val, tag);
-          }
-          if (ev_res) {
-            outputs.d_val(folded, tag);
-            first = true;
-          }
-        } catch (err) {
-          outputs.b_d_val(d_val, tag);
-          outputs.ev_err(String(err), tag);
+        if (first) {
+          folded = initialized ?
+            cb(copy(initial), d_val, tag) :
+            <any>d_val;
+          first = ev_res;
+        } else {
+          folded = cb(folded, d_val, tag);
+        }
+        if (ev_res) {
+          outputs.d_val(folded, tag);
+          first = true;
         }
       },
 
       d_val: (value, tag) => {
-        try {
-          if (first) {
-            folded = initialized ?
-              cb(copy(initial), value, tag) :
-              <any>value;
-            first = false;
-          } else {
-            folded = cb(folded, value, tag);
-          }
-        } catch (err) {
-          outputs.b_d_val(value, tag);
-          outputs.ev_err(String(err), tag);
+        if (first) {
+          folded = initialized ?
+            cb(copy(initial), value, tag) :
+            <any>value;
+          first = false;
+        } else {
+          folded = cb(folded, value, tag);
         }
       },
 
