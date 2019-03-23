@@ -1,6 +1,6 @@
 {
   "name": "1e14-mux",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Multiplexing for 1e14",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
