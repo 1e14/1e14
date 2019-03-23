@@ -21,15 +21,7 @@ export type Out<V> = {
 
 /**
  * Forwards input values in an order matching the reference input.
- * @example
- * import {connect} from "1e14";
- * import {createSequencer} from "1e14-async";
- * const sequencer = createSequencer();
- * connect(sequencer.o.d_val, console.log);
- * sequencer.i.d_val("a", 2);
- * sequencer.i.r_tag(null, 1);
- * sequencer.i.r_tag(null, 2);
- * sequencer.i.d_val("b", 1); // logs: "b" 1, "a" 2
+ * @link https://github.com/1e14/1e14/wiki/Sequencer
  */
 export type Sequencer<V> = Node<In<V>, Out<V>>;
 

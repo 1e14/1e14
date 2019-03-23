@@ -22,14 +22,7 @@ export type Out<V> = {
 /**
  * Forwards input value when gate is open.
  * Operates with either independent or joined inputs.
- * @example
- * import {connect} from "1e14";
- * import {createGate} from "1e14-flow";
- * const gate = createGate(false);
- * connect(gate.o.d_val, console.log);
- * gate.i.d_val("a");
- * gate.i.st_open(true);
- * gate.i.d_val("b"); // logs: "b"
+ * @link https://github.com/1e14/1e14/wiki/Gate
  */
 export type Gate<V> = Node<In<V> & { all: In<V> }, Out<V>>;
 

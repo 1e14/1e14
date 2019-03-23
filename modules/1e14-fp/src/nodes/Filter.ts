@@ -17,14 +17,7 @@ export type Out<V> = {
 
 /**
  * Filters input values according to a filter callback.
- * @example
- * import {connect} from "1e14";
- * import {createFilter} from "1e14-fp";
- * const filter = createFilter(next => next > 5);
- * connect(filter.o.d_val, console.log);
- * filter.i.d_val(3);
- * filter.i.d_val(5);
- * filter.i.d_val(8); // logs: 8
+ * @link https://github.com/1e14/1e14/wiki/Filter
  */
 export type Filter<V> = Node<In<V>, Out<V>>;
 

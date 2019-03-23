@@ -10,15 +10,8 @@ export type Out<T> = {
 };
 
 /**
- * Joins input values from all ports having the same tag.
- * @example
- * import {connect} from "1e14";
- * import {createSyncer} from "1e14-flow";
- * const joiner = createSyncer(["foo", "bar"]);
- * connect(joiner.o.all, console.log);
- * joiner.i.foo("a", 2);
- * joiner.i.foo("b", 1);
- * joiner.i.bar("c", 2); // logs: {foo: "a", bar: "c"} 2
+ * Synchronizes input values from all ports having the same tag.
+ * @link https://github.com/1e14/1e14/wiki/Syncer
  */
 export type Syncer<T> = Node<In<T>, Out<T>>;
 

@@ -29,15 +29,7 @@ export type Out<V> = {
  * When the buffer is closed, it stores input values. When the buffer is
  * open it releases stored values and forwards input value.
  * Operates with either independent or joined inputs.
- * @example
- * import {connect} from "1e14";
- * import {createBuffer} from "1e14-flow";
- * const buffer = createBuffer(false);
- * connect(buffer.o.d_val, console.log);
- * buffer.i.d_val("a");
- * buffer.i.d_val("b");
- * buffer.i.st_open(true); // logs: "a", "b"
- * buffer.i.d_val("c"); // logs: "c"
+ * @link https://github.com/1e14/1e14/wiki/Buffer
  */
 export type Buffer<V> = Node<In<V> & { all: In<V> }, Out<V>>;
 

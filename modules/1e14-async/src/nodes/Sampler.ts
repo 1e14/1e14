@@ -21,14 +21,7 @@ export type Out<V> = {
 
 /**
  * Forwards last input value on receiving a sampling signal.
- * @example
- * import {connect} from "1e14";
- * import {createSampler} from "1e14-async";
- * const sampler = createSampler();
- * connect(sampler.o.d_val, console.log);
- * sampler.i.d_val(5);
- * sampler.i.d_val(3);
- * sampler.i.ev_smp(); // logs: 3
+ * @link https://github.com/1e14/1e14/wiki/Sampler
  */
 export type Sampler<V> = Node<In<V>, Out<V>>;
 

@@ -24,15 +24,7 @@ export type Out<O> = {
  * Aggregates input values between reset signals, according to an aggregator
  * (reduce) callback.
  * Operates with either independent or joined inputs.
- * @example
- * import {connect} from "1e14";
- * import {createReducer} from "1e14-fp";
- * const reducer = createReducer((curr, next) => curr + next);
- * connect(reducer.o.d_val, console.log);
- * reducer.i.d_val(2);
- * reducer.i.d_val(3);
- * reducer.i.d_val(4);
- * reducer.i.ev_res(true); // logs: 9
+ * @link https://github.com/1e14/1e14/wiki/Reducer
  */
 export type Reducer<I, O> = Node<In<I> & { all: In<I> }, Out<O>>;
 

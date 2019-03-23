@@ -17,12 +17,7 @@ export type Out<O> = {
 
 /**
  * Maps input value according to mapper callback.
- * @example
- * import {connect} from "1e14";
- * import {createMapper} from "1e14-fp";
- * const mapper = createMapper(next => 2 * next);
- * connect(mapper.o.d_val, console.log);
- * mapper.i.d_val(5); // logs: 10
+ * @link https://github.com/1e14/1e14/wiki/Mapper
  */
 export type Mapper<I, O> = Node<In<I>, Out<O>>;
 

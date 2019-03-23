@@ -13,12 +13,7 @@ export type Out<T> = {
 /**
  * Multiplexes input value.
  * Forwards multiplexed input value to a single output port.
- * @example
- * import {connect} from "1e14";
- * import {createMuxer} from "1e14-mux";
- * const muxer = createMuxer(["foo", "bar"]);
- * connect(muxer.o.d_mux, console.log);
- * muxer.i.foo("a"); // logs: {field: "foo", value: "a"}
+ * @link https://github.com/1e14/1e14/wiki/Muxer
  */
 export type Muxer<T> = Node<In<T>, Out<T>>;
 

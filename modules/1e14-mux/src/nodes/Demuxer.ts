@@ -13,12 +13,7 @@ export type Out<T> = T;
 /**
  * De-multiplexes input value.
  * Forwards de-multiplexed input values to corresponding output ports.
- * @example
- * import {connect} from "1e14";
- * import {createDemuxer} from "1e14-mux";
- * const demuxer = createDemuxer(["foo", "bar"]);
- * connect(demuxer.o.foo, console.log);
- * demuxer.i.d_mux({field: "foo", value: "a"}); // logs: "a"
+ * @link https://github.com/1e14/1e14/wiki/Demuxer
  */
 export type Demuxer<T> = Node<In<T>, Out<T>>;
 

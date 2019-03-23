@@ -17,11 +17,7 @@ export type Out<V> = {
 
 /**
  * Forwards input value unconditionally.
- * @example
- * import {connect, createNoop} from "1e14";
- * const noop = createNoop();
- * connect(noop.o.d_val, console.log);
- * noop.i.d_val(5); // logs: 5
+ * @link https://github.com/1e14/1e14/wiki/Noop
  */
 export type Noop<V> = Node<In<V>, Out<V>>;
 
