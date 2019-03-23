@@ -24,19 +24,24 @@ export type Ticker = Node<In, Out>;
 /**
  * Creates a Ticker node.
  * @param ms Number of milliseconds between ticks.
- * @param active Whether the ticker is ticking initially.
+ * @param ticking Whether the ticker is ticking initially.
  */
-export function createTicker(ms: number, active: boolean = false): Ticker {
-  let timer: Timer;
-  return createNode<In, Out>(["ev_tick"], (outputs) => ({
-    st_ticking: (value) => {
-      if (!active && value) {
-        timer = setInterval(outputs.ev_tick, ms);
-        active = true;
-      } else if (active && !value) {
-        clearInterval(timer);
-        active = false;
-      }
+export function createTicker(ms: number, ticking: boolean = false): Ticker {
+  return createNode<In, Out>(["ev_tick"], (outputs) => {
+    let timer: Timer;
+    if (ticking) {
+      timer = setInterval(outputs.ev_tick, ms);
     }
-  }));
+    return {
+      st_ticking: (value) => {
+        if (!ticking && value) {
+          timer = setInterval(outputs.ev_tick, ms);
+          ticking = true;
+        } else if (ticking && !value) {
+          clearInterval(timer);
+          ticking = false;
+        }
+      }
+    };
+  });
 }
