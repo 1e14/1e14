@@ -1,9 +1,14 @@
 1e14-time
 =========
 
-Timing for 1e14.
+Timing for [1e14](https://www.npmjs.com/package/1e14).
 
-Nodes
------
+Getting started
+---------------
 
-* `Delayer` / `createDelayer()`: Forwards values with a delay.
+`npm i 1e14-time`
+
+Wiki
+----
+
+For documentation, check the [**1e14** wiki](https://github.com/1e14/1e14/wiki).

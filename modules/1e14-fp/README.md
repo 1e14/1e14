@@ -1,20 +1,14 @@
 1e14-fp
 =======
 
-Functional programming for 1e14.
+Functional programming for [1e14](https://www.npmjs.com/package/1e14).
 
-Nodes
------
+Getting started
+---------------
 
-* `Filter` / `createFilter()`: Forwards value only when it satisfies a tester 
-function. 
-* `Mapper` / `createMapper()`: Maps values according to a mapper function.
-* `Reducer` / `createReducer()`: Reduces bursts of values according to a 
-reducer function.
+`npm i 1e14-fp`
 
-Types
------
+Wiki
+----
 
-* `FilterCallback`: Function signature for filter callbacks
-* `MapperCallback`: Function signature for mapper callbacks
-* `ReducerCallback`: Function signature for reducer callbacks
+For documentation, check the [**1e14** wiki](https://github.com/1e14/1e14/wiki).

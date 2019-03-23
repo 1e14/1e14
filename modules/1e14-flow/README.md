@@ -1,14 +1,14 @@
 1e14-flow
 =========
 
-Flow control for 1e14.
+Flow control for [1e14](https://www.npmjs.com/package/1e14).
 
-Nodes
------
+Getting started
+---------------
 
-* `Buffer` / `createBuffer()`: Buffers and releases values.
-* `Gate` / `createGate()`: Forwards value only when open.
-* `Merger` / `createMerger()`: Merges values from different input ports reactively.
-* `Splitter` / `createSplitter()`: Splits value from one port to multiple ports.
-* `Syncer` / `createSyncer()`: Syncs values from different input ports that 
-have the same tag.
+`npm i 1e14-flow`
+
+Wiki
+----
+
+For documentation, check the [**1e14** wiki](https://github.com/1e14/1e14/wiki).

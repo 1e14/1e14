@@ -1,15 +1,14 @@
 1e14-mux
 ========
 
-Multiplexing / demultiplexing for 1e14.
+Multiplexing for [1e14](https://www.npmjs.com/package/1e14).
 
-Nodes
------
+Getting started
+---------------
 
-* `Demuxer` / `createDemuxer()`: Demultiplexes values.
-* `Muxer` / `createMuxer()`: Multiplexes values.
+`npm i 1e14-mux`
 
-Types
------
+Wiki
+----
 
-* `Muxed`: Describes a multiplexed input. Bundles port name with value.
+For documentation, check the [**1e14** wiki](https://github.com/1e14/1e14/wiki).

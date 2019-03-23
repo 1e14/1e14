@@ -1,11 +1,14 @@
 1e14-fp
 =======
 
-Asynchronicity and parallelism for 1e14.
+Asynchronicity and parallelism for [1e14](https://www.npmjs.com/package/1e14).
 
-Nodes
------
+Getting started
+---------------
 
-* `Sampler` / `createSampler()`: Forwards last input value on signal.
-* `Sequencer` / `createSequencer()`: Forwards values in an order set by a reference 
-input.
+`npm i 1e14-async`
+
+Wiki
+----
+
+For documentation, check the [**1e14** wiki](https://github.com/1e14/1e14/wiki).
