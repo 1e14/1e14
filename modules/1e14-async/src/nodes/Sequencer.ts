@@ -24,12 +24,12 @@ export type Out<V> = {
  * @example
  * import {connect} from "1e14";
  * import {createSequencer} from "1e14-async";
- * const serializer = createSequencer();
- * connect(serializer.o.d_val, console.log);
- * serializer.i.d_val("a", 2);
- * serializer.i.r_tag(null, 1);
- * serializer.i.r_tag(null, 2);
- * serializer.i.d_val("b", 1); // logs: "b" 1, "a" 2
+ * const sequencer = createSequencer();
+ * connect(sequencer.o.d_val, console.log);
+ * sequencer.i.d_val("a", 2);
+ * sequencer.i.r_tag(null, 1);
+ * sequencer.i.r_tag(null, 2);
+ * sequencer.i.d_val("b", 1); // logs: "b" 1, "a" 2
  */
 export type Sequencer<V> = Node<In<V>, Out<V>>;
 
