@@ -10,7 +10,17 @@
     "package.json",
     "README.md"
   ],
-  "keywords": [],
+  "keywords": [
+    "asynchronous-programming",
+    "computational-graphs",
+    "dataflow-programming",
+    "distributed-computing",
+    "flow-based-programming",
+    "function-graph",
+    "reactive-programming",
+    "reactive-streams",
+    "stream-processing"
+  ],
   "author": "Dan Stocker <dan@kwaia.com>",
   "license": "MIT",
   "repository": {
