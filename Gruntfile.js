@@ -73,6 +73,11 @@ module.exports = function (grunt) {
         cmd: "npm unlink"
       };
 
+      config[`publish-${module}`] = {
+        cwd: `modules/${module}`,
+        cmd: "npm publish"
+      };
+
       return config;
     }, {}),
 
@@ -85,6 +90,11 @@ module.exports = function (grunt) {
       config[`test-${module}`] = {
         options: {
           message: `Tests for "${module}" passed.`
+        }
+      };
+      config[`publish-${module}`] = {
+        options: {
+          message: `"${module}" published.`
         }
       };
       return config;
@@ -120,6 +130,9 @@ module.exports = function (grunt) {
       `clean:${module}-dist`,
       `tslint:${module}`, `exec:ts-${module}`,
       `test-${module}`, `notify:build-${module}`
+    ]);
+    grunt.registerTask(`publish-${module}`, [
+      `exec:publish-${module}`, `notify:publish-${module}`
     ]);
   });
   grunt.registerTask("clean-dist", modules
