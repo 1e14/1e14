@@ -1,6 +1,6 @@
 {
   "name": "1e14-fp",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Functional programming for 1e14",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
