@@ -54,14 +54,16 @@ module.exports = function (grunt) {
         cmd: `${resolve("node_modules/.bin/jasmine")} dist/**/*.spec.js`
       };
 
-      const pkg = grunt.file.readJSON(`modules/${module}/package.json`);
-      const deps = Object.keys(pkg.dependencies || {})
-      .filter((name) => /^(?:1e14).*$/.test(name));
       config[`link-${module}-deps`] = {
         cwd: `modules/${module}`,
-        cmd: deps
-        .map((dep) => `npm ln ${dep}`)
-        .join(" && ") || "echo noop"
+        cmd: () => {
+          const pkg = grunt.file.readJSON(`modules/${module}/package.json`);
+          const deps = Object.keys(pkg.dependencies || {})
+          .filter((name) => /^(?:1e14).*$/.test(name));
+          return deps
+          .map((dep) => `npm ln ${dep}`)
+          .join(" && ") || "echo noop";
+        }
       };
       config[`link-${module}-self`] = {
         cwd: `modules/${module}`,
