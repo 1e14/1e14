@@ -23,7 +23,6 @@ export type Out<O> = {
 /**
  * Aggregates input values between reset signals, according to an aggregator
  * (reduce) callback.
- * Bounces input, and emits error on callback exception.
  * Operates with either independent or joined inputs.
  * @example
  * import {connect} from "1e14";

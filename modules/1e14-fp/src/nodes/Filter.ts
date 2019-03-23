@@ -17,7 +17,6 @@ export type Out<V> = {
 
 /**
  * Filters input values according to a filter callback.
- * Bounces input, and emits error on callback exception.
  * @example
  * import {connect} from "1e14";
  * import {createFilter} from "1e14-fp";

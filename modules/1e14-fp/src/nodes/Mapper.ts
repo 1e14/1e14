@@ -17,7 +17,6 @@ export type Out<O> = {
 
 /**
  * Maps input value according to mapper callback.
- * Bounces input, and emits error on callback exception.
  * @example
  * import {connect} from "1e14";
  * import {createMapper} from "1e14-fp";
