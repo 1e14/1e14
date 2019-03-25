@@ -2,6 +2,7 @@
   "name": "1e14-time",
   "version": "0.1.2",
   "description": "Timing for 1e14",
+  "homepage": "http://1e14.org",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [

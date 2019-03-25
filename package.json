@@ -2,6 +2,7 @@
   "name": "1e14-dev",
   "version": "0.1.0",
   "description": "",
+  "homepage": "http://1e14.org",
   "author": "Dan Stocker <dan@kwaia.com>",
   "license": "MIT",
   "private": true,
