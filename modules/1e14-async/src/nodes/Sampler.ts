@@ -9,7 +9,7 @@ export type In<V> = {
   /**
    * Sampling signal.
    */
-  ev_smp: any;
+  a_smp: any;
 };
 
 export type Out<V> = {
@@ -37,7 +37,7 @@ export function createSampler<V>() {
         input = value;
       },
 
-      ev_smp: (value, tag) => {
+      a_smp: (value, tag) => {
         o_d_val(input, tag);
       }
     };

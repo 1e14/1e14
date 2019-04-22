@@ -10,7 +10,7 @@ export type In<I> = {
   /**
    * Reset signal.
    */
-  ev_res: boolean;
+  a_res: boolean;
 };
 
 export type Out<O> = {
@@ -45,16 +45,16 @@ export function createReducer<I, O>(
     let first: boolean = true;
 
     return {
-      all: ({d_val, ev_res}, tag) => {
+      all: ({d_val, a_res}, tag) => {
         if (first) {
           folded = initialized ?
             cb(copy(initial), d_val, tag) :
             <any>d_val;
-          first = ev_res;
+          first = a_res;
         } else {
           folded = cb(folded, d_val, tag);
         }
-        if (ev_res) {
+        if (a_res) {
           o_d_val(folded, tag);
           first = true;
         }
@@ -71,7 +71,7 @@ export function createReducer<I, O>(
         }
       },
 
-      ev_res: (value, tag) => {
+      a_res: (value, tag) => {
         if (value) {
           o_d_val(folded, tag);
           first = true;
