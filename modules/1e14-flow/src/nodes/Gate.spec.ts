@@ -25,6 +25,13 @@ describe("createGate()", () => {
         node.i.all({d_val: 5, st_open: false}, "1");
         expect(spy).not.toHaveBeenCalled();
       });
+
+      it("should bounce input value on 'b_d_val'", () => {
+        const spy = jasmine.createSpy();
+        connect(node.o.b_d_val, spy);
+        node.i.all({d_val: 5, st_open: false}, "1");
+        expect(spy).toHaveBeenCalledWith(5, "1");
+      });
     });
   });
 
@@ -56,6 +63,13 @@ describe("createGate()", () => {
         connect(node.o.d_val, spy);
         node.i.d_val(5, "1");
         expect(spy).not.toHaveBeenCalled();
+      });
+
+      it("should bounce input on 'b_d_val'", () => {
+        const spy = jasmine.createSpy();
+        connect(node.o.b_d_val, spy);
+        node.i.d_val(5, "2");
+        expect(spy).toHaveBeenCalledWith(5, "2");
       });
     });
   });

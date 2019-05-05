@@ -23,7 +23,7 @@ describe("createSwitcher()", () => {
     });
 
     describe("on invalid position", () => {
-      it("should bounce input on 'b_d_val'", () => {
+      it("should bounce input value on 'b_d_val'", () => {
         const spy = jasmine.createSpy();
         connect(node.o.b_d_val, spy);
         node.i.all({d_val: 5, st_pos: <any>"quux"}, "1");

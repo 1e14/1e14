@@ -1,26 +1,18 @@
 import {createNode, Node, Tag} from "1e14";
 
 export type In<V> = {
-  /**
-   * Value to be buffered.
-   */
+  /** Value to be buffered. */
   d_val: V;
 
-  /**
-   * Whether the buffer is open.
-   */
+  /** Whether the buffer is open. */
   st_open: boolean;
 };
 
 export type Out<V> = {
-  /**
-   * Forwarded value.
-   */
+  /** Forwarded value. */
   d_val: V;
 
-  /**
-   * Current buffer size. Non-zero when only when buffer is closed.
-   */
+  /** Current buffer size. Non-zero when only when buffer is closed. */
   st_size: number;
 };
 

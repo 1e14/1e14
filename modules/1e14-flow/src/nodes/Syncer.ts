@@ -3,9 +3,7 @@ import {createNode, InPorts, Node, Tag} from "1e14";
 export type In<T> = T;
 
 export type Out<T> = {
-  /**
-   * Joined inputs.
-   */
+  /** Joined inputs. */
   all: T;
 };
 

@@ -3,9 +3,7 @@ import {copy, createNode, InPorts, Node} from "1e14";
 export type In<T> = T;
 
 export type Out<T> = {
-  /**
-   * Merged inputs.
-   */
+  /** Merged inputs. */
   all: T;
 };
 

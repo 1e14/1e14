@@ -1,21 +1,18 @@
 import {createNode, Node} from "1e14";
 
 export type In<V> = {
-  /**
-   * Value to be forwarded.
-   */
+  /** Value to be forwarded. */
   d_val: V;
 
-  /**
-   * Whether gate is open.
-   */
+  /** Whether gate is open. */
   st_open: boolean;
 };
 
 export type Out<V> = {
-  /**
-   * Forwarded value.
-   */
+  /** Value bounced when gate is closed. */
+  b_d_val: V;
+
+  /** Forwarded value. */
   d_val: V;
 };
 
@@ -32,18 +29,24 @@ export type Gate<V> = Node<In<V> & { all: In<V> }, Out<V>>;
  */
 export function createGate<V>(open?: boolean): Gate<V> {
   return createNode<In<V> & { all: In<V> }, Out<V>>
-  (["d_val"], (outputs) => {
+  (["b_d_val", "d_val"], (outputs) => {
     const o_d_val = outputs.d_val;
+    const o_b_d_val = outputs.b_d_val;
     return {
       all: ({d_val, st_open}, tag) => {
+        open = st_open;
         if (st_open) {
           o_d_val(d_val, tag);
+        } else {
+          o_b_d_val(d_val, tag);
         }
       },
 
       d_val: (value, tag) => {
         if (open) {
           o_d_val(value, tag);
+        } else {
+          o_b_d_val(value, tag);
         }
       },
 

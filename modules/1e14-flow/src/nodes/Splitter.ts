@@ -1,9 +1,7 @@
 import {createNode, Node} from "1e14";
 
 export type In<T> = {
-  /**
-   * Value to be split.
-   */
+  /** Value to be split. */
   all: T;
 };
 

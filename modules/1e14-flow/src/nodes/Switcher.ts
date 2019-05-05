@@ -41,6 +41,7 @@ export function createSwitcher<P extends string, V>(
 ): Switcher<P, V> {
   return createNode<In<P, V> & { all: In<P, V> }, Out<P, V>>
   (positions.concat(<any>"b_d_val"), (outputs) => {
+    const o_b_d_val = outputs.b_d_val;
     const lookup = new Set(positions);
     return {
       all: ({d_val, st_pos}, tag) => {
@@ -48,7 +49,7 @@ export function createSwitcher<P extends string, V>(
           position = st_pos;
           outputs[position](<any>d_val, tag);
         } else {
-          outputs.b_d_val(d_val, tag);
+          o_b_d_val(d_val, tag);
         }
       },
 
@@ -56,7 +57,7 @@ export function createSwitcher<P extends string, V>(
         if (lookup.has(position)) {
           outputs[position](<any>value, tag);
         } else {
-          outputs.b_d_val(value, tag);
+          o_b_d_val(value, tag);
         }
       },
 
