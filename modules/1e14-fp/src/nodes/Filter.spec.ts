@@ -26,5 +26,27 @@ describe("createFilter()", () => {
         expect(spy).not.toHaveBeenCalled();
       });
     });
+
+    describe("when callback throws", () => {
+      beforeEach(() => {
+        node = createFilter(() => {
+          throw new Error("foo");
+        });
+      });
+
+      it("should bounce input on 'b_d_val'", () => {
+        const spy = jasmine.createSpy();
+        connect(node.o.b_d_val, spy);
+        node.i.d_val(5, "1");
+        expect(spy).toHaveBeenCalledWith(5, "1");
+      });
+
+      it("should emit error message on 'ev_err'", () => {
+        const spy = jasmine.createSpy();
+        connect(node.o.ev_err, spy);
+        node.i.d_val(5, "1");
+        expect(spy).toHaveBeenCalledWith("Error: foo", "1");
+      });
+    });
   });
 });

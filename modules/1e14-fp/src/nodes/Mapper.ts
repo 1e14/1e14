@@ -2,36 +2,45 @@ import {createNode, Node} from "1e14";
 import {MapperCallback} from "../types";
 
 export type In<I> = {
-  /**
-   * Value to be mapped.
-   */
+  /** Value to be mapped. */
   d_val: I;
 };
 
-export type Out<O> = {
-  /**
-   * Mapped value.
-   */
+export type Out<I, O> = {
+  /** Value bounced when callback throws. */
+  b_d_val: I;
+
+  /** Mapped value. */
   d_val: O;
+
+  /** Error emitted when callback throws. */
+  ev_err: string;
 };
 
 /**
  * Maps input value according to mapper callback.
  * @link https://github.com/1e14/1e14/wiki/Mapper
  */
-export type Mapper<I, O> = Node<In<I>, Out<O>>;
+export type Mapper<I, O> = Node<In<I>, Out<I, O>>;
 
 /**
  * Creates a Mapper node.
  * @param cb Mapper callback.
  */
 export function createMapper<I, O>(cb: MapperCallback<I, O>): Mapper<I, O> {
-  return createNode<In<I>, Out<O>>
-  (["d_val"], (outputs) => {
+  return createNode<In<I>, Out<I, O>>
+  (["b_d_val", "d_val", "ev_err"], (outputs) => {
+    const o_b_d_val = outputs.b_d_val;
     const o_d_val = outputs.d_val;
+    const o_ev_err = outputs.ev_err;
     return {
       d_val: (value, tag) => {
-        o_d_val(cb(value, tag), tag);
+        try {
+          o_d_val(cb(value, tag), tag);
+        } catch (err) {
+          o_b_d_val(value, tag);
+          o_ev_err(String(err), tag);
+        }
       }
     };
   });
