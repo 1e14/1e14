@@ -1,11 +1,16 @@
 import {createNode, Node, Tag} from "1e14";
 
-export type In<V> = {
+export type InFields<V> = {
   /** Value to be buffered. */
   d_val: V;
 
   /** Whether the buffer is open. */
   st_open: boolean;
+};
+
+export type In<V> = InFields<V> & {
+  /** All input fields at once. */
+  all: InFields<V>;
 };
 
 export type Out<V> = {
@@ -23,14 +28,14 @@ export type Out<V> = {
  * Operates with either independent or joined inputs.
  * @link https://github.com/1e14/1e14/wiki/Buffer
  */
-export type Buffer<V> = Node<In<V> & { all: In<V> }, Out<V>>;
+export type Buffer<V> = Node<In<V>, Out<V>>;
 
 /**
  * Creates a Buffer node.
  * @param open Whether buffer is open initially.
  */
 export function createBuffer<V>(open?: boolean): Buffer<V> {
-  return createNode<In<V> & { all: In<V> }, Out<V>>
+  return createNode<In<V>, Out<V>>
   (["d_val", "st_size"], (outputs) => {
     const o_d_val = outputs.d_val;
     const o_st_size = outputs.st_size;

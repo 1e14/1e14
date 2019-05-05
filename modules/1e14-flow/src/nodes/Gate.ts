@@ -1,6 +1,6 @@
 import {createNode, Node} from "1e14";
 
-export type In<V> = {
+export type InFields<V> = {
   /** Value to be forwarded. */
   d_val: V;
 
@@ -8,9 +8,14 @@ export type In<V> = {
   st_open: boolean;
 };
 
+export type In<V> = InFields<V> & {
+  /** All input fields at once. */
+  all: InFields<V>
+};
+
 export type Out<V> = {
   /** Value bounced when gate is closed. */
-  b_all: In<V>;
+  b_all: InFields<V>;
 
   /** Value bounced when gate is closed. */
   b_d_val: V;
@@ -24,14 +29,14 @@ export type Out<V> = {
  * Operates with either independent or joined inputs.
  * @link https://github.com/1e14/1e14/wiki/Gate
  */
-export type Gate<V> = Node<In<V> & { all: In<V> }, Out<V>>;
+export type Gate<V> = Node<In<V>, Out<V>>;
 
 /**
  * Creates a Gate node.
  * @param open Initial 'open' state.
  */
 export function createGate<V>(open?: boolean): Gate<V> {
-  return createNode<In<V> & { all: In<V> }, Out<V>>
+  return createNode<In<V>, Out<V>>
   (["b_all", "b_d_val", "d_val"], (outputs) => {
     const o_b_all = outputs.b_all;
     const o_b_d_val = outputs.b_d_val;

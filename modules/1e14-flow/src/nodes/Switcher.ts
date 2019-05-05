@@ -42,7 +42,7 @@ export function createSwitcher<P extends string, V>(
   positions: Array<P>,
   position?: P
 ): Switcher<P, V> {
-  return createNode<In<P, V> & { all: In<P, V> }, Out<P, V>>
+  return createNode<In<P, V>, Out<P, V>>
   ((<any>positions).concat(["b_all", "b_d_val"]), (outputs) => {
     const o_b_all = outputs.b_all;
     const o_b_d_val = outputs.b_d_val;
