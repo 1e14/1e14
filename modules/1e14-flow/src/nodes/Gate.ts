@@ -10,6 +10,9 @@ export type In<V> = {
 
 export type Out<V> = {
   /** Value bounced when gate is closed. */
+  b_all: In<V>;
+
+  /** Value bounced when gate is closed. */
   b_d_val: V;
 
   /** Forwarded value. */
@@ -29,7 +32,8 @@ export type Gate<V> = Node<In<V> & { all: In<V> }, Out<V>>;
  */
 export function createGate<V>(open?: boolean): Gate<V> {
   return createNode<In<V> & { all: In<V> }, Out<V>>
-  (["b_d_val", "d_val"], (outputs) => {
+  (["b_all", "b_d_val", "d_val"], (outputs) => {
+    const o_b_all = outputs.b_all;
     const o_b_d_val = outputs.b_d_val;
     const o_d_val = outputs.d_val;
     return {
@@ -38,7 +42,7 @@ export function createGate<V>(open?: boolean): Gate<V> {
         if (st_open) {
           o_d_val(d_val, tag);
         } else {
-          o_b_d_val(d_val, tag);
+          o_b_all({d_val, st_open}, tag);
         }
       },
 

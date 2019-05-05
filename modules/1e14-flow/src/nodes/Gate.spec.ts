@@ -13,7 +13,10 @@ describe("createGate()", () => {
       it("should forward d_val", () => {
         const spy = jasmine.createSpy();
         connect(node.o.d_val, spy);
-        node.i.all({d_val: 5, st_open: true}, "1");
+        node.i.all({
+          d_val: 5,
+          st_open: true
+        }, "1");
         expect(spy).toHaveBeenCalledWith(5, "1");
       });
     });
@@ -22,15 +25,24 @@ describe("createGate()", () => {
       it("should not forward d_val", () => {
         const spy = jasmine.createSpy();
         connect(node.o.d_val, spy);
-        node.i.all({d_val: 5, st_open: false}, "1");
+        node.i.all({
+          d_val: 5,
+          st_open: false
+        }, "1");
         expect(spy).not.toHaveBeenCalled();
       });
 
-      it("should bounce input value on 'b_d_val'", () => {
+      it("should bounce input on 'b_all'", () => {
         const spy = jasmine.createSpy();
-        connect(node.o.b_d_val, spy);
-        node.i.all({d_val: 5, st_open: false}, "1");
-        expect(spy).toHaveBeenCalledWith(5, "1");
+        connect(node.o.b_all, spy);
+        node.i.all({
+          d_val: 5,
+          st_open: false
+        }, "1");
+        expect(spy).toHaveBeenCalledWith({
+          d_val: 5,
+          st_open: false
+        }, "1");
       });
     });
   });

@@ -16,18 +16,27 @@ describe("createSwitcher()", () => {
       connect(node.o.foo, foo);
       connect(node.o.bar, bar);
       connect(node.o.baz, baz);
-      node.i.all({d_val: 5, st_pos: "bar"}, "1");
+      node.i.all({
+        d_val: 5,
+        st_pos: "bar"
+      }, "1");
       expect(foo).not.toHaveBeenCalled();
       expect(bar).toHaveBeenCalledWith(5, "1");
       expect(baz).not.toHaveBeenCalled();
     });
 
     describe("on invalid position", () => {
-      it("should bounce input value on 'b_d_val'", () => {
+      it("should bounce input on 'b_all'", () => {
         const spy = jasmine.createSpy();
-        connect(node.o.b_d_val, spy);
-        node.i.all({d_val: 5, st_pos: <any>"quux"}, "1");
-        expect(spy).toHaveBeenCalledWith(5, "1");
+        connect(node.o.b_all, spy);
+        node.i.all({
+          d_val: 5,
+          st_pos: <any>"quux"
+        }, "1");
+        expect(spy).toHaveBeenCalledWith({
+          d_val: 5,
+          st_pos: <any>"quux"
+        }, "1");
       });
     });
   });
