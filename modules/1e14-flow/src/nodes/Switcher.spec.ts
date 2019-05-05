@@ -21,6 +21,15 @@ describe("createSwitcher()", () => {
       expect(bar).toHaveBeenCalledWith(5, "1");
       expect(baz).not.toHaveBeenCalled();
     });
+
+    describe("on invalid position", () => {
+      it("should bounce input on 'b_d_val'", () => {
+        const spy = jasmine.createSpy();
+        connect(node.o.b_d_val, spy);
+        node.i.all({d_val: 5, st_pos: <any>"quux"}, "1");
+        expect(spy).toHaveBeenCalledWith(5, "1");
+      });
+    });
   });
 
   describe("on input (d_val)", () => {
@@ -41,6 +50,19 @@ describe("createSwitcher()", () => {
       expect(foo).not.toHaveBeenCalled();
       expect(bar).toHaveBeenCalledWith(5, "1");
       expect(baz).not.toHaveBeenCalled();
+    });
+
+    describe("on invalid position", () => {
+      beforeEach(() => {
+        node.i.st_pos(<any>"quux", "1");
+      });
+
+      it("should bounce input on 'b_d_val'", () => {
+        const spy = jasmine.createSpy();
+        connect(node.o.b_d_val, spy);
+        node.i.d_val(5, "2");
+        expect(spy).toHaveBeenCalledWith(5, "2");
+      });
     });
   });
 });
