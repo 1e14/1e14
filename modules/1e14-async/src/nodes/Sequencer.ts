@@ -1,21 +1,15 @@
 import {createNode, Node, Tag} from "1e14";
 
 export type In<V> = {
-  /**
-   * Values to serialize.
-   */
+  /** Values to serialize. */
   d_val: V;
 
-  /**
-   * Reference input.
-   */
+  /** Reference input. */
   r_tag: any;
 };
 
 export type Out<V> = {
-  /**
-   * Forwarded value.
-   */
+  /** Forwarded value. */
   d_val: V;
 };
 

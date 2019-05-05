@@ -1,16 +1,12 @@
 import {createNode, Node} from "1e14";
 
 export type In<V> = {
-  /**
-   * Value to be delayed.
-   */
+  /** Value to be delayed. */
   d_val: V;
 };
 
 export type Out<V> = {
-  /**
-   * Delayed value.
-   */
+  /** Delayed value. */
   d_val: V;
 };
 

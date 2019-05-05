@@ -2,9 +2,7 @@ import {createNode, Node} from "1e14";
 import {Muxed} from "../types";
 
 export type In<T> = {
-  /**
-   * Multiplexed input value.
-   */
+  /** Multiplexed input value. */
   d_mux: Muxed<T>;
 };
 

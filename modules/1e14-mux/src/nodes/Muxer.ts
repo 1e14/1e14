@@ -4,9 +4,7 @@ import {Muxed} from "../types";
 export type In<T> = T;
 
 export type Out<T> = {
-  /**
-   * Multiplexed input value.
-   */
+  /** Multiplexed input value. */
   d_mux: Muxed<T>;
 };
 

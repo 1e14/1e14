@@ -1,21 +1,15 @@
 import {createNode, Node} from "1e14";
 
 export type In<V> = {
-  /**
-   * Value to be sampled.
-   */
+  /** Value to be sampled. */
   d_val: V;
 
-  /**
-   * Sampling signal.
-   */
+  /** Sampling signal. */
   a_smp: any;
 };
 
 export type Out<V> = {
-  /**
-   * Sampled input value.
-   */
+  /** Sampled input value. */
   d_val: V;
 };
 

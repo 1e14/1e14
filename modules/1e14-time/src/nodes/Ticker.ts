@@ -2,16 +2,12 @@ import {createNode, Node} from "1e14";
 import Timer = NodeJS.Timer;
 
 export type In = {
-  /**
-   * Whether the ticker is ticking.
-   */
+  /** Whether the ticker is ticking. */
   st_ticking: boolean;
 };
 
 export type Out = {
-  /**
-   * Tick signal.
-   */
+  /** Tick signal. */
   ev_tick: any;
 };
 

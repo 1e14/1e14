@@ -2,16 +2,12 @@ import {Node} from "../types";
 import {createNode} from "../utils";
 
 export type In<V> = {
-  /**
-   * Value to be forwarded.
-   */
+  /** Value to be forwarded. */
   d_val: V;
 };
 
 export type Out<V> = {
-  /**
-   * Forwarded input value.
-   */
+  /** Forwarded input value. */
   d_val: V;
 };
 
